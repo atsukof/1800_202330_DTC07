@@ -1,0 +1,14 @@
+*{
+    box-sizing: border-box;
+}
+
+nav{
+    background-color:rgb(255, 166, 0);
+}
+
+#nav_logo{
+    position:relative;
+    left: 40%;
+    justify-content: center;
+    align-items: center;
+}
