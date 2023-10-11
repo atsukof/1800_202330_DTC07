@@ -17,12 +17,14 @@
 
 header.masthead {
     padding-top: 5rem;
-    padding-bottom: calc(10rem - 0rem);
+    /* padding-bottom: calc(20rem-0); */
+    padding-bottom: 70%;
+    height: max-content;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(192, 122, 10, 0.8) 50%), url("../images/landing_background.png");
-    background-position: center;
-    /* background-repeat: no-repeat; */
-    /* background-attachment: scroll; */
-    background-size: cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:scroll;
+    background-size:cover;
 }
 
 header img {
