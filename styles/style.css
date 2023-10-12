@@ -15,11 +15,13 @@
     font-size: 18px;
 }
 
-header.masthead {
+.masthead {
     padding-top: 5rem;
     /* padding-bottom: calc(20rem-0); */
     padding-bottom: 70%;
-    height: max-content;
+    height: 100vh;
+    width: 100%;
+    overflow:hidden;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(192, 122, 10, 0.8) 50%), url("../images/landing_background.png");
     background-position:center;
     background-repeat:no-repeat;
@@ -27,9 +29,11 @@ header.masthead {
     background-size:cover;
 }
 
-header img {
+.masthead img {
     border-radius: 50%;
     margin-bottom: 2rem;
+    max-width: 100%;
+    height: auto;
 }
 
 footer {
