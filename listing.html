@@ -23,14 +23,45 @@
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css">
+
+    <style>
+        main {
+            padding: 2%;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .title-section {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .title-left,
+        .title-right {
+            padding-top: 2%;
+            padding-bottom: 2%;
+        }
+
+        .item-name>h2 {
+            display: float;
+        }
+
+        .description,
+        .comment-section {
+            padding: 1%;
+        }
+
+        .comment {
+            background-color: lightyellow;
+            padding: 4px;
+            margin: 1%;
+        }
+    </style>
 </head>
 
 <body>
-
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
-    <!-- Stuff for body goes here -->
 
     <!-- navbar -->
     <!-- Replace navbar to navbar.html later!!!-->
@@ -38,30 +69,57 @@
 
     <!-- welcome and call_to_action -->
     <main>
-        <p>< back</p>
+        <a href="#">back</a>
         <div class="item-img">
             <img src="https://picsum.photos/id/898/500/500" alt="">
         </div>
-        <div class="title-left">
-            <h2 class="item-title">Name of Item</h2>
-            <h3>seller name</h3>
-            <p id="rating">★★★★★</p>
-
+        <div class="title-section">
+            <div class="title-left">
+                <div class="item-name">
+                    <h2 class="item-name-text">Name of Item<span class="material-icons">favorite</span></h2>
+                </div>
+                <p>seller name <span id="rating">★★★★★</span></p>
+            </div>
+            <div class="title-right">
+                <h2>$ Price</h2>
+                <button type="button" class="btn btn-primary">BUY</button>
+            </div>
         </div>
-        
+        <h3>description</h3>
+        <div class="description">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur similique reiciendis
+            suscipit quod nostrum adipisci? Ipsa nisi tempore quaerat cumque voluptatem soluta quam hic, natus nihil
+            similique magni non minima. Natus iste totam eius dolorum voluptatum voluptate vitae! Non animi obcaecati
+            molestias maxime laudantium odio doloremque aperiam cupiditate velit totam?
+        </div>
+        <h3>Comment</h3>
+        <div class="comment-section">
+            <div class="comment">
+                <div class="commenter-name">commenter xx</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, commodi!</p>
+            </div>
+            <div class="comment">
+                <div class="commenter-name">commenter yy</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, commodi!</p>
+            </div>
+            <div class="comment">
+                <div class="commenter-name">commenter zz</div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, commodi!</p>
+            </div>
+        </div>
+
+        <dev class="write-comment">
+            <label for="comment-text">Ask a question or comment to the seller:</label><br>
+            <textarea name="comment-text rows=" 4" cols="40">Write a comment here</textarea><br>
+            <input type="submit" value="Comment">
+        </dev>
+
+
 
     </main>
 
     <!-- footer -->
     <!-- Replace footer to footer.html later!!!-->
-    <footer class="fixed-bottom py-3">
-        <div class="nav justify-content-evenly">
-            <a href="#"><span class="material-icons">home</span></a>
-            <a href="#"><span class="material-icons">add_a_photo</span></a>
-            <a href="#"><span class="material-icons">message</span></a>
-            <a href="#"><span class="material-icons">favorite</span></a>
-        </div>
-    </footer>
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
