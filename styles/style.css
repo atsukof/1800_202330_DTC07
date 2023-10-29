@@ -2,6 +2,11 @@
     box-sizing: border-box;
 }
 
+body { 
+    padding-top: 65px; 
+    padding-bottom: 65px;
+}
+
 .call_to_action {
     display: flex;
     flex-direction: row;
