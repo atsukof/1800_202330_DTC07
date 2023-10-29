@@ -18,11 +18,22 @@
         crossorigin="anonymous"></script>
 
     <!-- Other libraries go here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css">
+
+    <!-- other scripts -->
+
 </head>
 
 <body>
@@ -33,28 +44,7 @@
     <!-- Stuff for body goes here -->
 
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="./images/Second_Chance.png" alt="Second Chance" width="50">Second Chance</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sign in</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sign up</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <nav id="navbar-here"></nav>
 
     <!-- welcome and call_to_action -->
     <div class="masthead">
@@ -79,21 +69,21 @@
     </div>
 
     <!-- footer -->
-    <footer class="fixed-bottom py-3">
-        <div class="nav justify-content-evenly">
-            <a href="#"><span class="material-icons footer-icons">home</span></a>
-            <a href="#"><span class="material-icons footer-icons">add_a_photo</span></a>
-            <a href="#"><span class="material-icons footer-icons">message</span></a>
-            <a href="#"><span class="material-icons footer-icons">favorite</span></a>
-        </div>
-    </footer>
+    <footer id="footer-here"></footer>
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->
 
     <!-- Link to scripts of your own -->
-    <!-- <script src="./scripts/script.js"></script> -->
+    <script src="./scripts/firebaseAPI_DTC07.js"></script>
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/skeleton.js"></script>
+
+
+    <script>
+        logout();       //make sure user is logged out
+    </script>
 
 </body>
 
