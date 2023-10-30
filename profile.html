@@ -57,6 +57,39 @@
                 'GRAD' 0,
                 'opsz' 24
         }
+
+        
+        .img-row {
+            display: flex;
+            padding: 0px;
+            justify-content: space-around;
+        }
+
+        .search-img {
+            position: relative;
+            padding: 5px;
+            width: 30%;
+        }
+
+        .price {
+            position: absolute;
+            bottom: 8%;
+            left: 8%;
+            margin-bottom: 0px;
+            background: rgba(34, 34, 34, 0.763);
+            border-radius:3px;
+            color: white;
+        }
+
+        .city {
+            position: absolute;
+            top: 8%;
+            right: 8%;
+            margin-bottom: 0px;
+            background: rgba(34, 34, 34, 0.763);
+            border-radius:3px;
+            color: white;
+        }
     </style>
 
 </head>
@@ -91,6 +124,59 @@
             </div>
         </div>
     </div>
+
+    <div id="active_listing" class="container">
+        <div class="card">
+            <h1 class="align-self-center">Active listing</h1>
+            <div class="img-row">
+                <div class="search-img">
+                    <img src="https://picsum.photos/200?random=1" class="img-thumbnail">
+                    <p class="price">$Price</p>
+                    <p class="city">City</p>
+                </div>
+                <div class="search-img">
+                    <img src="https://picsum.photos/200?random=2" class="img-thumbnail">
+                    <p class="price">$Price</p>
+                    <p class="city">City</p>
+                </div>
+                <div class="search-img">
+                    <img src="https://picsum.photos/200?random=3" class="img-thumbnail">
+                    <p class="price">$Price</p>
+                    <p class="city">City</p>
+                </div>
+                <div class="search-img">
+                    <img src="https://picsum.photos/200?random=4" class="img-thumbnail">
+                    <p class="price">$Price</p>
+                    <p class="city">City</p>
+                </div>
+            </div>
+            
+            <div class="img-row">
+                <div class="search-img">
+                    <img src="https://picsum.photos/200?random=5" class="img-thumbnail">
+                    <p class="price">$Price</p>
+                    <p class="city">City</p>
+                </div>
+                <div class="search-img">
+                    <img src="https://picsum.photos/200?random=6" class="img-thumbnail">
+                    <p class="price">$Price</p>
+                    <p class="city">City</p>
+                </div>
+                <div class="search-img">
+                    <img src="https://picsum.photos/200?random=7" class="img-thumbnail">
+                    <p class="price">$Price</p>
+                    <p class="city">City</p>
+                </div>
+                <div class="search-img">
+                    <img src="https://picsum.photos/200?random=8" class="img-thumbnail">
+                    <p class="price">$Price</p>
+                    <p class="city">City</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- our own footer goes here-->
     <nav id="footer-here"></nav>
