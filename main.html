@@ -44,9 +44,13 @@
         .search-container form {
             margin-top: 1rem;
             height: 48px;
-            width: 75%;
+            width: 100%;
         }
 
+        .search-container{
+            margin-top: 2%;
+            margin-bottom: 2%;
+        }
         .search-container button {
             background-color: white;
             padding: 0 5px;
@@ -67,7 +71,7 @@
         }
 
         #filter {
-            margin-right: 8%;
+            margin-right: 5%;
             margin-top: 2%;
             width: 20%;
         }
@@ -88,8 +92,6 @@
             margin-top: 5%;
             margin-bottom: 5%;
         }
-
-        
 
         .img-row {
             display: flex;
@@ -125,6 +127,11 @@
             border-radius:3px;
             color: white;
         }
+
+        #icon_row{
+            padding-top: 2%;
+            /* margin: 3% 0%; */
+        }
         
 
     </style>
@@ -140,26 +147,31 @@
 
     <!-- the body of your page goes here -->
     <!-- search bar -->
-    <div class="search-container">
-        <div class="d-flex justify-content-center align-items-center mt-4">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search anything.." aria-label="Search">
-            </form>
-            <div class="material-symbols-outlined ">search</div>
+
+
+
+    <div class="container bg-warning bg-opacity-10" style="width: 90%;">
+        <div id="icon_row">
+            <div class="d-flex flex-row justify-content-between">
+                <div><span class="material-symbols-outlined">chair</span></div>
+                <div><span class="material-symbols-outlined">skillet</span></div>
+                <div><span class="material-symbols-outlined">tv</span></div>
+                <div><span class="material-symbols-outlined">local_florist</span></div>
+            </div>
         </div>
+        <div class="search-container">
+            <div class="d-flex justify-content-center align-items-center">
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search anything.." aria-label="Search">
+                </form>
+                <div class="material-symbols-outlined ">search</div>
+            </div>
+        </div>
+
     </div>
 
     <div class="d-flex flex-row-reverse">
         <button type="button" class="btn btn-primary" id="filter">Filter</button>
-    </div>
-
-    <div id="icon_row">
-        <div class="d-flex flex-row justify-content-around my-4">
-            <div><span class="material-symbols-outlined">chair</span></div>
-            <div><span class="material-symbols-outlined">skillet</span></div>
-            <div><span class="material-symbols-outlined">tv</span></div>
-            <div><span class="material-symbols-outlined">local_florist</span></div>
-        </div>
     </div>
 
     <div id="today">
