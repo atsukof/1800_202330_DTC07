@@ -25,6 +25,7 @@ function showForm() {
         console.log("clicked");
         document.getElementById("change-pic").style.display = "none";
         document.getElementById("upload-pic").style.display = "block";
+        document.getElementById("username-rating").style.display = "none";
     })
 }
 showForm();
