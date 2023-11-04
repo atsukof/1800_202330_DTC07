@@ -1,5 +1,4 @@
 // GET USER INFO FROM FIRESTORE
-
 function insertNameFromFirestore() {
     // Check if the user is logged in:
     firebase.auth().onAuthStateChanged(user => {
@@ -19,3 +18,13 @@ function insertNameFromFirestore() {
     })
 }
 insertNameFromFirestore();
+
+//show form when change picture button is clicked
+function showForm() {
+    document.getElementById("change-pic").addEventListener('click', function() {
+        console.log("clicked");
+        document.getElementById("change-pic").style.display = "none";
+        document.getElementById("upload-pic").style.display = "block";
+    })
+}
+showForm();
