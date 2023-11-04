@@ -22,7 +22,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -55,11 +55,11 @@
         }
 
         .description,
-        .comment-section {
+        #comments-go-here {
             padding: 1%;
         }
 
-        .comment {
+        .each-comment {
             background-color: lightyellow;
             padding: 4px;
             margin: 1%;
@@ -99,20 +99,7 @@
             molestias maxime laudantium odio doloremque aperiam cupiditate velit totam?
         </div>
         <h3>Comment</h3>
-        <div class="comment-section">
-            <div class="comment">
-                <div class="commenter-name">commenter xx</div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, commodi!</p>
-            </div>
-            <div class="comment">
-                <div class="commenter-name">commenter yy</div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, commodi!</p>
-            </div>
-            <div class="comment">
-                <div class="commenter-name">commenter zz</div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, commodi!</p>
-            </div>
-        </div>
+        <div id="comments-go-here"></div>
 
         <div class="write-comment">
             <div class="mb-3">
@@ -122,7 +109,14 @@
             <input type="submit" value="Comment">
         </div>
 
-
+        <!-- Templates for general use, not displayed -->
+        <template id="commentTemplate">
+            <div class="each-comment">
+                <div class="commenter-name text-warning">commenter name here</div>
+                <div class="comment-date">date here</div>
+                <p class="comment-text">Text here</p>
+            </div>
+        </template>
 
     </main>
 
@@ -136,7 +130,7 @@
     <!-- Link to scripts of your own -->
     <script src="./scripts/firebaseAPI_DTC07.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <!-- <script src="./scripts/script.js"></script> -->
+    <script src="./scripts/script.js"></script>
 
 </body>
 
