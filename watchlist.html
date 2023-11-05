@@ -48,12 +48,12 @@
             justify-content: space-between;
         }
 
-        .search-img {
+        .watchlist-img {
             position: relative;
             padding: 5px;
         }
 
-        .search-img img {
+        .watchlist-img img {
             width: 100%;
         }
 
@@ -91,31 +91,18 @@
     <!-- stuff -->
     <main class="container">
         <h3>Watchlist</h1>
-        <div class="container">
-            <div class="results">
-                <div class="img-row">
-                    <div class="search-img">
-                        <img src="https://picsum.photos/400?random=1" class="img-thumbnail">
-                        <p class="price">$Price</p>
-                        <p class="city">City</p>
-                    </div>
-                    <div class="search-img">
-                        <img src="https://picsum.photos/400?random=2" class="img-thumbnail">
-                        <p class="price">$Price</p>
-                        <p class="city">City</p>
-                    </div>
+            <div class="container">
+                <div class="row row-cols-2" id="watchlists-go-here">
                 </div>
-            </div>
-        </div>
 
-        <!-- Templates for general use, not displayed -->
-        <template id="watchlistTemplate">
-            <div class="search-img">
-                <img src="https://picsum.photos/400?random=6" class="img-thumbnail">
-                <p class="price">$Price</p>
-                <p class="city">City</p>
-            </div>
-        </template>
+                <!-- Templates for general use, not displayed -->
+                <template id="watchlistTemplate">
+                    <div class="watchlist-img col">
+                        <img src="https://picsum.photos/400?random=1" class="img-thumbnail">
+                        <p>$<span class="price">Price here</span></p>
+                        <p class="city">City here</p>
+                    </div>
+                </template>
     </main>
 
     <!-- our own footer goes here-->
