@@ -64,30 +64,30 @@
 
         <form action="">
             <div class="mb-3">
-                <label for="item-title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="item-title" placeholder="">
+                <label for="item-title" class="form-label">Name</label>
+                <input type="text" class="form-control" id="item-name" placeholder="">
             </div>
 
-            <label for="item-category-1">Category 1</label><br>
-            <select class="form-select" id="item-category-1" aria-label="Default select example">
-                <option selected>Select a Category 1</option>
-                <option value="1">Electronics</option>
-                <option value="2">Furniture</option>
-                <option value="3">Household Items</option>
-                <option value="4">Plants</option>
+            <label for="item-category-1">Type of item</label><br>
+            <select class="form-select" id="item-type" aria-label="Default select example">
+                <option selected>Select a Category</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Household Items">Household Items</option>
+                <option value="Plants">Plants</option>
             </select><br>
 
             <label for="item-category-2">Category 2</label><br>
             <select class="form-select" id="item-category-2" aria-label="Default select example">
                 <option selected>Select a category 2</option>
-                <option value="1">Sofas</option>
-                <option value="2">Beds</option>
-                <option value="3">Bookcases & shelves</option>
-                <option value="4">Tables & desks</option>
-                <option value="5">Display & storage cabinets</option>
-                <option value="6">TV stands & media furniture</option>
-                <option value="7">Dressers & storage drawers</option>
-                <option value="8">Chairs</option>
+                <option value="Sofas">Sofas</option>
+                <option value="Beds">Beds</option>
+                <option value="Bookcases & shelves">Bookcases & shelves</option>
+                <option value="Tables & desks">Tables & desks</option>
+                <option value="Display & storage cabinets">Display & storage cabinets</option>
+                <option value="TV stands & media furniture">TV stands & media furniture</option>
+                <option value="Dressers & storage drawers">Dressers & storage drawers</option>
+                <option value="Chairs">Chairs</option>
             </select><br>
 
             <label for="item-brand">Brand (optional)</label><br>
@@ -102,33 +102,33 @@
             <label for="item-colour">Colour (optional)</label><br>
             <select class="form-select" id="item-colour" aria-label="Default select example">
                 <option selected>Select a colour</option>
-                <option value="1">Black</option>
-                <option value="2">White</option>
-                <option value="3">Grey</option>
-                <option value="4">Red</option>
-                <option value="5">Blue</option>
-                <option value="6">Yellow</option>
-                <option value="7">Green</option>
-                <option value="8">Pink</option>
-                <option value="9">Others</option>
+                <option value="Black">Black</option>
+                <option value="White">White</option>
+                <option value="Grey">Grey</option>
+                <option value="Red">Red</option>
+                <option value="Blue">Blue</option>
+                <option value="Yellow">Yellow</option>
+                <option value="Green">Green</option>
+                <option value="Pink">Pink</option>
+                <option value="Others">Others</option>
             </select><br>
 
             <label for="item-material">Material (optional)</label><br>
             <select class="form-select" id="item-material" aria-label="Default select example">
                 <option selected>Select a material</option>
-                <option value="1">Fabric</option>
-                <option value="2">Leather</option>
-                <option value="3">Wood</option>
-                <option value="4">Others</option>
+                <option value="Fabric">Fabric</option>
+                <option value="Leather">Leather</option>
+                <option value="Wood">Wood</option>
+                <option value="Others">Others</option>
             </select><br>
 
             <label for="item-condition">Condition of the item</label><br>
             <select class="form-select" id="item-condition" aria-label="Default select example">
                 <option selected>Select a condition</option>
-                <option value="1">New</option>
-                <option value="2">Used - like new</option>
-                <option value="3">Used - good</option>
-                <option value="4">Used - fair</option>
+                <option value="New">New</option>
+                <option value="Used - like new">Used - like new</option>
+                <option value="Used - good">Used - good</option>
+                <option value="Used - fair">Used - fair</option>
             </select><br>
 
             <div class="mb-3">
@@ -138,7 +138,7 @@
 
             <div class="mb-3">
                 <label for="selling-price" class="form-label">Selling Price (CAD)</label>
-                <input type="text" class="form-control" id="selling-price" placeholder="">
+                <input type="number" min="0.01" step="0.01" class="form-control" id="item-price" placeholder="">
             </div>
 
             <label for="handover-location">Preferred handover location</label><br>
@@ -149,6 +149,16 @@
                 <option value="3">Location name 3</option>
                 <option value="4">Location name 4</option>
             </select><br>
+
+            <form id="upload-pic">
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="mypic-input">Upload image</label>
+                    <input type="file" class="form-control" id="mypic-input" accept="image/*" >
+                </div>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="createListing()">Upload</button>
+                </div>
+            </form>
 
             <input type="submit" class="btn btn-outline-primary" value="Save as a draft">
             <input type="submit" class="btn btn-primary" value="Create a listing">
@@ -171,6 +181,7 @@
     <!-- <script src="./scripts/script.js"></script> -->
     <script src="./scripts/firebaseAPI_DTC07.js"></script>
     <script src="./scripts/skeleton.js"></script>
+    <script src="./scripts/create_listing.js"></script>
 
 </body>
 
