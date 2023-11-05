@@ -8,19 +8,28 @@ function add_4_card() {
                 all_items.forEach(doc => { //iterate thru each doc
                     var item_obj = {
                         ID: doc.id,
-                        picture: doc.data().picture,
                         city: doc.data().city,
-                        price: doc.data().price
+                        price: doc.data().price,
+                        picture: doc.data().picture,
+                        // pictures: []
                     };
+                    // pictures = db.collection("items").doc(item_obj.ID).collection("pictures");
+                    // pictures.get()
+                    //     .then(querySnapshot => {
+                    //         querySnapshot.forEach(picture => {
+                    //             console.log(picture.data().name);
+                    //             item_obj.pictures.push(picture.data().name)
+                    //         });
+                    //     })
+                    console.log(item_obj)
                     item_arr.push(item_obj);
                     return item_arr
                 })
-
                 // add card into main.html
                 for (let i = 0; i < item_arr.length; i++) {
                     $(`#item_card_${i}`).append(
                         `<div class="item_card">
-                        <img src="../images/${item_arr[i].picture}.png" class="img-thumbnail">
+                        <a href="test_main2listing.html?docID=${item_arr[i].ID}"><span><img src="../images/${item_arr[i].picture}.png" class="img-thumbnail"></span></a>
                         <p class="price">$${item_arr[i].price}</p>
                         <p class="city">${item_arr[i].city}</p>
                         </div>`
