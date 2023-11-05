@@ -35,104 +35,16 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <!-------------------------------------------->
     <!-- Other libraries and styles of your own -->
     <!-------------------------------------------->
-    <link rel="stylesheet" href="./styles/style.css">
 
+    <link rel="stylesheet" href="./styles/main_style.css">
     <style>
-        .search-container form {
-            margin-top: 1rem;
-            height: 48px;
-            width: 100%;
-        }
-
-        .search-container{
-            margin-top: 2%;
-            margin-bottom: 2%;
-        }
-        .search-container button {
-            background-color: white;
-            padding: 0 5px;
-            border: 0;
-        }
-
-        .search-container input::placeholder {
-            font-size: 20px;
-        }
-
-        .material-symbols-outlined {
-            font-size: 48px;
-            font-variation-settings:
-                'FILL' 0,
-                'wght' 400,
-                'GRAD' 0,
-                'opsz' 48
-        }
-
-        #filter {
-            margin-right: 5%;
-            margin-top: 2%;
-            width: 20%;
-        }
-
-        .card-body {
-            padding: 1% 5%;
-        }
-
-        .card-text {
-            margin-bottom: 0;
-        }
-
-        #icon_row{
-            margin-top: 5%;
-        }
-
-        #today {
-            margin-top: 5%;
-            margin-bottom: 5%;
-        }
-
-        .img-row {
-            display: flex;
-            padding: 0px;
-            justify-content: space-around;
-        }
-
-        .search-img {
-            position: relative;
-            padding: 5px;
-        }
-
-        .search-img img {
-            width: 100%;
-        }
-
-        .price {
-            position: absolute;
-            bottom: 5%;
-            left: 5%;
-            margin-bottom: 0px;
-            background: rgba(222, 222, 222, 0.5);
-            border-radius:3px;
-            color: white;
-        }
-
-        .city {
-            position: absolute;
-            top: 5%;
-            right: 5%;
-            margin-bottom: 0px;
-            background: rgba(222, 222, 222, 0.5);
-            border-radius:3px;
-            color: white;
-        }
-
-        #icon_row{
-            padding-top: 2%;
-            /* margin: 3% 0%; */
-        }
-        
 
     </style>
 </head>
@@ -147,8 +59,6 @@
 
     <!-- the body of your page goes here -->
     <!-- search bar -->
-
-
     <div class="container bg-warning bg-opacity-10" style="width: 90%; margin-top: 10%;">
         <div id="icon_row">
             <div class="d-flex flex-row justify-content-between">
@@ -161,7 +71,8 @@
         <div class="search-container">
             <div class="d-flex justify-content-center align-items-center">
                 <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search anything.." aria-label="Search">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search anything.."
+                        aria-label="Search">
                 </form>
                 <div class="material-symbols-outlined ">search</div>
             </div>
@@ -174,28 +85,12 @@
 
     <div id="today">
         <div class="img-row">
-            <div class="search-img">
-                <img src="https://picsum.photos/200?random=1" class="img-thumbnail">
-                <p class="price">$Price</p>
-                <p class="city">City</p>
-            </div>
-            <div class="search-img">
-                <img src="https://picsum.photos/200?random=2" class="img-thumbnail">
-                <p class="price">$Price</p>
-                <p class="city">City</p>
-            </div>
+            <div id="item_card_0"></div>
+            <div id="item_card_1"></div>
         </div>
         <div class="img-row">
-            <div class="search-img">
-                <img src="https://picsum.photos/200?random=3" class="img-thumbnail">
-                <p class="price">$Price</p>
-                <p class="city">City</p>
-            </div>
-            <div class="search-img">
-                <img src="https://picsum.photos/200?random=4" class="img-thumbnail">
-                <p class="price">$Price</p>
-                <p class="city">City</p>
-            </div>
+            <div id="item_card_2"></div>
+            <div id="item_card_3"></div>
         </div>
     </div>
 
@@ -207,6 +102,7 @@
     <!---------------------------------------------->
     <script src="./scripts/firebaseAPI_DTC07.js"></script>
     <script src="./scripts/skeleton.js"></script>
+    <script src="./scripts/main.js"></script>
     <!-- <script src="./scripts/script.js"></script> -->
 
 </body>
