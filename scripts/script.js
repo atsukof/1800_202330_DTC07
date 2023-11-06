@@ -18,8 +18,8 @@ function displayCommentsDynamically(collection) {
   let commentTemplate = document.getElementById("commentTemplate"); // Retrieve the HTML element with the ID "commentTemplate" 
 
   db.collection(collection).get()   //the collection called "comments"
-    .then(allHikes => {
-      allHikes.forEach(doc => { //iterate thru each doc
+    .then(allComments => {
+      allComments.forEach(doc => { //iterate thru each doc
         var commenter = doc.data().comment_user_ID;
         var commentDate = doc.data().comment_date;
         var commentText = doc.data().comment_text;
