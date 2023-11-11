@@ -6,14 +6,12 @@ function listenFileSelect() {
 			// When a change happens to the File Chooser Input
       fileInput.addEventListener('change', function (e) {
           ImageFile = e.target.files[0];   //Global variable
-          var blob = URL.createObjectURL(ImageFile);
-          console.log(blob)
       })
 }
 listenFileSelect();
 
 function createListing() {
-    alert ("SAVE POST is triggered");
+    alert ("CREATE LISTING is triggered");
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
@@ -59,9 +57,9 @@ function createListing() {
 }
 
 //upload picture
-function uploadPic(postDocID) {
-    console.log("inside uploadPic " + postDocID);
-    var storageRef = storage.ref("images/" + postDocID + ".jpg");
+function uploadPic(listingID) {
+    console.log("inside uploadPic " + listingID);
+    var storageRef = storage.ref("images/" + listingID + ".jpg");
 
     storageRef.put(ImageFile)   //global variable ImageFile
        
@@ -77,13 +75,18 @@ function uploadPic(postDocID) {
                     // Now that the image is on Storage, we can go back to the
                     // listing document, and update it with an "image" field
                     // that contains the url of where the picture is stored.
-                    db.collection("items").doc(postDocID).update({
+                    db.collection("items").doc(listingID).update({
                             "image": url // Save the URL into users collection
                         })
                          // AFTER .update is done
                         .then(function () {
                             console.log('4. Added pic URL to Firestore.');
                         })
+
+                    // TODO: ADD FOR LOOP TO LOOP THROUGH MULTIPLE IMAGES  
+                    // db.collection('items').doc(listingID).collection('images').add({
+                    //     url
+                    // })
                 })
         })
         .catch((error) => {
