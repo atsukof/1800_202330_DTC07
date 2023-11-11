@@ -82,6 +82,11 @@ function uploadPic(listingID) {
                         .then(function () {
                             console.log('4. Added pic URL to Firestore.');
                         })
+
+                    // TODO: ADD FOR LOOP TO LOOP THROUGH MULTIPLE IMAGES  
+                    // db.collection('items').doc(listingID).collection('images').add({
+                    //     url
+                    // })
                 })
         })
         .catch((error) => {
