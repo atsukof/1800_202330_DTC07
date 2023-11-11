@@ -57,9 +57,9 @@
     <main>
         <h2>Create a listing</h2>
         <div class="img-section">
-                <div class="pics img-thumbnail"><img src="https://picsum.photos/id/898/500/500" alt=""></div>
-                <div class="pics img-thumbnail"><img src="https://picsum.photos/id/898/500/500" alt=""></div>
-                <div class="pics img-thumbnail"><img src="https://picsum.photos/id/898/500/500" alt=""></div>
+            <div class="pics img-thumbnail"><img src="https://picsum.photos/id/898/500/500" alt=""></div>
+            <div class="pics img-thumbnail"><img src="https://picsum.photos/id/898/500/500" alt=""></div>
+            <div class="pics img-thumbnail"><img src="https://picsum.photos/id/898/500/500" alt=""></div>
         </div>
 
         <form action="">
@@ -80,23 +80,66 @@
             <label for="item-category-2">Category 2</label><br>
             <select class="form-select" id="item-category-2" aria-label="Default select example">
                 <option selected>Select a category 2</option>
-                <option value="Sofas">Sofas</option>
-                <option value="Beds">Beds</option>
-                <option value="Bookcases & shelves">Bookcases & shelves</option>
-                <option value="Tables & desks">Tables & desks</option>
-                <option value="Display & storage cabinets">Display & storage cabinets</option>
-                <option value="TV stands & media furniture">TV stands & media furniture</option>
-                <option value="Dressers & storage drawers">Dressers & storage drawers</option>
-                <option value="Chairs">Chairs</option>
+                <option value="Beds" class="furniture">Beds</option>
+                <option value="Bookcases & shelves" class="furniture">Bookcases & shelves</option>
+                <option value="Chairs" class="furniture">Chairs</option>
+                <option value="Display & storage cabinets" class="furniture">Display & storage cabinets</option>
+                <option value="Dressers & storage drawers" class="furniture">Dressers & storage drawers</option>
+                <option value="Sofas" class="furniture">Sofas</option>
+                <option value="Tables & desks" class="furniture">Tables & desks</option>
+                <option value="TV stands & media furniture" class="furniture">TV stands & media furniture</option>
+                <option value="Plants" class="plants">Plants</option>
+                <option value="Air Conditioners" class="electronics">Air Conditioners</option>
+                <option value="Bread Machines" class="electronics">Bread Machines</option>
+                <option value="Coffee Makers" class="electronics">Coffee Makers</option>
+                <option value="Dishwashers" class="electronics">Dishwashers</option>
+                <option value="Dryers" class="electronics">Dryers</option>
+                <option value="Fans" class="electronics">Fans</option>
+                <option value="Irons" class="electronics">Irons</option>
+                <option value="Kettles" class="electronics">Kettles</option>
+                <option value="Microwaves" class="electronics">Microwaves</option>
+                <option value="Refrigerators" class="electronics">Refrigerators</option>
+                <option value="Stoves" class="electronics">Stoves</option>
+                <option value="Televisions" class="electronics">Televisions</option>
+                <option value="Toasters" class="electronics">Toasters</option>
+                <option value="Vacuum Cleaners" class="electronics">Vacuum Cleaners</option>
+                <option value="Washing Machines" class="electronics">Washing Machines</option>
+                <option value="Artworks" class="household">Artworks</option>
+                <option value="Cups & Glasses" class="household">Cups & Glasses</option>
+                <option value="Cutlery" class="household">Cutlery</option>
+                <option value="Mirrors" class="household">Mirrors</option>
+                <option value="Pans & Pots" class="household">Pans & Pots</option>
+                <option value="Plates & Bowls" class="household">Plates & Bowls</option>
             </select><br>
 
             <label for="item-brand">Brand (optional)</label><br>
             <select class="form-select" id="item-brand" aria-label="Default select example">
-                <option selected>Select a brand</option>
-                <option value="1">Brand 1</option>
-                <option value="2">Brand 2</option>
-                <option value="3">Brand 3</option>
-                <option value="4">Brand 4</option>
+                <option value="Apple">Apple</option>
+                <option value="ASUS">ASUS</option>
+                <option value="Bose">Bose</option>
+                <option value="Canon">Canon</option>
+                <option value="Cb2">Cb2</option>
+                <option value="Crate and Barrel">Crate and Barrel</option>
+                <option value="Dell">Dell</option>
+                <option value="dyson">dyson</option>
+                <option value="Fujitsu">Fujitsu</option>
+                <option value="IKEA">IKEA</option>
+                <option value="Intel">Intel</option>
+                <option value="Lenovo">Lenovo</option>
+                <option value="LG">LG</option>
+                <option value="Microsoft">Microsoft</option>
+                <option value="Nintendo">Nintendo</option>
+                <option value="Panasonic">Panasonic</option>
+                <option value="Philips">Philips</option>
+                <option value="Samsung">Samsung</option>
+                <option value="Sharp">Sharp</option>
+                <option value="Sonos">Sonos</option>
+                <option value="Sony">Sony</option>
+                <option value="Texas Instruments">Texas Instruments</option>
+                <option value="Toshiba">Toshiba</option>
+                <option value="Wayfair">Wayfair</option>
+                <option value="Zara home">Zara home</option>
+                <option value="Other">Other</option>
             </select><br>
 
             <label for="item-colour">Colour (optional)</label><br>
@@ -110,7 +153,7 @@
                 <option value="Yellow">Yellow</option>
                 <option value="Green">Green</option>
                 <option value="Pink">Pink</option>
-                <option value="Others">Others</option>
+                <option value="Other">Other</option>
             </select><br>
 
             <label for="item-material">Material (optional)</label><br>
@@ -119,7 +162,7 @@
                 <option value="Fabric">Fabric</option>
                 <option value="Leather">Leather</option>
                 <option value="Wood">Wood</option>
-                <option value="Others">Others</option>
+                <option value="Other">Other</option>
             </select><br>
 
             <label for="item-condition">Condition of the item</label><br>
@@ -132,7 +175,8 @@
             </select><br>
 
             <div class="mb-3">
-                <label for="item-description" class="form-label">Description</label><button class="btn btn-primary btn-sm" style="margin-left: 5px;">Templates</button>
+                <label for="item-description" class="form-label">Description</label><button
+                    class="btn btn-primary btn-sm" style="margin-left: 5px;">Templates</button>
                 <textarea class="form-control" id="item-description" rows="3"></textarea>
             </div>
 
@@ -144,16 +188,52 @@
             <label for="handover-location">Preferred handover location</label><br>
             <select class="form-select" id="handover-location" aria-label="Default select example">
                 <option selected>Select a location</option>
-                <option value="1">Location name 1</option>
-                <option value="2">Location name 2</option>
-                <option value="3">Location name 3</option>
-                <option value="4">Location name 4</option>
+                <option value="Arbutus Greenway">Arbutus Greenway</option>
+                <option value="Arbutus Ridge">Arbutus Ridge</option>
+                <option value="Champlain Heights">Champlain Heights</option>
+                <option value="Chinatown">Chinatown</option>
+                <option value="Coal Harbour">Coal Harbour</option>
+                <option value="Davie Village">Davie Village</option>
+                <option value="Downtown">Downtown</option>
+                <option value="Dunbar-Southlands">Dunbar-Southlands</option>
+                <option value="East Side">East Side</option>
+                <option value="English Bay">English Bay</option>
+                <option value="Fairview">Fairview</option>
+                <option value="False Creek">False Creek</option>
+                <option value="Gastown">Gastown</option>
+                <option value="Granville Island">Granville Island</option>
+                <option value="International Village">International Village</option>
+                <option value="Japantown">Japantown</option>
+                <option value="Kerrisdale">Kerrisdale</option>
+                <option value="Killarney">Killarney</option>
+                <option value="Kitsilano">Kitsilano</option>
+                <option value="Marpole">Marpole</option>
+                <option value="Mount Pleasant">Mount Pleasant</option>
+                <option value="Musqueam">Musqueam</option>
+                <option value="North Vancouver">North Vancouver</option>
+                <option value="Oakridge">Oakridge</option>
+                <option value="Pacific National Exhibition">Pacific National Exhibition</option>
+                <option value="Renfrew-Collingwood">Renfrew-Collingwood</option>
+                <option value="Riley Park">Riley Park</option>
+                <option value="Robson">Robson</option>
+                <option value="Seawall">Seawall</option>
+                <option value="Shaughnessy">Shaughnessy</option>
+                <option value="South Cambie">South Cambie</option>
+                <option value="South Granville">South Granville</option>
+                <option value="Strathcona">Strathcona</option>
+                <option value="Victoria-Fraserview">Victoria-Fraserview</option>
+                <option value="West Point Grey">West Point Grey</option>
+                <option value="West Vancouver">West Vancouver</option>
+                <option value="Yaletown">Yaletown</option>
+                <option value="Other">Other</option>
+
+
             </select><br>
 
             <form id="upload-pic">
                 <div class="input-group mb-3">
                     <label class="input-group-text" for="mypic-input">Upload image</label>
-                    <input type="file" class="form-control" id="mypic-input" accept="image/*" >
+                    <input type="file" class="form-control" id="mypic-input" accept="image/*">
                 </div>
                 <div class="d-flex">
                     <button type="button" class="btn btn-primary btn-sm" onclick="createListing()">Upload</button>
