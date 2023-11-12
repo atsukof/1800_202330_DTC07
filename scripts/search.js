@@ -1,8 +1,6 @@
 function setup() {
-    console.log('ready')
     var keywords = sessionStorage.getItem('keywords').split(',');
     sessionStorage.clear();
-    console.log(keywords);
 
     results_arr = []
     db.collection("items")
@@ -43,10 +41,6 @@ function setup() {
             }
         }
         );
-        
-
-
 }
 
 $(document).ready(setup);
-

@@ -13,16 +13,7 @@ function add_4_card() {
                         location: doc.data().location,
                         price: doc.data().price,
                         image: doc.data().image,
-                        // pictures: []
                     };
-                    // pictures = db.collection("items").doc(item_obj.ID).collection("pictures");
-                    // pictures.get()
-                    //     .then(querySnapshot => {
-                    //         querySnapshot.forEach(picture => {
-                    //             console.log(picture.data().name);
-                    //             item_obj.pictures.push(picture.data().name)
-                    //         });
-                    //     })
                     item_arr.push(item_obj);
                     return item_arr
                 })
@@ -47,25 +38,7 @@ function setup() {
 
 function searchQuery() {
     keywords = $("#search-input").val().split(" ")
-
     sessionStorage.setItem('keywords', keywords);
-
-    // results_arr = []
-    // db.collection("items")
-    //     .where('name', 'in', keywords)
-    //     .get()
-    //     .then(
-    //         results => {
-    //             results.forEach(result => {
-    //                 var result_obj = {
-    //                     name: result.data().name
-    //                 };
-    //                 results_arr.push(result_obj);
-    //             })
-    //         }
-    //     )
-
-    // console.log(results_arr)
 }
 
 $(document).ready(setup);
