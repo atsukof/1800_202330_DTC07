@@ -10,7 +10,7 @@ function insertUserFromFirestore() {
                 // Get the user name
                 var userName = userDoc.data().name;
                 let picUrl = userDoc.data().profilePic;
-                let userRate = userDoc.data().rate
+                let userRating = userDoc.data().rating
 
                 if (picUrl != null) {
                     console.log(picUrl);
@@ -24,18 +24,18 @@ function insertUserFromFirestore() {
 
                 document.getElementById("username-here").innerText = userName;
                 console.log(userName);
-                console.log(userRate);
+                console.log(userRating);
 
                 // Initialize an empty string to store the star rating HTML
                 let starRating = "";
-                userRate = Math.round(userRate);
+                userRating = Math.round(userRating);
 
                 // This loop runs from i=0 to i<rating, where 'rating' is a variable holding the rating value.
-                for (let i = 0; i < userRate; i++) {
+                for (let i = 0; i < userRating; i++) {
                     starRating += '<span class="material-icons">star</span>';
                 }
                 // After the first loop, this second loop runs from i=rating to i<5.
-                for (let i = userRate; i < 5; i++) {
+                for (let i = userRating; i < 5; i++) {
                     starRating += '<span class="material-icons">star_outline</span>';
                 }
                 document.querySelector(".stars_row").innerHTML = starRating;
