@@ -9,9 +9,10 @@ function insertUserFromFirestore() {
             currentUser.get().then(userDoc => {
                 // Get the user name
                 var userName = userDoc.data().name;
-                let picUrl = userDoc.data().profilePic; 
+                let picUrl = userDoc.data().profilePic;
+                let userRate = userDoc.data().rate
 
-                if (picUrl != null){
+                if (picUrl != null) {
                     console.log(picUrl);
                     document.getElementById('profile-pic').innerHTML = ''
                     profile_pic = document.createElement('img')
@@ -23,6 +24,21 @@ function insertUserFromFirestore() {
 
                 document.getElementById("username-here").innerText = userName;
                 console.log(userName);
+                console.log(userRate);
+
+                // Initialize an empty string to store the star rating HTML
+                let starRating = "";
+                userRate = Math.round(userRate);
+
+                // This loop runs from i=0 to i<rating, where 'rating' is a variable holding the rating value.
+                for (let i = 0; i < userRate; i++) {
+                    starRating += '<span class="material-icons">star</span>';
+                }
+                // After the first loop, this second loop runs from i=rating to i<5.
+                for (let i = userRate; i < 5; i++) {
+                    starRating += '<span class="material-icons">star_outline</span>';
+                }
+                document.querySelector(".stars_row").innerHTML = starRating;
             })
         } else {
             console.log("No user is logged in."); // Log a message when no user is logged in
@@ -33,7 +49,7 @@ insertUserFromFirestore();
 
 //show form when change picture button is clicked
 function showForm() {
-    document.getElementById("change-pic").addEventListener('click', function() {
+    document.getElementById("change-pic").addEventListener('click', function () {
         console.log("clicked");
         document.getElementById("change-pic").style.display = "none";
         document.getElementById("upload-pic").style.display = "block";
@@ -41,17 +57,17 @@ function showForm() {
     })
 }
 
-var ImageFile; 
+var ImageFile;
 
-function chooseFileListener(){
+function chooseFileListener() {
     const fileInput = document.getElementById("mypic-input");   // pointer #1
 
     //attach listener to input file
     //when this file changes, do something
-    fileInput.addEventListener('change', function(e){
+    fileInput.addEventListener('change', function (e) {
 
         //the change event returns a file "e.target.files[0]"
-	      ImageFile = e.target.files[0];
+        ImageFile = e.target.files[0];
     })
 }
 chooseFileListener();
@@ -72,8 +88,8 @@ function savePic() {
 
                         //Asynch call to save the form fields into Firestore.
                         db.collection("users").doc(user.uid).update({
-                                profilePic: url // Save the URL into users collection
-                            })
+                            profilePic: url // Save the URL into users collection
+                        })
                             .then(function () {
                                 console.log('Added Profile Pic URL to Firestore.');
                                 console.log('Saved use profile info');
