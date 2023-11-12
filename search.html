@@ -29,6 +29,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -60,19 +61,21 @@
             padding-right: 10px;
         }
 
-        .img-row {
+        #results {
             display: flex;
-            padding: 0px;
             justify-content: space-between;
+            flex-wrap: wrap;
         }
 
-        .search-img {
+        .search {
             position: relative;
             padding: 5px;
+            width: 40%;
         }
 
-        .search-img img {
-            width: 100%;
+        .search img {
+            width: 200px;
+            height: 200px;
         }
 
         .price {
@@ -82,17 +85,17 @@
             margin-bottom: 0px;
             background: rgba(222, 222, 222, 0.5);
             border-radius:3px;
-            color: white;
+            color: black;
         }
 
-        .city {
+        .location {
             position: absolute;
             top: 5%;
             right: 5%;
             margin-bottom: 0px;
             background: rgba(222, 222, 222, 0.5);
             border-radius:3px;
-            color: white;
+            color: black;
         }
 
         .search-container {
@@ -127,7 +130,6 @@
                 <div class="material-symbols-outlined ">search</div>
             </div>
         </div>
-        <!-- <h3>Search Result</h3> -->
 
         <div class = "container" id="search-filters">
             <div>Furniture, Sofa, Black, Fabric, $100-250, Downtown (3km)</div>
@@ -149,53 +151,8 @@
               </ul>
         </div>
 
-
-        <div class="results">
-            <div class="img-row">
-                <div class="search-img">
-                    <img src="https://picsum.photos/400?random=1" class="img-thumbnail">
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-                <div class="search-img">
-                    <img src="https://picsum.photos/400?random=2" class="img-thumbnail">
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-            </div>
-            <div class="img-row">
-                <div class="search-img">
-                    <img src="https://picsum.photos/400?random=3" class="img-thumbnail">
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-                <div class="search-img">
-                    <img src="https://picsum.photos/400?random=4" class="img-thumbnail">
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-            </div>
-            <div class="img-row">
-                <div class="search-img">
-                    <img src="https://picsum.photos/400?random=5" class="img-thumbnail">
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-                <div class="search-img">
-                    <img src="https://picsum.photos/400?random=6" class="img-thumbnail">
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-            </div>
-            
+        <div id="results">
         </div>
-
-        <div class="btn-group">
-
-            
-
-        </div>
-    
     </div>
 
 
@@ -207,6 +164,7 @@
     <!---------------------------------------------->
     <script src="./scripts/firebaseAPI_DTC07.js"></script>
     <script src="./scripts/skeleton.js"></script>
+    <script src="./scripts/search.js"></script>
     <!-- <script src="./scripts/script.js"></script> -->
 
 </body>

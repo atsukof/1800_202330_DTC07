@@ -23,7 +23,6 @@ function add_4_card() {
                     //             item_obj.pictures.push(picture.data().name)
                     //         });
                     //     })
-                    console.log(item_obj)
                     item_arr.push(item_obj);
                     return item_arr
                 })
@@ -44,6 +43,29 @@ function add_4_card() {
 function setup() {
     console.log("main.js is loaded")
     add_4_card()
+}
+
+function searchQuery() {
+    keywords = $("#search-input").val().split(" ")
+
+    sessionStorage.setItem('keywords', keywords);
+
+    // results_arr = []
+    // db.collection("items")
+    //     .where('name', 'in', keywords)
+    //     .get()
+    //     .then(
+    //         results => {
+    //             results.forEach(result => {
+    //                 var result_obj = {
+    //                     name: result.data().name
+    //                 };
+    //                 results_arr.push(result_obj);
+    //             })
+    //         }
+    //     )
+
+    // console.log(results_arr)
 }
 
 $(document).ready(setup);
