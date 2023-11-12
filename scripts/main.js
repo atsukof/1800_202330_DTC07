@@ -4,14 +4,13 @@ async function add_4_card() {
     await db.collection("items").get()
         .then(
             all_items => {
-                //var i = 1;  //Optional: if you want to have a unique ID for each hike
+
                 all_items.forEach(doc => { //iterate thru each doc
                     var item_obj = {
                         ID: doc.id,
-                        city: doc.data().city,
+                        location: doc.data().location,
                         price: doc.data().price,
                         image: doc.data().image,
-                        // pictures: []
                     };
 
                     console.log(item_obj)
@@ -24,7 +23,7 @@ async function add_4_card() {
                         `<div class="item_card">
                         <a href="listing.html?docID=${item_arr[i].ID}"><span><img src=${item_arr[i].image} class="img-thumbnail"></span></a>
                         <p class="price">$${item_arr[i].price}</p>
-                        <p class="city">${item_arr[i].city}</p>
+                        <p class="city">${item_arr[i].location}</p>
                         </div>`
                     )
                 }
@@ -35,6 +34,11 @@ async function add_4_card() {
 function setup() {
     console.log("main.js is loaded")
     add_4_card()
+}
+
+function searchQuery() {
+    keywords = $("#search-input").val().split(" ")
+    sessionStorage.setItem('keywords', keywords);
 }
 
 $(document).ready(setup);

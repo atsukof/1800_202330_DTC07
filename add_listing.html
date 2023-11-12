@@ -56,30 +56,30 @@
     <!-- welcome and call_to_action -->
     <main>
         <h2>Create a listing</h2>
-        <div class="img-section">
+        <!-- <div class="img-section">
             <div class="pics img-thumbnail"><img src="https://picsum.photos/id/898/500/500" alt=""></div>
             <div class="pics img-thumbnail"><img src="https://picsum.photos/id/898/500/500" alt=""></div>
             <div class="pics img-thumbnail"><img src="https://picsum.photos/id/898/500/500" alt=""></div>
-        </div>
+        </div> -->
 
         <form action="">
             <div class="mb-3">
                 <label for="item-title" class="form-label">Name</label>
-                <input type="text" class="form-control" id="item-name" placeholder="">
+                <input type="text" class="form-control" id="item-name" placeholder="" required>
             </div>
 
             <label for="item-category-1">Type of item</label><br>
             <select class="form-select" id="item-type" aria-label="Default select example">
-                <option selected>Select a Category</option>
+                <option value="" disabled selected>Select a Category</option>
                 <option value="Electronics">Electronics</option>
                 <option value="Furniture">Furniture</option>
                 <option value="Household Items">Household Items</option>
                 <option value="Plants">Plants</option>
             </select><br>
 
-            <label for="item-category-2">Category 2</label><br>
-            <select class="form-select" id="item-category-2" aria-label="Default select example">
-                <option selected>Select a category 2</option>
+            <label for="item-category-2">Subcategory</label><br>
+            <select class="form-select" id="item-subcategory" aria-label="Default select example">
+                <option value="disable" disabled selected>Select subcategory</option>
                 <option value="Beds" class="furniture">Beds</option>
                 <option value="Bookcases & shelves" class="furniture">Bookcases & shelves</option>
                 <option value="Chairs" class="furniture">Chairs</option>
@@ -114,6 +114,7 @@
 
             <label for="item-brand">Brand (optional)</label><br>
             <select class="form-select" id="item-brand" aria-label="Default select example">
+                <option value="disable" disabled selected>Select brand</option>
                 <option value="Apple">Apple</option>
                 <option value="ASUS">ASUS</option>
                 <option value="Bose">Bose</option>
@@ -144,7 +145,7 @@
 
             <label for="item-colour">Colour (optional)</label><br>
             <select class="form-select" id="item-colour" aria-label="Default select example">
-                <option selected>Select a colour</option>
+                <option value='disable' disabled selected>Select colour</option>
                 <option value="Black">Black</option>
                 <option value="White">White</option>
                 <option value="Grey">Grey</option>
@@ -158,7 +159,7 @@
 
             <label for="item-material">Material (optional)</label><br>
             <select class="form-select" id="item-material" aria-label="Default select example">
-                <option selected>Select a material</option>
+                <option value="disable" disabled selected>Select material</option>
                 <option value="Fabric">Fabric</option>
                 <option value="Leather">Leather</option>
                 <option value="Wood">Wood</option>
@@ -167,7 +168,7 @@
 
             <label for="item-condition">Condition of the item</label><br>
             <select class="form-select" id="item-condition" aria-label="Default select example">
-                <option selected>Select a condition</option>
+                <option value="disable" disabled selected>Select condition</option>
                 <option value="New">New</option>
                 <option value="Used - like new">Used - like new</option>
                 <option value="Used - good">Used - good</option>
@@ -186,8 +187,8 @@
             </div>
 
             <label for="handover-location">Preferred handover location</label><br>
-            <select class="form-select" id="handover-location" aria-label="Default select example">
-                <option selected>Select a location</option>
+            <select class="form-select" id="item-location" aria-label="Default select example">
+                <option value="disable" disabled selected>Select location</option>
                 <option value="Arbutus Greenway">Arbutus Greenway</option>
                 <option value="Arbutus Ridge">Arbutus Ridge</option>
                 <option value="Champlain Heights">Champlain Heights</option>
@@ -236,7 +237,7 @@
                     <input type="file" class="form-control" id="mypic-input" accept="image/*">
                 </div>
                 <div class="d-flex">
-                    <button type="button" class="btn btn-primary" onclick="createListing()">Create listing</button>
+                    <button type="button" class="btn btn-primary disabled" onclick="createListing()" id="submit-btn">Create listing</button>
                 </div>
             </form>
 

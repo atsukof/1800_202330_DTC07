@@ -30,6 +30,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -72,9 +73,9 @@
             <div class="d-flex justify-content-center align-items-center">
                 <form class="form-inline">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search anything.."
-                        aria-label="Search">
+                        aria-label="Search" id="search-input">
                 </form>
-                <div class="material-symbols-outlined ">search</div>
+                <a href='search.html' onclick=searchQuery()><div class="material-symbols-outlined">search</div></a>
             </div>
         </div>
     </div>
