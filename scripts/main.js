@@ -10,7 +10,7 @@ function add_4_card() {
                 all_items.forEach(doc => { //iterate thru each doc
                     var item_obj = {
                         ID: doc.id,
-                        city: doc.data().city,
+                        location: doc.data().location,
                         price: doc.data().price,
                         image: doc.data().image,
                         // pictures: []
@@ -33,7 +33,7 @@ function add_4_card() {
                         `<div class="item_card">
                         <a href="test_main2listing.html?docID=${item_arr[i].ID}"><span><img src="${item_arr[i].image}" class="img-thumbnail"></span></a>
                         <p class="price">$${item_arr[i].price}</p>
-                        <p class="city">${item_arr[i].city}</p>
+                        <p class="city">${item_arr[i].location}</p>
                         </div>`
                     )
                 }

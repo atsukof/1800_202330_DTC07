@@ -28,7 +28,7 @@ function itemInfo() {
         .then(doc => {
             console.log("item is read")
             let imgEvent = document.querySelector(".item-img");
-            imgEvent.src = `../images/${doc.data().picture}.png`;
+            imgEvent.src = `${doc.data().image}`;
             $(".item-name").append(`
             <h2 class="item-name-text">${doc.data().name}<span class="material-icons">favorite</span></h2>
             `);
