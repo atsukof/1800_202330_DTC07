@@ -1,3 +1,8 @@
+function searchQuery() {
+    keywords = $("#search-input").val().split(" ")
+    sessionStorage.setItem('keywords', keywords);
+}
+
 function setup() {
     var keywords = sessionStorage.getItem('keywords').split(',');
     sessionStorage.clear();
