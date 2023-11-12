@@ -1,24 +1,16 @@
 {
-    "brand": "Philips",
-    "buyer_ID": "",
-    "category": "plant",
-    "city": "Coquitlam",
-    "color": "green",
-    "condition": "good",
-    "description": "2years",
-    "location": "address_04",
-    "material": "",
-    "name": "plant",
-    "picture": "plant",
-    "price": "10",
-    "seller_ID": "",
-    "status": "messaging",
-    "comments": {
-        "comment_date": "",
-        "comment_text": "",
-        "comment_user_ID": ""
-    },
-    "pictures": {
-        "name": ""
-    }
+    "brand": null,
+    "buyer_ID": null,
+    "category": null,
+    "city": null,
+    "color": null,
+    "condition": null,
+    "description": null,
+    "location": null,
+    "material": null,
+    "name": null,
+    "picture": null,
+    "price": null,
+    "seller_ID": null,
+    "status": null
 }
