@@ -1,5 +1,7 @@
 {
     "name": null,
     "email": null,
-    "profilePic": null
+    "profilePic": null,
+    "rating": null,
+    "rating_count": null
 }
