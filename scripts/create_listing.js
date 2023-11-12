@@ -1,9 +1,33 @@
 var ImageFile;
+
+$(document).ready(function () {
+    $("#item-name").keyup(checkFields);
+    $("#item-description").keyup(checkFields);
+    $("#item-price").keyup(checkFields);
+    $("#item-type").change(checkFields);
+    $("#item-condition").change(checkFields);
+    $("#item-location").change(checkFields);
+    $("#mypic-input").change(checkFields);
+});  
+
+function checkFields() {
+    var item_name = document.getElementById("item-name").value;
+    var description = document.getElementById("item-description").value;
+    var price = document.getElementById("item-price").value;
+    var type = document.getElementById("item-type").value;
+    var condition = document.getElementById("item-condition").value;
+    var location = document.getElementById("item-location").value;
+
+    if (item_name != '' && description != '' && price != '' && type != '' && condition != 'disable' && location != 'disable' && ImageFile != null) {
+        $("#submit-btn").removeClass("disabled");
+    }
+}
+
 function listenFileSelect() {
       // listen for file selection
       var fileInput = document.getElementById("mypic-input"); // pointer #1
 
-			// When a change happens to the File Chooser Input
+	  // When a change happens to the File Chooser Input
       fileInput.addEventListener('change', function (e) {
           ImageFile = e.target.files[0];   //Global variable
       })
@@ -14,33 +38,42 @@ function createListing() {
     alert ("CREATE LISTING is triggered");
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            // User is signed in.
-            // Do something for the user here. 
-            var name = document.getElementById("item-name").value;
-            var type = document.getElementById("item-type").value;
-            var category = document.getElementById("item-category-2").value;
-            var colour = document.getElementById("item-colour").value;
-            var brand = document.getElementById("item-brand").value;
-            var material = document.getElementById("item-material").value;
-            var condition = document.getElementById("item-condition").value;
-            var description = document.getElementById("item-description").value;
-            var price = document.getElementById("item-price").value;
-            var location = document.getElementById("handover-location").value;
+            var item_name = document.getElementById("item-name").value;
+            var item_description = document.getElementById("item-description").value;
+            var item_price = document.getElementById("item-price").value;
+            var item_type = document.getElementById("item-type").value;
+            var item_condition = document.getElementById("item-condition").value;
+            var item_location = document.getElementById("item-location").value;
 
-            console.log(name, type, category, colour, brand, material, condition, description, price, location)
+            var item_subcategory = document.getElementById("item-subcategory").value;
+            if (item_subcategory == 'disable') {
+                item_subcategory = null
+            }
+            var colour = document.getElementById("item-colour").value;
+            if (colour == 'disable') {
+                colour = null
+            }
+            var brand = document.getElementById("item-brand").value;
+            if (brand == 'disable') {
+                brand = null
+            }
+            var material = document.getElementById("item-material").value;
+            if (material == 'disable') {
+                 material = null
+            }
 
             db.collection("items").add({
                 seller_ID: user.uid,
-                name: name,
-                type: type,
-                category: category,
+                name: item_name,
+                type: item_type,
+                subcategory: item_subcategory,
                 colour: colour,
                 brand: brand,
                 material: material,
-                condition: condition,
-                description: description,
-                price: price,
-                location: location,
+                condition: item_condition,
+                description: item_description,
+                price: item_price,
+                location: item_location,
                 date_created: firebase.firestore.FieldValue
                     .serverTimestamp(), //current system time
                 buyer_ID: null
