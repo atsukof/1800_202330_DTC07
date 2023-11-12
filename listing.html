@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Second Chance - Home</title>
+    <title>Second Chance - listing</title>
     <meta name="comp1800 template" content="My 1800 App">
 
     <!-- Required meta tags -->
@@ -27,6 +27,9 @@
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css">
 
@@ -35,8 +38,8 @@
             padding: 2%;
         }
 
-        .item-img img {
-            height: 100%;
+        .item-img {
+            width: 400px;
         }
 
         .title-section {
@@ -64,6 +67,18 @@
             padding: 4px;
             margin: 1%;
         }
+
+        .table {
+            display: flex;
+        }
+
+        .table_content {
+            font-style: italic;
+        }
+
+        .colon {
+            width: 15px;
+        }
     </style>
 </head>
 
@@ -76,28 +91,51 @@
     <!-- welcome and call_to_action -->
     <main>
         <a href="#" class="link-primary">back</a>
-        <div class="item-img">
-            <img src="https://picsum.photos/id/898/500/500" alt="">
+        <div>
+            <img class="item-img" src="" alt="">
         </div>
         <div class="title-section">
             <div class="title-left">
-                <div class="item-name">
-                    <h2 class="item-name-text">Name of Item<span class="material-icons">favorite</span></h2>
-                </div>
-                <p>seller name <span id="rating">★★★★★</span></p>
+                <div class="item-name"></div>
             </div>
             <div class="title-right">
-                <h2>$ Price</h2>
+                <h2 id="price"></h2>
                 <button type="button" class="btn btn-primary">BUY</button>
             </div>
         </div>
-        <h3>description</h3>
-        <div class="description">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur similique reiciendis
-            suscipit quod nostrum adipisci? Ipsa nisi tempore quaerat cumque voluptatem soluta quam hic, natus nihil
-            similique magni non minima. Natus iste totam eius dolorum voluptatum voluptate vitae! Non animi obcaecati
-            molestias maxime laudantium odio doloremque aperiam cupiditate velit totam?
-        </div>
+        <h3>Details</h3>
+        <table>
+            <tr>
+                <td>city</td>
+                <td class="colon">:</td>
+                <td id="city" class="table_content"></td>
+            </tr>
+            <tr>
+                <td>location</td>
+                <td>:</td>
+                <td id="location" class="table_content"></td>
+            </tr>
+            <tr>
+                <td>color</td>
+                <td>:</td>
+                <td id="color" class="table_content"></td>
+            </tr>
+            <tr>
+                <td>material</td>
+                <td>:</td>
+                <td id="material" class="table_content"></td>
+            </tr>
+            <tr>
+                <td>status</td>
+                <td>:</td>
+                <td id="status" class="table_content"></td>
+            </tr>
+            <tr>
+                <td>description</td>
+                <td>:</td>
+                <td id="description" class="table_content"></td>
+            </tr>
+        </table>
         <h3>Comment</h3>
         <div id="comments-go-here"></div>
 
@@ -130,7 +168,7 @@
     <!-- Link to scripts of your own -->
     <script src="./scripts/firebaseAPI_DTC07.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/script.js"></script>
+    <script src="./scripts/listing.js"></script>
 
 </body>
 
