@@ -1,3 +1,8 @@
+function searchQuery() {
+    keywords = $("#search-input").val().split(" ")
+    sessionStorage.setItem('keywords', keywords);
+}
+
 function setup() {
     var keywords = sessionStorage.getItem('keywords').split(',');
     sessionStorage.clear();
@@ -23,6 +28,8 @@ function setup() {
         .then(() => {
             console.log(results_arr.length);
             for (let i = 0; i < results_arr.length; i++) {
+                let redirect = document.createElement('a')
+                redirect.href = `listing.html?docID=${results_arr[i].id}`
                 let search = document.createElement('div')
                 search.className = 'search'
                 let image = document.createElement('img')
@@ -33,14 +40,14 @@ function setup() {
                 let location = document.createElement('p')
                 location.innerHTML = results_arr[i].location
                 location.className = 'location'
-                search.appendChild(image)
+
+                redirect.appendChild(image)
+                search.appendChild(redirect)
                 search.appendChild(price)
                 search.appendChild(location)
                 document.getElementById('results').appendChild(search)
-                console.log(results_arr[i])
             }
-        }
-        );
+        });
 }
 
 $(document).ready(setup);
