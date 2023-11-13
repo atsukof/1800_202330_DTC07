@@ -79,6 +79,9 @@ async function displayCommentsDynamically(item_ID) {
     })
 };
 
+function createComment() {
+    console.log("comment button clicked")
+};
 
 async function setup() {
     item_ID = await itemInfo();
