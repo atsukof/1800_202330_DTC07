@@ -79,13 +79,20 @@ async function displayCommentsDynamically(item_ID) {
     })
 };
 
+
+
+function checkCommentFields() {
+    var comment = document.getElementById("comment").value;
+
+    if (comment != '') {
+        $("#comment-btn").removeClass("disabled");
+    }
+    else {$("#comment-btn").addClass("disabled");
+    }
+}
+
 function postComment() {
     console.log("comment button clicked")
-};
-
-// replace this function to createComment
-function commentPrep() {
-    console.log("commentPrep")
     var commentDate = firebase.firestore.Timestamp.fromDate(new Date())
     var commentText = document.getElementById("comment").value
 
@@ -105,17 +112,20 @@ function commentPrep() {
             item_ID: item_ID
         }).then(() => {
             alert("Comment submitted.");
+            window.location.href = `listing.html?docID=${item_ID}`; // Redirect to the thanks page
         });
     } else {
         console.log("No user is signed in");
     }
-
 };
 
 async function setup() {
     item_ID = await itemInfo();
     saveItemID();
     displayCommentsDynamically(item_ID);
+    $("#comment").keyup(checkCommentFields);
+    $("#comment").change(checkCommentFields);
+    
 }
 
 $(document).ready(setup)
