@@ -64,17 +64,15 @@
             margin-bottom: 0px;
             background: rgba(222, 222, 222, 0.5);
             border-radius: 3px;
-            color: white;
         }
 
-        .city {
+        .location {
             position: absolute;
             top: 5%;
             right: 5%;
             margin-bottom: 0px;
             background: rgba(222, 222, 222, 0.5);
             border-radius: 3px;
-            color: white;
         }
     </style>
 </head>
@@ -98,8 +96,10 @@
                 <!-- Templates for general use, not displayed -->
                 <template id="watchlistTemplate">
                     <div class="watchlist-img col">
-                        <img src="https://picsum.photos/400?random=1" class="img-thumbnail">
-                        <p>$<span class="price">Price here</span></p>
+                        <a href="" class="listing-link">
+                            <img src="" class="img-thumbnail">
+                        </a>
+                        <p class="price">Price here</span></p>
                         <p class="location">location here</p>
                     </div>
                 </template>
