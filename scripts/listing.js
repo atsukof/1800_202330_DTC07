@@ -149,13 +149,10 @@ function postComment() {
 
     var user = firebase.auth().currentUser;
     if (user) {
-        var currentUser = db.collection("users").doc(user.uid);
-        var userID = user.uid;
-
         db.collection("comments").add({
             comment_date: commentDate,
             comment_text: commentText,
-            comment_user_ID: userID,
+            comment_user_ID: user_ID,
             item_ID: item_ID
         }).then(() => {
             alert("Comment submitted.");
