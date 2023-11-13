@@ -83,6 +83,35 @@ function createComment() {
     console.log("comment button clicked")
 };
 
+// replace this function to createComment
+function commentPrep() {
+    console.log("commentPrep")
+    var commentDate = firebase.firestore.Timestamp.fromDate(new Date())
+    var commentText = document.getElementById("comment").value
+
+    console.log(commentText)
+    console.log(item_ID)
+    console.log(commentDate)
+
+    var user = firebase.auth().currentUser;
+    if (user) {
+        var currentUser = db.collection("users").doc(user.uid);
+        var userID = user.uid;
+
+        db.collection("comments").add({
+            comment_date: commentDate,
+            comment_text: commentText,
+            comment_user_ID: userID,
+            item_ID: item_ID
+        }).then(() => {
+            alert("Comment submitted.");
+        });
+    } else {
+        console.log("No user is signed in");
+    }
+
+};
+
 async function setup() {
     item_ID = await itemInfo();
     saveItemID();
