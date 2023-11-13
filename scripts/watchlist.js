@@ -25,8 +25,21 @@ function newCard(itemID) {
     console.log("inside new card", itemID)
     doc = db.collection("items").doc(itemID).get().then((doc) => {
         if (doc.exists) {
-            const itemName = doc.data()["name"]
-            console.log(itemName)
+            var itemName = doc.data()["name"]
+            var itemLocation = doc.data()["city"]
+            var itemPrice = doc.data()["price"]
+            console.log(itemName, itemLocation, itemPrice)
+
+            let newcard = watchlistTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
+
+            //update comment name, date, text
+            // newcard.querySelector('.watchilist-img').innerHTML = img;
+            newcard.querySelector('.price').innerHTML = itemPrice;
+            newcard.querySelector('.location').innerHTML = itemLocation;
+
+            document.getElementById("watchlists-go-here").appendChild(newcard);
+
+
         }
     })
 }
