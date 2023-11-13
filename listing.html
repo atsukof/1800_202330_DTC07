@@ -26,6 +26,7 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -144,7 +145,7 @@
                 <label for="item-description" class="form-label">Ask a question or comment to the seller:</label>
                 <textarea class="form-control" id="comment" rows="3"></textarea>
             </div>
-            <button type="button" class="btn btn-primary" onclick="writeComment()" id="comment-btn">Comment</button>
+            <button type="button" class="btn btn-primary" onclick="postComment()" id="comment-btn">Comment</button>
 
         </div>
 

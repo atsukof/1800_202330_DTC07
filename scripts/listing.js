@@ -79,7 +79,7 @@ async function displayCommentsDynamically(item_ID) {
     })
 };
 
-function writeComment() {
+function postComment() {
     console.log("comment button clicked")
 };
 
