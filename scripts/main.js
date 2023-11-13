@@ -1,7 +1,9 @@
 // read_items
 async function add_4_card() {
     const item_arr = [];
-    await db.collection("items").get()
+    await db.collection("items")
+        .where('status', '==', 'active')
+        .get()
         .then(
             all_items => {
 

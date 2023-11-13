@@ -76,7 +76,8 @@ function createListing() {
                 location: item_location,
                 date_created: firebase.firestore.FieldValue
                     .serverTimestamp(), //current system time
-                buyer_ID: null
+                buyer_ID: null,
+                status: 'active'
             }).then(doc => {
                 console.log("Listing created!");
                 console.log(doc.id);
