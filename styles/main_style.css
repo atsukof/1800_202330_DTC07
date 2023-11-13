@@ -53,42 +53,21 @@ footer {
     width: 20%;
 }
 
-.card-body {
-    padding: 1% 5%;
-}
-
-.card-text {
-    margin-bottom: 0;
-}
-
-#icon_row {
-    margin-top: 5%;
-}
-
-#today {
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
-
-.img-row {
+#results {
     display: flex;
-    padding: 0px;
-    justify-content: space-around;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.item_card {
+.search {
     position: relative;
     padding: 5px;
+    width: 40%;
 }
 
-.item_card img {
+.search img {
     width: 200px;
     height: 200px;
-}
-
-
-.item_card>p {
-    color: black;
 }
 
 .price {
@@ -97,21 +76,16 @@ footer {
     left: 5%;
     margin-bottom: 0px;
     background: rgba(222, 222, 222, 0.5);
-    border-radius: 3px;
-    color: white;
+    border-radius:3px;
+    color: black;
 }
 
-.city {
+.location {
     position: absolute;
     top: 5%;
     right: 5%;
     margin-bottom: 0px;
     background: rgba(222, 222, 222, 0.5);
-    border-radius: 3px;
-    color: white;
-}
-
-#icon_row {
-    padding-top: 2%;
-    /* margin: 3% 0%; */
+    border-radius:3px;
+    color: black;
 }
