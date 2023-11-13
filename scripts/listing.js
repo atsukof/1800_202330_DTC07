@@ -30,8 +30,6 @@ function itemInfo() {
             imgEvent.src = `${doc.data().image}`;
             $(".item-name").append(`
             <h2 class="item-name-text">${doc.data().name}
-            <span class="material-icons">favorite</span>
-            <span class="material-icons">favorite_border</span>
             </h2>
             `);
 
@@ -77,8 +75,6 @@ function checkFavorite(userID) {
     let itemID = params.searchParams.get("docID"); //get value for key "id"
     console.log(itemID, "item ID");
 
-    // doc = db.collection("watchlists"). where("user_ID", "==", userID)
-
     db.collection("watchlists")
         .where("user_ID", "==", userID)
         .where("item_ID", "==", itemID)
@@ -86,15 +82,20 @@ function checkFavorite(userID) {
         .then((querySnapshot) => {
             if (!querySnapshot.empty) {
                 console.log("this item is in your watchlist");
+                $(".item-name-text").append(`
+            <span class="material-icons">favorite</span>
+            `);
+
             } else {
                 console.log("this item is not in your watchlist");
+                $(".item-name-text").append(`
+            <span class="material-icons">favorite_border</span>
+            `)
             }
         })
         .catch((error) => {
             console.error("error occurred", error);
         });
-    console.log(doc)
-
 }
 
 async function displayCommentsDynamically(item_ID) {
