@@ -38,3 +38,21 @@ function writeComments() {
         comment_text: "Is the laptop still available, and if so, could you share some photos of it so I can assess its condition?"
     });
 }
+
+
+function writeWatchlists() {
+    //define a variable for the collection you want to create in Firestore to populate data
+    var watchlistsRef = db.collection("watchlists");
+    watchlistsRef.add({
+        item_ID: "0Lq4CWzjebQWtx0MD9ee",
+        user_ID: "1JuoYoDQz3ZdY2xSeufiejsCj2B2"
+    });
+    watchlistsRef.add({
+        item_ID: "3XKl7DJlWX5Ud8n4JnoW",
+        user_ID: "1JuoYoDQz3ZdY2xSeufiejsCj2B2"
+    })
+    watchlistsRef.add({
+        item_ID: "P34j93cLQTV0QteDDbrZ",
+        user_ID: "1JuoYoDQz3ZdY2xSeufiejsCj2B2"
+    })
+}
