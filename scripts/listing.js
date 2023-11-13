@@ -1,3 +1,6 @@
+let user_ID = null
+let item_ID = null
+
 
 //------------------------------------------------
 // Call this function when the "logout" button is clicked
@@ -18,11 +21,11 @@ function logout() {
 function itemInfo() {
     let params = new URL(window.location.href); //get URL of search bar
     console.log(params)
-    let ID = params.searchParams.get("docID"); //get value for key "id"
-    console.log(ID);
+    item_ID = params.searchParams.get("docID"); //get value for key "id"
+    console.log(item_ID, "item_ID");
 
     db.collection("items")
-        .doc(ID)
+        .doc(item_ID)
         .get()
         .then(doc => {
             console.log("item is read")
@@ -50,7 +53,7 @@ function itemInfo() {
             document.getElementById("status").innerHTML = doc.data().status;
             document.getElementById("description").innerHTML = doc.data().description;
         });
-    return ID;
+    return item_ID;
 }
 
 function saveItemID() {
@@ -63,39 +66,43 @@ function saveItemID() {
 function getUserID() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            var userID = user.uid
-            checkFavorite(userID)
+            user_ID = user.uid
+            checkFavorite(user_ID)
         }
     })
 }
 
-function checkFavorite(userID) {
-    console.log("user id is", userID)
+function checkFavorite(user_ID) {
     let params = new URL(window.location.href); //get URL of search bar
-    let itemID = params.searchParams.get("docID"); //get value for key "id"
-    console.log(itemID, "item ID");
+    // let itemID = params.searchParams.get("docID"); //get value for key "id"
+    console.log(item_ID, "item ID");
 
     db.collection("watchlists")
-        .where("user_ID", "==", userID)
-        .where("item_ID", "==", itemID)
+        .where("user_ID", "==", user_ID)
+        .where("item_ID", "==", item_ID)
         .get()
         .then((querySnapshot) => {
             if (!querySnapshot.empty) {
                 console.log("this item is in your watchlist");
                 $(".item-name-text").append(`
-            <span class="material-icons">favorite</span>
+            <span class="material-icons" onclick="changeWatchilist()">favorite</span>
             `);
 
             } else {
                 console.log("this item is not in your watchlist");
                 $(".item-name-text").append(`
-            <span class="material-icons">favorite_border</span>
+            <span class="material-icons" onclick="changeWatchlist()">favorite_border</span>
             `)
             }
         })
         .catch((error) => {
             console.error("error occurred", error);
         });
+}
+
+function changeWatchilist() {
+    console.log("watchlist icon clicked")
+    console.log(user_ID, item_ID)
 }
 
 async function displayCommentsDynamically(item_ID) {
