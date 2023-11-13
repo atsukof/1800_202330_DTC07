@@ -29,7 +29,10 @@ function itemInfo() {
             let imgEvent = document.querySelector(".item-img");
             imgEvent.src = `${doc.data().image}`;
             $(".item-name").append(`
-            <h2 class="item-name-text">${doc.data().name}<span class="material-icons">favorite</span></h2>
+            <h2 class="item-name-text">${doc.data().name}
+            <span class="material-icons">favorite</span>
+            <span class="material-icons">favorite_border</span>
+            </h2>
             `);
 
             // get users collection -> user.name
@@ -57,6 +60,41 @@ function saveItemID() {
     let ID = params.searchParams.get("docID");
     localStorage.setItem('item_ID', ID);
     // window.location.href = 'review.html';
+}
+
+function getUserID() {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+            var userID = user.uid
+            checkFavorite(userID)
+        }
+    })
+}
+
+function checkFavorite(userID) {
+    console.log("user id is", userID)
+    let params = new URL(window.location.href); //get URL of search bar
+    let itemID = params.searchParams.get("docID"); //get value for key "id"
+    console.log(itemID, "item ID");
+
+    // doc = db.collection("watchlists"). where("user_ID", "==", userID)
+
+    db.collection("watchlists")
+        .where("user_ID", "==", userID)
+        .where("item_ID", "==", itemID)
+        .get()
+        .then((querySnapshot) => {
+            if (!querySnapshot.empty) {
+                console.log("this item is in your watchlist");
+            } else {
+                console.log("this item is not in your watchlist");
+            }
+        })
+        .catch((error) => {
+            console.error("error occurred", error);
+        });
+    console.log(doc)
+
 }
 
 async function displayCommentsDynamically(item_ID) {
@@ -87,7 +125,8 @@ function checkCommentFields() {
     if (comment != '') {
         $("#comment-btn").removeClass("disabled");
     }
-    else {$("#comment-btn").addClass("disabled");
+    else {
+        $("#comment-btn").addClass("disabled");
     }
 }
 
@@ -122,10 +161,11 @@ function postComment() {
 async function setup() {
     item_ID = await itemInfo();
     saveItemID();
+    getUserID();
     displayCommentsDynamically(item_ID);
     $("#comment").keyup(checkCommentFields);
     $("#comment").change(checkCommentFields);
-    
+
 }
 
 $(document).ready(setup)
