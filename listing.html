@@ -91,7 +91,7 @@
 
     <!-- welcome and call_to_action -->
     <main>
-        <a href="#" class="link-primary">back</a>
+        <a href="#" class="link-primary" onclick="goBack()">back</a>
         <div>
             <img class="item-img" src="" alt="">
         </div>
@@ -145,7 +145,8 @@
                 <label for="item-description" class="form-label">Ask a question or comment to the seller:</label>
                 <textarea class="form-control" id="comment" rows="3"></textarea>
             </div>
-            <button type="button" class="btn btn-primary disabled" onclick="postComment()" id="comment-btn">Comment</button>
+            <button type="button" class="btn btn-primary disabled" onclick="postComment()"
+                id="comment-btn">Comment</button>
 
         </div>
 
@@ -171,7 +172,11 @@
     <script src="./scripts/firebaseAPI_DTC07.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/listing.js"></script>
-
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 
 </body>
 
