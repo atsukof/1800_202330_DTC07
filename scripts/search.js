@@ -10,7 +10,7 @@ function setup() {
     results_arr = []
     db.collection("items")
         .where('name', 'in', keywords)
-        // .where('status', '==', 'active')
+        .where('status', '==', 'active')
         .get()
         .then(
             results => {
