@@ -169,8 +169,6 @@ async function setup() {
     getUserID();
     displayCommentsDynamically(item_ID);
     $("#comment").keyup(checkCommentFields);
-    $("#comment").change(checkCommentFields);
-
 }
 
 $(document).ready(setup)
