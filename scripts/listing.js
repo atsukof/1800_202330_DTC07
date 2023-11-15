@@ -108,23 +108,20 @@ function changeWatchilist() {
 async function displayCommentsDynamically(item_ID) {
     const all_comments = await db.collection("comments").where("item_ID", "==", item_ID).get()
     const comments = all_comments.docs;
-    console.log(comments);
-    comments.forEach(async (doc) => {
-        var commenter = doc.data().comment_user_ID;
-        console.log(commenter)
-        commenter_name = await db.collection("users").doc(commenter).get()
-        .then(doc =>{
-            console.log(doc.name);
-        })
-        console.log(commenter_name)
-
+    // console.log(comments);
+    comments.forEach(async function (doc) {
+        var commenter = await doc.data().comment_user_ID;
+        // console.log(commenter);
+        var commenter_docRef = await db.collection("users").doc(commenter).get()
+        var commenter_name = commenter_docRef.data().name;
+        // console.log(commenter_name);
         var commentDate = doc.data().comment_date;
         var commentText = doc.data().comment_text;
 
         let newcard = commentTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
         //update comment name, date, text
-        newcard.querySelector('.commenter-name').innerHTML = commenter;
+        newcard.querySelector('.commenter-name').innerHTML = commenter_name;
         newcard.querySelector('.comment-date').innerHTML = commentDate.toDate().toLocaleString();
         newcard.querySelector('.comment-text').innerHTML = commentText;
 
