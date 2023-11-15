@@ -109,8 +109,15 @@ async function displayCommentsDynamically(item_ID) {
     const all_comments = await db.collection("comments").where("item_ID", "==", item_ID).get()
     const comments = all_comments.docs;
     console.log(comments);
-    comments.forEach((doc) => {
+    comments.forEach(async (doc) => {
         var commenter = doc.data().comment_user_ID;
+        console.log(commenter)
+        commenter_name = await db.collection("users").doc(commenter).get()
+        .then(doc =>{
+            console.log(doc.name);
+        })
+        console.log(commenter_name)
+
         var commentDate = doc.data().comment_date;
         var commentText = doc.data().comment_text;
 
