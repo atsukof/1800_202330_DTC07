@@ -38,6 +38,7 @@ function itemInfo() {
 
             // get users collection -> user.name
             seller_ID = doc.data().seller_ID
+            localStorage.setItem("seller_ID", seller_ID);
             db.collection("users").doc(seller_ID).get()
                 .then(
                     seller => {
@@ -109,9 +110,8 @@ async function displayCommentsDynamically(item_ID) {
     const all_comments = await db.collection("comments").where("item_ID", "==", item_ID).get()
     const comments = all_comments.docs;
     // console.log(comments);
-    comments.forEach(async function (doc) {
+    comments.forEach(async (doc) => {
         var commenter = await doc.data().comment_user_ID;
-        // console.log(commenter);
         var commenter_docRef = await db.collection("users").doc(commenter).get()
         var commenter_name = commenter_docRef.data().name;
         // console.log(commenter_name);
