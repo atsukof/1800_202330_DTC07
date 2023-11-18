@@ -75,7 +75,7 @@
 
     <!-- the body of your page goes here -->
     <!-- stuff -->
-
+    <a href="#" class="link-primary" onclick="goBack()">back</a>
     <div class="container text-center mt-5">
         <h1>How did it go</h1>
         <h2>Rate {Seller_name}</h2>
@@ -127,6 +127,12 @@
     <script src="./scripts/firebaseAPI_DTC07.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/rating.js"></script>
+    <script>
+        function goBack() {
+            console.log("Button clicked!");
+            window.history.go(-1);
+        }
+    </script>
     <!-- <script src="./scripts/script.js"></script> -->
 
 </body>
