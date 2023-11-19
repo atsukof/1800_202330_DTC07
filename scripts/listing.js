@@ -38,7 +38,7 @@ function itemInfo() {
 
             // get users collection -> user.name
             seller_ID = doc.data().seller_ID
-            localStorage.setItem("seller_ID", seller_ID);
+            localStorage.setItem("seller_ID", seller_ID)
             db.collection("users").doc(seller_ID).get()
                 .then(
                     seller => {
