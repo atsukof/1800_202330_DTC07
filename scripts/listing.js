@@ -74,7 +74,10 @@ async function itemInfo() {
                 .then(
                     seller => {
                         seller = seller.data()
-                        $(".seller-name").append(`${seller.name} ${rating_stars}`)
+                        $(".seller-name").append(`
+                        <a href="profile.html?userID=${seller_ID}" class="seller-name-link">${seller.name}</a> 
+                        ${rating_stars}
+                        `)
                     })
 
             $("#price").text(`$${doc.data().price}`);
