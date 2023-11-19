@@ -2,25 +2,25 @@
 function getUserID() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            var userID = user.uid
-            displayWatchlistsDynamically(userID)
+            var user_ID = user.uid
+            // currentUser = db.collection("users").doc(user_ID)
+            displayWatchlistsDynamically(user_ID)
 
         }
     })
 }
 
-async function displayWatchlistsDynamically(userID) {
-    const all_watchlists = await db.collection("watchlists").where("user_ID", "==", userID).get()
-    console.log(db.collection("watchlists").where("user_ID", "==", userID).get().doc)
-    const watchlists = all_watchlists.docs;
-    console.log(watchlists)
-    watchlists.forEach((doc) => {
-        var itemID = doc.data().item_ID;
-        console.log(itemID)
-        newCard(itemID);
-    })
-};
+async function displayWatchlistsDynamically(user_ID) {
+    const userDoc = await db.collection("users").doc(user_ID).get()
+    const watchlist_items = userDoc.data().watchlists;
 
+    watchlist_items.forEach((item_ID) => {
+        console.log(item_ID)
+        newCard(item_ID);
+    });
+    }
+
+    
 function newCard(itemID) {
     console.log("inside new card", itemID)
     doc = db.collection("items").doc(itemID).get().then((doc) => {
