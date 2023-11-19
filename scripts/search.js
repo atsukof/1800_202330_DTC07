@@ -4,13 +4,33 @@ function searchQuery() {
 }
 
 function setup() {
+
+    console.log('selected:', sessionStorage.getItem('type'))
+
     if (sessionStorage.getItem('keywords')) {
         var keywords = sessionStorage.getItem('keywords').split(',');
     } else if (sessionStorage.getItem('advanced_queries')) {
         var advanced_queries = JSON.parse(sessionStorage.getItem('advanced_queries'))
+    } else if (sessionStorage.getItem('type')) {
+        var selectedType = sessionStorage.getItem('type');
+        if (selectedType == 'type-furniture') {
+            var type = "Furniture"
+        }
+        if (selectedType == 'type-household-items') {
+            var type = "Household Items"
+        }
+        if (selectedType == 'type-electronics') {
+            var type = "Electronics"
+        }
+        if (selectedType == 'type-plants') {
+            var type = "Plants"
+        }
     }
+
+    
     sessionStorage.clear();
     console.log(advanced_queries)
+    console.log('type is ', type)
 
     query = db.collection("items").where('status', '==', 'active')
 
@@ -31,6 +51,8 @@ function setup() {
                 query = query.where(key, '==', advanced_queries[key])
             }
         }
+    } else if (type) {
+        query = query.where('type', '==', type);
     }
 
     console.log(query)

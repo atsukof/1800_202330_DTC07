@@ -63,10 +63,30 @@
     <div class="container bg-warning bg-opacity-10" style="width: 90%; margin-top: 10%;">
         <div id="icon_row">
             <div class="d-flex flex-row justify-content-between">
-                <div><span class="material-symbols-outlined">chair</span></div>
-                <div><span class="material-symbols-outlined">skillet</span></div>
-                <div><span class="material-symbols-outlined">tv</span></div>
-                <div><span class="material-symbols-outlined">local_florist</span></div>
+                <a href="search.html" onclick="searchByType(event)" class="selected-type" id="type-furniture">
+                    <div class="category-button">
+                        <p class="material-symbols-outlined category-icon">chair</p>
+                        <p class="category-name">Furniture</p>
+                    </div>
+                </a>
+                <a href="search.html" onclick="searchByType(event)" class="selected-type" id="type-household-items">
+                    <div class="category-button">
+                        <p class="material-symbols-outlined category-icon">skillet</p>
+                        <p class="category-name">Household<br>items</p>
+                    </div>
+                </a>
+                <a href="search.html" onclick="searchByType(event)" class="selected-type" id="type-electronics">
+                    <div class="category-button">
+                        <p class="material-symbols-outlined category-icon">tv</p>
+                        <p class="category-name">Electronics</p>
+                    </div>
+                </a>
+                <a href="search.html" onclick="searchByType(event)" class="selected-type" id="type-plants">
+                    <div class="category-button">
+                        <p class="material-symbols-outlined category-icon">local_florist</p>
+                        <p class="category-name">Plants</p>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="search-container">
@@ -75,13 +95,16 @@
                     <input class="form-control mr-sm-2" type="search" placeholder="Search anything.."
                         aria-label="Search" id="search-input">
                 </form>
-                <a href='search.html' onclick=searchQuery()><div class="material-symbols-outlined">search</div></a>
+                <a href='search.html' onclick=searchQuery()>
+                    <div class="material-symbols-outlined">search</div>
+                </a>
             </div>
         </div>
     </div>
 
     <div class="advanced">
-       <button type="button" onclick="location.href = 'advanced_search.html'" class="btn btn-primary btn-sm" id="filter">Advanced Search</button>
+        <button type="button" onclick="location.href = 'advanced_search.html'" class="btn btn-primary btn-sm"
+            id="filter">Advanced Search</button>
     </div>
 
     <div id="results">

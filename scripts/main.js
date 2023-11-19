@@ -54,4 +54,9 @@ function searchQuery() {
     sessionStorage.setItem('keywords', keywords);
 }
 
+function searchByType(event) {
+    var selectedType = event.currentTarget.id
+    sessionStorage.setItem("type", selectedType)
+}
+
 $(document).ready(setup);

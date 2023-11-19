@@ -19,7 +19,6 @@ async function displayWatchlistsDynamically(user_ID) {
         newCard(item_ID);
     });
     }
-
     
 function newCard(itemID) {
     console.log("inside new card", itemID)
