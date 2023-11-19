@@ -39,29 +39,7 @@
     <!-- Other libraries and styles of your own -->
     <!-------------------------------------------->
     <link rel="stylesheet" href="./styles/style.css">
-    <style>
-        .material-symbols-outlined {
-            font-size: 140px;
-            font-variation-settings:
-                'FILL' 0,
-                'wght' 400,
-                'GRAD' 0,
-                'opsz' 24
-        }
-
-        .star {
-            font-size: 50px;
-            font-variation-settings:
-                'FILL' 1,
-                'wght' 400,
-                'GRAD' 0,
-                'opsz' 24
-        }
-
-        textarea::placeholder {
-            font-size: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="./styles/rating.css">
 
 </head>
 
@@ -75,48 +53,50 @@
 
     <!-- the body of your page goes here -->
     <!-- stuff -->
-    <a href="#" class="link-primary" onclick="goBack()">back</a>
-    <div class="container text-center mt-5">
-        <h1>How did it go</h1>
-        <h2>Rate {Seller_name}</h2>
-    </div>
-    <div class="d-flex flex-row justify-content-center">
-        <div class="card text-center border-0 mt-4" style="width: 80%;">
-            <div class="d-flex justify-content-center">
-                <div class="material-symbols-outlined">
-                    account_circle
+    <main>
+        <a href="#" id="back" class="link-primary" onclick="goBack()">back</a>
+        <div class="container text-center mt-5">
+            <h1>Thank you for your order!</h1>
+            <h1>How did it go?</h1>
+            <!-- <h2 class="seller_name">Rate</h2> -->
+        </div>
+        <div class="d-flex flex-row justify-content-center">
+            <div class="card text-center border-0 mt-4" style="width: 80%;">
+                <div id="seller_img" class="d-flex justify-content-center">
+                    <div class="material-symbols-outlined">
+                        account_circle
+                    </div>
                 </div>
-
             </div>
         </div>
-    </div>
-
-    <div id="rating" class="container">
-        <div class="card my-3 py-2 bg-warning bg-opacity-10 border-2 border-warning mx-2">
-            <h1 class="align-self-center">{Seller_name}</h1>
-            <div class="stars_row d-flex justify-content-center">
-                <span class="material-icons star" id="star1">star_outline</span>
-                <span class="material-icons star" id="star2">star_outline</span>
-                <span class="material-icons star" id="star3">star_outline</span>
-                <span class="material-icons star" id="star4">star_outline</span>
-                <span class="material-icons star" id="star5">star_outline</span>
+        <div id="rating" class="container">
+            <div class="card my-3 py-2 bg-warning bg-opacity-10 border-2 border-warning mx-2">
+                <h1 class="align-self-center seller_name"></h1>
+                <div class="stars_row d-flex justify-content-center">
+                    <span class="material-icons star" id="star1">star_outline</span>
+                    <span class="material-icons star" id="star2">star_outline</span>
+                    <span class="material-icons star" id="star3">star_outline</span>
+                    <span class="material-icons star" id="star4">star_outline</span>
+                    <span class="material-icons star" id="star5">star_outline</span>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div id="rating" class="container">
-        <div class="card my-3 py-2 bg-warning bg-opacity-10 border-2 border-warning mx-2">
-            <div class="form-group mx-3">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"
-                    placeholder="Tell everyone how your experience went..."></textarea>
-            </div>
-
-            <div class="d-flex flex-row-reverse mx-3 my-2">
-                <button type="button" class="btn btn-primary" style="width: 30%; font-size: 20px;">POST
-                </button>
+        <div id="rating" class="container">
+            <div class="card my-3 py-2 bg-warning bg-opacity-10 border-2 border-warning mx-2">
+                <div class="form-group mx-3">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"
+                        placeholder="Tell everyone how your experience went..."></textarea>
+                </div>
+                <div class="d-flex flex-row-reverse mx-3 my-2">
+                    <!-- <button type="button" class="btn btn-primary" style="width: 30%; font-size: 20px;"
+                        onclick="update_rating()">POST
+                    </button> -->
+                    <button class="btn btn-primary" style="width: 30%; font-size: 20px;"
+                        onclick="update_rating()">POST</button>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- our own footer goes here-->
     <nav id="footer-here"></nav>

@@ -39,6 +39,12 @@
     <!-------------------------------------------->
     <link rel="stylesheet" href="./styles/style.css">
 
+    <style>
+        button {
+            margin-right: 10px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -51,28 +57,24 @@
 
     <!-- the body of your page goes here -->
     <div class="container">
-        <form>
-            <div class="search-container">
-                <label for="search-input">What would you like to search?</label>
-                <div class="d-flex justify-content-left align-items-center">
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Item name"
-                            aria-label="Search" id="search-input">
-                    </form>
-                </div>
-            </div><br>
-        
+
+        <form action="">
+            <div class="mb-3">
+                <label for="item-title" class="form-label">Name</label>
+                <input type="text" class="form-control" id="item-name" placeholder="" required>
+            </div>
+
             <label for="item-category-1">Type of item</label><br>
-            <select class="form-select" id="type" aria-label="Default select example">
-                <option value="disable" disabled selected>Select a Category</option>
+            <select class="form-select" id="item-type" aria-label="Default select example">
+                <option value="" disabled selected>Select a Category</option>
                 <option value="Electronics">Electronics</option>
                 <option value="Furniture">Furniture</option>
                 <option value="Household Items">Household Items</option>
                 <option value="Plants">Plants</option>
             </select><br>
-        
-            <label for="item-category-2">Subcategory</label><br>
-            <select class="form-select" id="subcategory" aria-label="Default select example">
+
+            <label for="item-category-2">Subcategory (optional)</label><br>
+            <select class="form-select" id="item-subcategory" aria-label="Default select example">
                 <option value="disable" disabled selected>Select subcategory</option>
                 <option value="Beds" class="furniture">Beds</option>
                 <option value="Bookcases & shelves" class="furniture">Bookcases & shelves</option>
@@ -105,9 +107,9 @@
                 <option value="Pans & Pots" class="household">Pans & Pots</option>
                 <option value="Plates & Bowls" class="household">Plates & Bowls</option>
             </select><br>
-        
-            <label for="item-brand">Brand</label><br>
-            <select class="form-select" id="brand" aria-label="Default select example">
+
+            <label for="item-brand">Brand (optional)</label><br>
+            <select class="form-select" id="item-brand" aria-label="Default select example">
                 <option value="disable" disabled selected>Select brand</option>
                 <option value="Apple">Apple</option>
                 <option value="ASUS">ASUS</option>
@@ -136,9 +138,9 @@
                 <option value="Zara home">Zara home</option>
                 <option value="Other">Other</option>
             </select><br>
-        
-            <label for="item-colour">Colour</label><br>
-            <select class="form-select" id="colour" aria-label="Default select example">
+
+            <label for="item-colour">Colour (optional)</label><br>
+            <select class="form-select" id="item-colour" aria-label="Default select example">
                 <option value='disable' disabled selected>Select colour</option>
                 <option value="Black">Black</option>
                 <option value="White">White</option>
@@ -150,36 +152,38 @@
                 <option value="Pink">Pink</option>
                 <option value="Other">Other</option>
             </select><br>
-        
-            <label for="item-material">Material</label><br>
-            <select class="form-select" id="material" aria-label="Default select example">
+
+            <label for="item-material">Material (optional)</label><br>
+            <select class="form-select" id="item-material" aria-label="Default select example">
                 <option value="disable" disabled selected>Select material</option>
                 <option value="Fabric">Fabric</option>
                 <option value="Leather">Leather</option>
                 <option value="Wood">Wood</option>
                 <option value="Other">Other</option>
             </select><br>
-        
+
             <label for="item-condition">Condition of the item</label><br>
-            <select class="form-select" id="condition" aria-label="Default select example">
+            <select class="form-select" id="item-condition" aria-label="Default select example">
                 <option value="disable" disabled selected>Select condition</option>
                 <option value="New">New</option>
                 <option value="Used - like new">Used - like new</option>
                 <option value="Used - good">Used - good</option>
                 <option value="Used - fair">Used - fair</option>
             </select><br>
-        
-            <label for="item-condition">Price Range</label><br>
-            <select class="form-select" id="price-range" aria-label="Default select example">
-                <option value="disable" disabled selected>Select price range</option>
-                <option value="50">&lt$50</option>
-                <option value="100">$50 - $100</option>
-                <option value="500">$100 - $500</option>
-                <option value="500-more">&gt$500</option>
-            </select><br>
-        
+
+            <div class="mb-3">
+                <label for="item-description" class="form-label">Description</label><button
+                    class="btn btn-primary btn-sm" style="margin-left: 5px;">Templates</button>
+                <textarea class="form-control" id="item-description" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="selling-price" class="form-label">Selling Price (CAD)</label>
+                <input type="number" min="0.01" step="0.01" class="form-control" id="item-price" placeholder="">
+            </div>
+
             <label for="handover-location">Preferred handover location</label><br>
-            <select class="form-select" id="location" aria-label="Default select example">
+            <select class="form-select" id="item-location" aria-label="Default select example">
                 <option value="disable" disabled selected>Select location</option>
                 <option value="Arbutus Greenway">Arbutus Greenway</option>
                 <option value="Arbutus Ridge">Arbutus Ridge</option>
@@ -219,15 +223,16 @@
                 <option value="West Vancouver">West Vancouver</option>
                 <option value="Yaletown">Yaletown</option>
                 <option value="Other">Other</option>
+
+
             </select><br>
-        
-            <a href="search.html">
-                <button type="button" class="btn btn-primary" onclick="advancedSearchQuery()" id="submit-btn">Search</button>
-            </a>
-            </form>
+
+            <div class="d-flex">
+                <button type="button" class="btn btn-primary" onclick="saveListing()" id="submit-btn">Edit listing</button>
+                <button type="button" class="btn btn-danger" onclick="deleteListing()" id="submit-btn">Delete listing</button>
+            </div>
+        </form>
     </div>
-    
-    
 
     <!-- our own footer goes here-->
     <nav id="footer-here"></nav>
@@ -237,7 +242,7 @@
     <!---------------------------------------------->
     <script src="./scripts/firebaseAPI_DTC07.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/advanced_search.js"></script>
+    <script src="./scripts/edit.js"></script>
     <!-- <script src="./scripts/script.js"></script> -->
 
 </body>

@@ -1,6 +1,7 @@
-var user_ID
-var item_ID
-var currentUser
+var user_ID = null
+var item_ID = null
+var seller_ID = null
+var currentUser = null
 
 
 //------------------------------------------------
@@ -52,7 +53,7 @@ function itemInfo() {
 
             // get users collection -> user.name
             seller_ID = doc.data().seller_ID
-            localStorage.setItem("seller_ID", seller_ID);
+            localStorage.setItem("seller_ID", seller_ID)
             db.collection("users").doc(seller_ID).get()
                 .then(
                     seller => {
@@ -71,6 +72,12 @@ function itemInfo() {
     return item_ID;
 }
 
+function showEdit() {
+    if (localStorage.getItem('seller_ID') != localStorage.getItem('user_ID')) {
+        document.getElementById('edit-btn').style.display = 'none'
+    } 
+}
+
 function saveItemID() {
     let params = new URL(window.location.href) //get the url from the search bar
     let ID = params.searchParams.get("docID");
@@ -81,7 +88,8 @@ function saveItemID() {
 function getUserID() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            user_ID = user.uid
+            localStorage.setItem('user_ID', user.uid)
+            var user_ID = user.uid
             checkFavorite(user_ID)
             currentUser = db.collection("users").doc(user_ID)
         }
@@ -201,6 +209,7 @@ async function setup() {
     getUserID();
     displayCommentsDynamically(item_ID);
     $("#comment").keyup(checkCommentFields);
+    showEdit();
 }
 
 $(document).ready(setup)
