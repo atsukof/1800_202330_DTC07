@@ -4,14 +4,39 @@ function searchQuery() {
 }
 
 function setup() {
-    var keywords = sessionStorage.getItem('keywords').split(',');
+    if (sessionStorage.getItem('keywords')) {
+        var keywords = sessionStorage.getItem('keywords').split(',');
+    } else if (sessionStorage.getItem('advanced_queries')) {
+        var advanced_queries = JSON.parse(sessionStorage.getItem('advanced_queries'))
+    }
     sessionStorage.clear();
+    console.log(advanced_queries)
+
+    query = db.collection("items").where('status', '==', 'active')
+
+    if (keywords) {
+        query = query.where('name', 'in', keywords)
+    } else if (advanced_queries) {
+        for (let key in advanced_queries) {
+            if (key === 'name') {
+                query = query.where('name', 'in', advanced_queries[key].split(' '))
+            } else if (key === 'price-range') {
+                if (advanced_queries[key] === '50') {
+                    query = query.where('price', '<=', parseInt(advanced_queries[key]))
+                } else if (advanced_queries[key] === '100') {
+                    query = query.where('price', '<=', parseInt(advanced_queries[key]))
+                    query = query.where('price', '>=', parseInt(advanced_queries[key]))
+                }
+            } else {
+                query = query.where(key, '==', advanced_queries[key])
+            }
+        }
+    }
+
+    console.log(query)
 
     results_arr = []
-    db.collection("items")
-        .where('name', 'in', keywords)
-        .where('status', '==', 'active')
-        .get()
+    query.get()
         .then(
             results => {
                 results.forEach(result => {
