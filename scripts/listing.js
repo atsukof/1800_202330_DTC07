@@ -21,8 +21,6 @@ function logout() {
 //------------------------------------------------------------------------------
 
 
-
-
 function itemInfo() {
     let params = new URL(window.location.href); //get URL of search bar
     console.log(params)
@@ -48,8 +46,7 @@ function itemInfo() {
                 }
             })
 
-            document.querySelector('i').onclick = () => saveWatchlist(item_ID);
-
+            document.querySelector('i').onclick = () => updateWatchlist(item_ID);
 
             // get users collection -> user.name
             seller_ID = doc.data().seller_ID
@@ -90,57 +87,39 @@ function getUserID() {
         if (user) {
             localStorage.setItem('user_ID', user.uid)
             var user_ID = user.uid
-            checkFavorite(user_ID)
             currentUser = db.collection("users").doc(user_ID)
         }
     })
 }
 
-function saveWatchlist(item_ID) {
-    currentUser.update({
-        watchlists: firebase.firestore.FieldValue.arrayUnion(item_ID)
+function updateWatchlist(item_ID) {
+    currentUser.get().then(userDoc => {
+        let watchlist_items = userDoc.data().watchlists
+        let iconID = 'save-' + item_ID;
+        let isInWatchlist = watchlist_items.includes(item_ID);
+
+        if(isInWatchlist) {
+            currentUser.update({
+                watchlists: firebase.firestore.FieldValue.arrayRemove(item_ID)
+            }).then( () => {
+                console.log(`item ${item_ID} was removed.`)
+                document.getElementById(iconID).innerText = 'favorite_border';
+            })
+
+        } else {
+            currentUser.update({
+                watchlists: firebase.firestore.FieldValue.arrayUnion(item_ID)
+            })
+                // Handle the front-end update to change the icon
+                .then(function () {
+                    console.log(`item ${item_ID} was added to your watchlist.`);
+                    document.getElementById(iconID).innerText = 'favorite';
+                });
+        }
     })
-        // Handle the front-end update to change the icon
-        .then(function () {
-            console.log("watchilist has been saved for" + item_ID);
-            var iconID = 'save-' + item_ID;
-            console.log(iconID);
-            document.getElementById(iconID).innerText = 'favorite';
-        });
+
 }
 
-function checkFavorite(user_ID) {
-    let params = new URL(window.location.href); //get URL of search bar
-    // let itemID = params.searchParams.get("docID"); //get value for key "id"
-    console.log(item_ID, "item ID");
-
-    db.collection("watchlists")
-        .where("user_ID", "==", user_ID)
-        .where("item_ID", "==", item_ID)
-        .get()
-        .then((querySnapshot) => {
-            if (!querySnapshot.empty) {
-                console.log("this item is in your watchlist");
-                $(".item-name-text").append(`
-            <span class="material-icons" onclick="changeWatchilist()">favorite</span>
-            `);
-
-            } else {
-                console.log("this item is not in your watchlist");
-                $(".item-name-text").append(`
-            <span class="material-icons" onclick="changeWatchlist()">favorite_border</span>
-            `)
-            }
-        })
-        .catch((error) => {
-            console.error("error occurred", error);
-        });
-}
-
-function changeWatchilist() {
-    console.log("watchlist icon clicked")
-    console.log(user_ID, item_ID)
-}
 
 async function displayCommentsDynamically(item_ID) {
     const all_comments = await db.collection("comments").where("item_ID", "==", item_ID).get()
@@ -164,7 +143,6 @@ async function displayCommentsDynamically(item_ID) {
         document.getElementById("comments-go-here").appendChild(newcard);
     })
 };
-
 
 
 function checkCommentFields() {
@@ -196,7 +174,7 @@ function postComment() {
             item_ID: item_ID
         }).then(() => {
             alert("Comment submitted.");
-            window.location.href = `listing.html?docID=${item_ID}`; // Redirect to the thanks page
+            window.location.href = `listing.html?docID=${item_ID}`; // Redirect to the listing page
         });
     } else {
         console.log("No user is signed in");
