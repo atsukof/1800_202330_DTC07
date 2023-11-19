@@ -1,5 +1,6 @@
-let user_ID = null
-let item_ID = null
+var user_ID
+var item_ID
+var currentUser
 
 
 //------------------------------------------------
@@ -18,6 +19,9 @@ function logout() {
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
 
+
+
+
 function itemInfo() {
     let params = new URL(window.location.href); //get URL of search bar
     console.log(params)
@@ -31,10 +35,20 @@ function itemInfo() {
             console.log("item is read")
             let imgEvent = document.querySelector(".item-img");
             imgEvent.src = `${doc.data().image}`;
-            $(".item-name").append(`
-            <h2 class="item-name-text">${doc.data().name}
-            </h2>
-            `);
+            $(".item-name-text").append(doc.data().name);
+            document.querySelector("i").id = "save-" + item_ID
+
+            // check if the item is in the watchlist
+            currentUser.get().then(userDoc => {
+                //get the user name
+                var watchlist_items = userDoc.data().watchlists;
+                if (watchlist_items.includes(item_ID)) {
+                    document.getElementById('save-' + item_ID).innerText = 'favorite';
+                }
+            })
+
+            document.querySelector('i').onclick = () => saveWatchlist(item_ID);
+
 
             // get users collection -> user.name
             seller_ID = doc.data().seller_ID
@@ -43,7 +57,7 @@ function itemInfo() {
                 .then(
                     seller => {
                         seller = seller.data()
-                        $(".title-left").append(`<p>${seller.name}<span id="rating">★★★★★</span></p>`)
+                        $(".seller-name").append(`${seller.name}<span id="rating">★★★★★</span>`)
                     })
 
             $("#price").text(`$${doc.data().price}`);
@@ -69,8 +83,22 @@ function getUserID() {
         if (user) {
             user_ID = user.uid
             checkFavorite(user_ID)
+            currentUser = db.collection("users").doc(user_ID)
         }
     })
+}
+
+function saveWatchlist(item_ID) {
+    currentUser.update({
+        watchlists: firebase.firestore.FieldValue.arrayUnion(item_ID)
+    })
+        // Handle the front-end update to change the icon
+        .then(function () {
+            console.log("watchilist has been saved for" + item_ID);
+            var iconID = 'save-' + item_ID;
+            console.log(iconID);
+            document.getElementById(iconID).innerText = 'favorite';
+        });
 }
 
 function checkFavorite(user_ID) {
