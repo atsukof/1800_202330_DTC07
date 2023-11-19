@@ -26,6 +26,8 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
     <!-- jQuery library -->
@@ -81,8 +83,21 @@
             font-style: italic;
         }
 
+        .display-table {
+            padding-bottom: 10px;
+        }
+
         .colon {
             width: 15px;
+        }
+
+        #edit-btn {
+            margin-bottom: 10px;
+        }
+
+        .img-div {
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
@@ -95,8 +110,10 @@
 
     <!-- welcome and call_to_action -->
     <main>
-        <a href="#" class="link-primary" onclick="goBack()">back</a>
-        <div>
+        <a href="#" class="link-primary" onclick="goBack()"><span class="material-symbols-outlined">
+            arrow_back_ios
+            </span></a>
+        <div class="img-div">
             <img class="item-img" src="" alt="">
         </div>
         <div class="title-section">
@@ -109,45 +126,49 @@
             </div>
             <div class="title-right">
                 <h2 id="price"></h2>
-                <a href="confirm_purchase.html" class="btn btn-primary">BUY</a>
+                <a href="confirm_purchase.html" class="btn btn-primary" id="buy-btn" style="display: none">BUY</a>
+                <button type="button" class="btn btn-primary" onclick="location.href = 'edit.html'" id="edit-btn" style="display: none">EDIT</button>
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary btn-sm" onclick="location.href = 'edit.html'" id="edit-btn">Edit</button>
+        
 
         <h3>Details</h3>
-        <table>
-            <tr>
-                <td>city</td>
-                <td class="colon">:</td>
-                <td id="city" class="table_content"></td>
-            </tr>
-            <tr>
-                <td>location</td>
-                <td>:</td>
-                <td id="location" class="table_content"></td>
-            </tr>
-            <tr>
-                <td>color</td>
-                <td>:</td>
-                <td id="color" class="table_content"></td>
-            </tr>
-            <tr>
-                <td>material</td>
-                <td>:</td>
-                <td id="material" class="table_content"></td>
-            </tr>
-            <tr>
-                <td>status</td>
-                <td>:</td>
-                <td id="status" class="table_content"></td>
-            </tr>
-            <tr>
-                <td>description</td>
-                <td>:</td>
-                <td id="description" class="table_content"></td>
-            </tr>
-        </table>
+        <div class="display-table">
+            <table>
+                <tr>
+                    <td>city</td>
+                    <td class="colon">:</td>
+                    <td id="city" class="table_content"></td>
+                </tr>
+                <tr>
+                    <td>location</td>
+                    <td>:</td>
+                    <td id="location" class="table_content"></td>
+                </tr>
+                <tr>
+                    <td>color</td>
+                    <td>:</td>
+                    <td id="color" class="table_content"></td>
+                </tr>
+                <tr>
+                    <td>material</td>
+                    <td>:</td>
+                    <td id="material" class="table_content"></td>
+                </tr>
+                <tr>
+                    <td>status</td>
+                    <td>:</td>
+                    <td id="status" class="table_content"></td>
+                </tr>
+                <tr>
+                    <td>description</td>
+                    <td>:</td>
+                    <td id="description" class="table_content"></td>
+                </tr>
+            </table>
+        </div>
+
         <h3>Comment</h3>
         <div id="comments-go-here"></div>
 

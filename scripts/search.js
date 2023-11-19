@@ -34,19 +34,43 @@ function setup() {
 
     query = db.collection("items").where('status', '==', 'active')
 
+
     if (keywords) {
         query = query.where('name', 'in', keywords)
-    } else if (advanced_queries) {
+    }
+
+    if (advanced_queries) {
         for (let key in advanced_queries) {
+            
             if (key === 'name') {
+                console.log('09380423')
                 query = query.where('name', 'in', advanced_queries[key].split(' '))
-            } else if (key === 'price-range') {
-                if (advanced_queries[key] === '50') {
-                    query = query.where('price', '<=', parseInt(advanced_queries[key]))
-                } else if (advanced_queries[key] === '100') {
-                    query = query.where('price', '<=', parseInt(advanced_queries[key]))
-                    query = query.where('price', '>=', parseInt(advanced_queries[key]))
-                }
+            // } else if (key === 'price-range') {
+            //     if (advanced_queries[key] === '50') {
+            //         console.log('here 50', parseInt(advanced_queries[key]), query)
+            //         query = query.where('price', '<=', parseInt(advanced_queries[key]))
+            //         query.get()
+            //         .then(
+            //             results => {
+            //                 results.forEach(result => {
+            //                     var result_obj = {
+            //                         name: result.data().name,
+            //                         image: result.data().image,
+            //                         price: result.data().price,
+            //                         location: result.data().location,
+            //                         id: result.id
+            //                     };
+            //                     console.log("results_ind:", result_obj)
+            //                 })
+            //             }
+            //         )
+            //     } else if (advanced_queries[key] === '100') {
+            //         console.log('here 100')
+            //         query = query.where('price', '<=', parseInt(advanced_queries[key]))
+            //         query = query.where('price', '>=', 50)
+            //     } else if (advanced_queries[key] === '500') {
+            //         console.log('here 500')
+            //     }
             } else {
                 query = query.where(key, '==', advanced_queries[key])
             }
@@ -61,6 +85,7 @@ function setup() {
     query.get()
         .then(
             results => {
+                console.log("results:", results)
                 results.forEach(result => {
                     var result_obj = {
                         name: result.data().name,

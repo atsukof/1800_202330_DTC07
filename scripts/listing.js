@@ -1,7 +1,7 @@
-var user_ID = null
+var user_ID
 var item_ID = null
-var seller_ID = null
-var currentUser = null
+var seller_ID 
+var currentUser
 
 
 //------------------------------------------------
@@ -21,13 +21,13 @@ function logout() {
 //------------------------------------------------------------------------------
 
 
-function itemInfo() {
+async function itemInfo() {
     let params = new URL(window.location.href); //get URL of search bar
     console.log(params)
     item_ID = params.searchParams.get("docID"); //get value for key "id"
     console.log(item_ID, "item_ID");
 
-    db.collection("items")
+    await db.collection("items")
         .doc(item_ID)
         .get()
         .then(doc => {
@@ -70,9 +70,13 @@ function itemInfo() {
 }
 
 function showEdit() {
-    if (localStorage.getItem('seller_ID') != localStorage.getItem('user_ID')) {
-        document.getElementById('edit-btn').style.display = 'none'
-    } 
+    firebase.auth().onAuthStateChanged(async function(user) {
+        if (user && seller_ID === user.uid) {
+            document.getElementById('edit-btn').style.display = 'block'
+        } else if (user && seller_ID != user.uid) {
+            document.getElementById('buy-btn').style.display = 'block'
+        }
+    })
 }
 
 function saveItemID() {
@@ -82,12 +86,13 @@ function saveItemID() {
     // window.location.href = 'review.html';
 }
 
-function getUserID() {
-    firebase.auth().onAuthStateChanged(user => {
+async function getUserID() {
+    firebase.auth().onAuthStateChanged(async function(user) {
         if (user) {
             localStorage.setItem('user_ID', user.uid)
-            var user_ID = user.uid
-            currentUser = db.collection("users").doc(user_ID)
+            var user_ID = user.uid;
+            currentUser = await db.collection("users").doc(user_ID);
+            console.log(currentUser)
         }
     })
 }
@@ -182,12 +187,14 @@ function postComment() {
 };
 
 async function setup() {
+    await getUserID();
     item_ID = await itemInfo();
     saveItemID();
-    getUserID();
+
     displayCommentsDynamically(item_ID);
     $("#comment").keyup(checkCommentFields);
     showEdit();
+    console.log(currentUser)
 }
 
 $(document).ready(setup)
