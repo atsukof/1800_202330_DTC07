@@ -40,7 +40,7 @@ function createListing() {
         if (user) {
             var item_name = document.getElementById("item-name").value;
             var item_description = document.getElementById("item-description").value;
-            var item_price = document.getElementById("item-price").value;
+            var item_price = parseFloat(document.getElementById("item-price").value);
             var item_type = document.getElementById("item-type").value;
             var item_condition = document.getElementById("item-condition").value;
             var item_location = document.getElementById("item-location").value;
