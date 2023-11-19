@@ -1,6 +1,6 @@
 var user_ID
 var item_ID = null
-var seller_ID 
+var seller_ID
 var currentUser
 
 
@@ -30,7 +30,7 @@ async function itemInfo() {
     await db.collection("items")
         .doc(item_ID)
         .get()
-        .then(doc => {
+        .then(async (doc) => {
             console.log("item is read")
             let imgEvent = document.querySelector(".item-img");
             imgEvent.src = `${doc.data().image}`;
@@ -49,13 +49,32 @@ async function itemInfo() {
             document.querySelector('i').onclick = () => updateWatchlist(item_ID);
 
             // get users collection -> user.name
-            seller_ID = doc.data().seller_ID
-            localStorage.setItem("seller_ID", seller_ID)
+
+            seller_ID = doc.data().seller_ID;
+            localStorage.setItem("seller_ID", seller_ID);
+
+            let seller_docRef = await db.collection("users").doc(seller_ID).get();
+            seller_rating = seller_docRef.data().rating;
+            seller_rating = Math.round(seller_rating);
+
+
+            // convert rating to stars
+            stars = ""
+            let rating_stars = "";
+            for (let i = 0; i < seller_rating; i++) {
+                rating_stars += '<span class="material-icons" style="font-size:15px">star</span>';
+            }
+
+            for (let i = seller_rating; i < 5; i++) {
+                rating_stars += '<span class="material-icons" style="font-size:15px">star_outline</span>';
+            }
+
+
             db.collection("users").doc(seller_ID).get()
                 .then(
                     seller => {
                         seller = seller.data()
-                        $(".seller-name").append(`${seller.name}<span id="rating">★★★★★</span>`)
+                        $(".seller-name").append(`${seller.name} ${rating_stars}`)
                     })
 
             $("#price").text(`$${doc.data().price}`);
@@ -70,7 +89,7 @@ async function itemInfo() {
 }
 
 function showEdit() {
-    firebase.auth().onAuthStateChanged(async function(user) {
+    firebase.auth().onAuthStateChanged(async function (user) {
         if (user && seller_ID === user.uid) {
             document.getElementById('edit-btn').style.display = 'block'
         } else if (user && seller_ID != user.uid) {
@@ -87,7 +106,7 @@ function saveItemID() {
 }
 
 async function getUserID() {
-    firebase.auth().onAuthStateChanged(async function(user) {
+    firebase.auth().onAuthStateChanged(async function (user) {
         if (user) {
             localStorage.setItem('user_ID', user.uid)
             var user_ID = user.uid;
@@ -103,10 +122,10 @@ function updateWatchlist(item_ID) {
         let iconID = 'save-' + item_ID;
         let isInWatchlist = watchlist_items.includes(item_ID);
 
-        if(isInWatchlist) {
+        if (isInWatchlist) {
             currentUser.update({
                 watchlists: firebase.firestore.FieldValue.arrayRemove(item_ID)
-            }).then( () => {
+            }).then(() => {
                 console.log(`item ${item_ID} was removed.`)
                 document.getElementById(iconID).innerText = 'favorite_border';
             })
