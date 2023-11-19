@@ -35,7 +35,7 @@ async function deleteListing() {
     } 
 }
 
-function saveListing() {
+async function saveListing() {
     var item_name = document.getElementById("item-name").value;
     var item_description = document.getElementById("item-description").value;
     var item_price = parseFloat(document.getElementById("item-price").value);
@@ -60,7 +60,7 @@ function saveListing() {
          material = null
     }
 
-    listing.update({
+    await listing.update({
         name: item_name,
         type: item_type,
         subcategory: item_subcategory,
@@ -76,6 +76,7 @@ function saveListing() {
     }).then(
         console.log('saved')
     )
+    window.location.href = `listing.html?docID=${localStorage.getItem('item_ID')}`
 }
 
 
