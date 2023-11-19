@@ -89,3 +89,8 @@ footer {
     border-radius:3px;
     color: black;
 }
+
+.advanced {
+    display: flex;
+    justify-content: right;
+}
