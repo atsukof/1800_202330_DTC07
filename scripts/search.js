@@ -29,6 +29,7 @@ function setup() {
 
     
     sessionStorage.clear();
+
     console.log(advanced_queries)
     console.log('type is ', type)
 
