@@ -9,23 +9,33 @@ function setup() {
     } else if (sessionStorage.getItem('advanced_queries')) {
         var advanced_queries = JSON.parse(sessionStorage.getItem('advanced_queries'))
     }
-    sessionStorage.clear();
+    // sessionStorage.clear();
     console.log(advanced_queries)
 
     query = db.collection("items").where('status', '==', 'active')
 
+
     if (keywords) {
         query = query.where('name', 'in', keywords)
-    } else if (advanced_queries) {
+    }
+
+    if (advanced_queries) {
         for (let key in advanced_queries) {
+            
             if (key === 'name') {
+                console.log('09380423')
                 query = query.where('name', 'in', advanced_queries[key].split(' '))
             } else if (key === 'price-range') {
+                console.log(1234321)
                 if (advanced_queries[key] === '50') {
+                    console.log('here 50', parseInt(advanced_queries[key]))
                     query = query.where('price', '<=', parseInt(advanced_queries[key]))
                 } else if (advanced_queries[key] === '100') {
+                    console.log('here 100')
                     query = query.where('price', '<=', parseInt(advanced_queries[key]))
                     query = query.where('price', '>=', parseInt(advanced_queries[key]))
+                } else if (advanced_queries[key] === '500') {
+                    console.log('here 500')
                 }
             } else {
                 query = query.where(key, '==', advanced_queries[key])
