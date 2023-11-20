@@ -1,12 +1,23 @@
+var profile_user_ID
+
+// get user ID which should be shown in the profile page from URL parameter
+function getProfileUserInfo() {
+    let params = new URL(window.location.href); //get URL of search bar
+    profile_user_ID = params.searchParams.get("userID"); //get value for key "id"
+}
+
 // GET USER INFO FROM FIRESTORE
 function insertUserFromFirestore() {
     // Check if the user is logged in:
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-            showForm();
-            console.log(user.uid); // Let's know who the logged-in user is by logging their UID
-            currentUser = db.collection("users").doc(user.uid); // Go to the Firestore document of the user
-            currentUser.get().then(userDoc => {
+
+            //
+            getProfileUserInfo();
+            console.log(profile_user_ID, "will be shown");
+
+            profileUser = db.collection("users").doc(profile_user_ID);
+            profileUser.get().then(userDoc => {
                 // Get the user name
                 var userName = userDoc.data().name;
                 let picUrl = userDoc.data().profilePic;
@@ -40,6 +51,13 @@ function insertUserFromFirestore() {
                 }
                 document.querySelector(".stars_row").innerHTML = starRating;
             })
+
+            if (profile_user_ID == user.uid) {
+                showForm();
+            } else {
+                document.getElementById("change-pic").style.display = "none";
+            }
+
         } else {
             console.log("No user is logged in."); // Log a message when no user is logged in
         }
