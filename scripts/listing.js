@@ -114,7 +114,8 @@ async function getUserID() {
             localStorage.setItem('user_ID', user.uid)
             var user_ID = user.uid;
             currentUser = await db.collection("users").doc(user_ID);
-            console.log(currentUser)
+            console.log(`currentUser: ${user_ID}`)
+            return user_ID;
         }
     })
 }
@@ -183,8 +184,10 @@ function checkCommentFields() {
     }
 }
 
-function postComment() {
+async function postComment() {
+    user_ID = localStorage.getItem("user_ID")
     console.log("comment button clicked")
+    console.log(`posterID: ${user_ID}`)
     var commentDate = firebase.firestore.Timestamp.fromDate(new Date())
     var commentText = document.getElementById("comment").value
 
@@ -193,6 +196,7 @@ function postComment() {
     console.log(commentDate)
 
     var user = firebase.auth().currentUser;
+    
     if (user) {
         db.collection("comments").add({
             comment_date: commentDate,
