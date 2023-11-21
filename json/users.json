@@ -3,5 +3,6 @@
     "email": null,
     "profilePic": null,
     "rating": null,
-    "rating_count": null
+    "rating_count": null,
+    "watchlists": null
 }
