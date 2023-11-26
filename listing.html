@@ -26,7 +26,8 @@
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <!-- Google Icons (Material Design)-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
@@ -96,6 +97,10 @@
             width: 15px;
         }
 
+        td {
+            vertical-align: top;
+        }
+
         #edit-btn {
             margin-bottom: 10px;
         }
@@ -116,7 +121,7 @@
     <!-- welcome and call_to_action -->
     <main>
         <a href="#" class="link-primary" onclick="goBack()"><span class="material-symbols-outlined">
-            arrow_back_ios
+                arrow_back_ios
             </span></a>
         <div class="img-div">
             <img class="item-img" src="" alt="">
@@ -132,11 +137,12 @@
             <div class="title-right">
                 <h2 id="price"></h2>
                 <a href="confirm_purchase.html" class="btn btn-primary" id="buy-btn" style="display: none">Buy</a>
-                <button type="button" class="btn btn-primary" onclick="location.href = 'edit.html'" id="edit-btn" style="display: none">Edit</button>
+                <button type="button" class="btn btn-primary" onclick="location.href = 'edit.html'" id="edit-btn"
+                    style="display: none">Edit</button>
             </div>
         </div>
 
-        
+
 
         <h3>Details</h3>
         <div class="display-table">
@@ -165,6 +171,11 @@
                     <td>Status</td>
                     <td>:</td>
                     <td id="status" class="table_content"></td>
+                </tr>
+                <tr>
+                    <td>Posted on</td>
+                    <td>:</td>
+                    <td id="posted" class="table_content"></td>
                 </tr>
                 <tr>
                     <td>Description</td>

@@ -86,6 +86,7 @@ async function itemInfo() {
             document.getElementById("color").innerHTML = doc.data().color;
             document.getElementById("material").innerHTML = doc.data().material;
             document.getElementById("status").innerHTML = doc.data().status;
+            document.getElementById("posted").innerHTML = doc.data().date_created.toDate().toISOString().split('T')[0];;
             document.getElementById("description").innerHTML = doc.data().description;
         });
     return item_ID;
@@ -186,8 +187,6 @@ function checkCommentFields() {
 
 async function postComment() {
     user_ID = localStorage.getItem("user_ID")
-    console.log("comment button clicked")
-    console.log(`posterID: ${user_ID}`)
     var commentDate = firebase.firestore.Timestamp.fromDate(new Date())
     var commentText = document.getElementById("comment").value
 
