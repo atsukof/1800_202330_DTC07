@@ -10,7 +10,7 @@ async function displayItemCard() {
     const item_docRef = await db.collection("items").doc(item_ID).get();
 
     const seller_ID = item_docRef.data().seller_ID;
-    console.log(seller_ID);
+    console.log(`seller_ID: ${seller_ID}`);
     const seller_docRef = await db.collection("users").doc(seller_ID).get();
 
     let search = document.createElement('div');
@@ -38,6 +38,16 @@ async function displayItemCard() {
 
 
     // document.getElementById("item_card").innerHTML = "abc";
+}
+
+async function change_status() {
+    // console.log(`item_ID: ${item_ID}`);
+    const item_docRef = await db.collection("items").doc(item_ID).get();
+    // console.log(item_docRef.data().status);
+
+    item_status = { ["status"]: "sold" };
+    await db.collection("items").doc(item_ID).update(item_status);
+    window.location.href = "rating.html"
 }
 
 
