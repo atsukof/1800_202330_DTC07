@@ -8,13 +8,41 @@ body {
     padding-bottom: 65px;
     margin-top: 20px;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 footer {
     background-color: orange;
 }
 
+#footer-all {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
 .footer-icons {
     color: white;
     font-size: 32px;
+    padding: 0;
+    margin: 0;
+}
+
+.nav > a {
+    text-decoration: none;
+    color: white;
+}
+
+.footer-text {
+    color: white;
+    font-size: 11px;
+    padding: 0;
+    margin: 0;
+}
+
+.category-button {
+    text-align: center;
+}
+
+.icon-label {
+    margin-top: 0;
 }

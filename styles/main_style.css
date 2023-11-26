@@ -8,15 +8,6 @@ body {
     padding-bottom: 65px;
 }
 
-footer {
-    background-color: orange;
-}
-
-.footer-icons {
-    color: white;
-    font-size: 32px;
-}
-
 .search-container form {
     margin-top: 1rem;
     height: 48px;
