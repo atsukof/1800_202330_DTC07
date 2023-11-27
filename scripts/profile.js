@@ -96,23 +96,24 @@ function savePic() {
 
         //Asynch call to put File Object (global variable ImageFile) onto Cloud
         storageRef.put(ImageFile)
-            .then(function () {
+            .then(async function () {
                 console.log('Uploaded to Cloud Storage.');
 
                 //Asynch call to get URL from Cloud
-                storageRef.getDownloadURL()
-                    .then(function (url) { // Get "url" of the uploaded file
+                await storageRef.getDownloadURL()
+                    .then(async function (url) { // Get "url" of the uploaded file
                         console.log("Got the download URL.");
 
                         //Asynch call to save the form fields into Firestore.
-                        db.collection("users").doc(user.uid).update({
+                        await db.collection("users").doc(user.uid).update({
                             profilePic: url // Save the URL into users collection
                         })
                             .then(function () {
                                 console.log('Added Profile Pic URL to Firestore.');
                                 console.log('Saved use profile info');
+                                location.reload();
                             })
                     })
-            })
-    })
+            })         
+        })
 }
