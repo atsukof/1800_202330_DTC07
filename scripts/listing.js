@@ -86,7 +86,8 @@ async function itemInfo() {
             document.getElementById("color").innerHTML = doc.data().color;
             document.getElementById("material").innerHTML = doc.data().material;
             document.getElementById("status").innerHTML = doc.data().status;
-            document.getElementById("posted").innerHTML = doc.data().date_created.toDate().toISOString().split('T')[0];;
+            let options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            document.getElementById("posted").innerHTML = doc.data().date_created.toDate().toLocaleString('en-US', options);
             document.getElementById("description").innerHTML = doc.data().description;
         });
     return item_ID;
