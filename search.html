@@ -39,74 +39,7 @@
     <!-- Other libraries and styles of your own -->
     <!-------------------------------------------->
     <link rel="stylesheet" href="./styles/style.css">
-    <style>
-        #search-filters {
-            display: flex;
-            background-color: #dedede;
-            justify-content: space-between;
-            padding: 10px 5px;
-        }
-
-        body {
-            padding-top: 85px;
-        }
-
-        .sort {
-            display: flex;
-            justify-content: right;
-            padding: 10px 0px;
-        }
-
-        .sort p{
-            padding-right: 10px;
-        }
-
-        #results {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .search {
-            position: relative;
-            padding: 5px;
-            width: 40%;
-        }
-
-        .search img {
-            width: 200px;
-            height: 200px;
-        }
-
-        .price {
-            position: absolute;
-            bottom: 5%;
-            left: 5%;
-            margin-bottom: 0px;
-            background: rgba(222, 222, 222, 0.5);
-            border-radius:3px;
-            color: black;
-        }
-
-        .location {
-            position: absolute;
-            top: 5%;
-            right: 5%;
-            margin-bottom: 0px;
-            background: rgba(222, 222, 222, 0.5);
-            border-radius:3px;
-            color: black;
-        }
-
-        .search-container {
-            margin-bottom: 10px
-        }
-
-        .form-inline{
-            flex-grow: 4;
-            margin-right: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="./styles/search.css">
 
 </head>
 
@@ -135,18 +68,17 @@
             <button type="button" onclick="location.href = 'advanced_search.html'" class="btn btn-primary btn-sm" id="filter">Advanced Search</button>
          </div>
 
-        <div class="sort">
+        <!-- <div class="sort">
             <p>Sort by</p>
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 --
             </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Price: low to high</a></li>
-                <li><a class="dropdown-item" href="#">Price: high to low</a></li>
-                <li><a class="dropdown-item" href="#">Newest</a></li>
-                <li><a class="dropdown-item" href="#">Distance</a></li>
+                <li><a class="dropdown-item" href='search.html'>Price: low to high</a></li>
+                <li><a class="dropdown-item" href='search.html'>Price: high to low</a></li>
+                <li><a class="dropdown-item" href='search.html'>Newest</a></li>
               </ul>
-        </div>
+        </div> -->
 
         <div id="results">
         </div>

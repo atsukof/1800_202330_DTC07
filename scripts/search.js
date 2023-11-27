@@ -3,9 +3,24 @@ function searchQuery() {
     sessionStorage.setItem('keywords', keywords);
 }
 
+// function saveSort(sort_array, index) {
+//     sessionStorage.setItem('sort', sort_array[index].innerHTML)
+// }
+
 function setup() {
 
-    console.log('selected:', sessionStorage.getItem('type'))
+    // console.log('selected:', sessionStorage.getItem('type'))
+
+    sort = document.getElementsByTagName('li')
+    for (let i = 0; i < sort.length; i ++) {
+        html = sort[i].childNodes[0].innerHTML
+        console.log(html)
+        sort[i].childNodes[0].addEventListener("click", function () {
+            console.log(this.innerHTML)
+            sessionStorage.setItem('sort', this.innerHTML)
+        })
+        // sort[i].onclick = saveSort(sort, i)
+    }
 
     if (sessionStorage.getItem('keywords')) {
         var keywords = sessionStorage.getItem('keywords').split(',');
@@ -36,7 +51,7 @@ function setup() {
         }
     })
 
-    sessionStorage.clear();
+    //sessionStorage.clear();
     query = db.collection("items").where('status', '==', 'active')
 
 
@@ -49,32 +64,32 @@ function setup() {
             
             if (key === 'name') {
                 query = query.where('name', 'in', advanced_queries[key].split(' '))
-            } else if (key === 'price-range') {
-                if (advanced_queries[key] === '50') {
-                    query = query.where('price', '<=', parseInt(advanced_queries[key]))
-                    query.get()
-                    .then(
-                        results => {
-                            results.forEach(result => {
-                                var result_obj = {
-                                    name: result.data().name,
-                                    image: result.data().image,
-                                    price: result.data().price,
-                                    location: result.data().location,
-                                    id: result.id
-                                };
-                                console.log("results_ind:", result_obj)
-                            })
-                        }
-                    )
-                } else if (advanced_queries[key] === '100') {
-                    // console.log('here 100')
-                    // display results that are within price range of [50, 100]
-                    query = query.where('price', '<=', parseInt(advanced_queries[key]))
-                    query = query.where('price', '>=', 50)
-                } else if (advanced_queries[key] === '500') {
-                    // console.log('here 500')
-                }
+            // } else if (key === 'price-range') {
+            //     if (advanced_queries[key] === '50') {
+            //         query = query.where('price', '<=', parseInt(advanced_queries[key]))
+            //         query.get()
+            //         .then(
+            //             results => {
+            //                 results.forEach(result => {
+            //                     var result_obj = {
+            //                         name: result.data().name,
+            //                         image: result.data().image,
+            //                         price: result.data().price,
+            //                         location: result.data().location,
+            //                         id: result.id
+            //                     };
+            //                     console.log("results_ind:", result_obj)
+            //                 })
+            //             }
+            //         )
+            //     } else if (advanced_queries[key] === '100') {
+            //         // console.log('here 100')
+            //         // display results that are within price range of [50, 100]
+            //         query = query.where('price', '<=', parseInt(advanced_queries[key]))
+            //         query = query.where('price', '>=', 50)
+            //     } else if (advanced_queries[key] === '500') {
+            //         // console.log('here 500')
+            //     }
             } else {
                 query = query.where(key, '==', advanced_queries[key])
             }
@@ -84,6 +99,17 @@ function setup() {
     }
 
     // console.log(query)
+
+    // if (sessionStorage.getItem('sort')) {
+    //     var order = sessionStorage.getItem('sort')
+    //     if (order === 'Price: low to high') {
+    //         console.log(22222)
+    //         query = query.orderBy('price')
+    //     } else if (order === 'Newest') {
+    //         query = query.orderBy('date_created')
+    //     }
+    // }
+
 
     results_arr = []
     query.get()
