@@ -27,6 +27,15 @@ function setup() {
         }
     }
 
+    // search with enter key
+    $("#search-input").keydown((e) =>{
+        var keyCode = e.which || e.keyCode;
+        if(keyCode == 13) {
+            searchQuery()
+            window.location.href = `search.html`
+        }
+    })
+
 
 
 

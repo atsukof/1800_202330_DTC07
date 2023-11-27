@@ -47,6 +47,17 @@ async function add_4_card() {
 function setup() {
     console.log("main.js is loaded")
     add_4_card()
+    console.log('here')
+
+    // search with enter key
+    $("#search-input").keydown((e) =>{
+        var keyCode = e.which || e.keyCode;
+        
+        if(keyCode == 13) {
+            searchQuery()
+            window.location.href = `search.html`
+        }
+    })
 }
 
 function searchQuery() {
