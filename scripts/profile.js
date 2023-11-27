@@ -4,6 +4,7 @@ var profile_user_ID
 function getProfileUserInfo() {
     let params = new URL(window.location.href); //get URL of search bar
     profile_user_ID = params.searchParams.get("userID"); //get value for key "id"
+    return profile_user_ID;
 }
 
 // GET USER INFO FROM FIRESTORE
@@ -24,7 +25,7 @@ function insertUserFromFirestore() {
                 let userRating = userDoc.data().rating
 
                 if (picUrl != null) {
-                    console.log(picUrl);
+                    console.log(`picUrl: ${picUrl}`);
                     document.getElementById('profile-pic').innerHTML = ''
                     profile_pic = document.createElement('img')
                     profile_pic.src = picUrl
@@ -34,8 +35,8 @@ function insertUserFromFirestore() {
                 }
 
                 document.getElementById("username-here").innerText = userName;
-                console.log(userName);
-                console.log(userRating);
+                console.log(`userName: ${userName}`);
+                console.log(`userRating: ${userRating}`);
 
                 // Initialize an empty string to store the star rating HTML
                 let starRating = "";
@@ -114,6 +115,67 @@ function savePic() {
                                 location.reload();
                             })
                     })
-            })         
-        })
+            })
+    })
 }
+
+async function displayItemCardsDynamically() {
+    let active_block = document.querySelector('#active');
+    let sold_block = document.querySelector('#sold');
+
+    let userID = getProfileUserInfo();
+    console.log(`userID: ${userID}`);
+
+
+    const all_activeDoc = await db.collection('items').where('status', '==', 'active').where('seller_ID', `==`, `${userID}`).orderBy(`date_created`, `desc`).get();
+    all_activeDoc.forEach(function (doc) {
+        console.log(`active: ${doc.id}`);
+
+        let search = document.createElement('div');
+        search.className = 'search';
+        let redirect = document.createElement('a')
+        redirect.href = `listing.html?docID=${doc.id}`
+        let image = document.createElement('img');
+        image.src = doc.data().image;
+        image.className = 'img-thumbnail';
+        let price = document.createElement('p');
+        price.className = 'price';
+        price.innerHTML = `$${doc.data().price}`;
+        let location = document.createElement('p');
+        location.innerHTML = doc.data().location;
+        location.className = 'location';
+
+        redirect.appendChild(image);
+        search.appendChild(redirect);
+        search.appendChild(price);
+        search.appendChild(location);
+        active_block.appendChild(search);
+    });
+
+
+    const all_soldDoc = await db.collection('items').where('status', '==', 'sold').where('seller_ID', `==`, `${userID}`).orderBy(`date_created`, `desc`).get();
+    all_soldDoc.forEach(doc => {
+        console.log(`sold: ${doc.id}`);
+        let search = document.createElement('div');
+        search.className = 'search';
+        let redirect = document.createElement('a');
+        redirect.href = `listing.html?docID=${doc.id}`;
+        let image = document.createElement('img');
+        image.src = doc.data().image;
+        image.className = 'img-thumbnail';
+        let price = document.createElement('p');
+        price.className = 'price';
+        price.innerHTML = `$${doc.data().price}`;
+        let location = document.createElement('p');
+        location.innerHTML = doc.data().location;
+        location.className = 'location';
+
+        redirect.appendChild(image);
+        search.appendChild(redirect);
+        search.appendChild(price);
+        search.appendChild(location);
+        sold_block.appendChild(search);
+    });
+}
+
+displayItemCardsDynamically();
