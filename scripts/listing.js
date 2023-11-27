@@ -81,7 +81,6 @@ async function itemInfo() {
                     })
 
             $("#price").text(`$${doc.data().price}`);
-            document.getElementById("city").innerHTML = doc.data().city;
             document.getElementById("location").innerHTML = doc.data().location;
             document.getElementById("color").innerHTML = doc.data().color;
             document.getElementById("material").innerHTML = doc.data().material;
@@ -151,7 +150,7 @@ function updateWatchlist(item_ID) {
 
 
 async function displayCommentsDynamically(item_ID) {
-    const all_comments = await db.collection("comments").where("item_ID", "==", item_ID).get()
+    const all_comments = await db.collection("comments").where("item_ID", "==", item_ID).orderBy(`comment_date`,`desc`).get()
     const comments = all_comments.docs;
     // console.log(comments);
     comments.forEach(async (doc) => {
