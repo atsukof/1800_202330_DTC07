@@ -130,8 +130,10 @@ function setup() {
         .then(() => {
             console.log(results_arr.length);
             if (results_arr.length == 0) {
-                document.getElementById('results').innerHTML += 'No listings found.'
-            } else {
+                no_result = document.createElement('div')
+                no_result.innerHTML = 'No listings found.'
+                document.getElementById('results').appendChild(no_result)
+               
                 for (let i = 0; i < results_arr.length; i++) {
                     let redirect = document.createElement('a')
                     redirect.href = `listing.html?docID=${results_arr[i].id}`
