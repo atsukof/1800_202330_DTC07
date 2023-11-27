@@ -1,9 +1,7 @@
 // read_items
 async function add_4_card() {
     const results_arr = [];
-    await db.collection("items")
-        .where('status', '==', 'active')
-        .get()
+    await db.collection('items').where('status', '==', 'active').orderBy(`date_created`, `desc`).get()
         .then(
             all_items => {
 
@@ -15,12 +13,12 @@ async function add_4_card() {
                         image: doc.data().image,
                     };
 
-                    console.log(item_obj)
+                    // console.log(item_obj)
                     results_arr.push(item_obj);
                     return results_arr
                 })
                 // add card into main.html
-                for (let i = 0; i < results_arr.length; i++) {
+                for (let i = 0; i < 6; i++) {
                     let redirect = document.createElement('a')
                     redirect.href = `listing.html?docID=${results_arr[i].id}`
                     let search = document.createElement('div')
@@ -33,7 +31,7 @@ async function add_4_card() {
                     let location = document.createElement('p')
                     location.innerHTML = results_arr[i].location
                     location.className = 'location'
-    
+
                     redirect.appendChild(image)
                     search.appendChild(redirect)
                     search.appendChild(price)
@@ -47,18 +45,17 @@ async function add_4_card() {
 function setup() {
     console.log("main.js is loaded")
     add_4_card()
-    console.log('here')
 
     // search with enter key
-    $("#search-input").keydown((e) =>{
+    $("#search-input").keydown((e) => {
         var keyCode = e.which || e.keyCode;
-        
-        if(keyCode == 13) {
+        if (keyCode == 13) {
             searchQuery()
             window.location.href = `search.html`
         }
     })
 }
+
 
 function searchQuery() {
     keywords = $("#search-input").val().split(" ")
