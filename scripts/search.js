@@ -51,7 +51,7 @@ function setup() {
         }
     })
 
-    //sessionStorage.clear();
+    sessionStorage.clear();
     query = db.collection("items").where('status', '==', 'active')
 
 
