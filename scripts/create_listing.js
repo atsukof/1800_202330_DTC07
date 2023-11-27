@@ -35,7 +35,6 @@ function listenFileSelect() {
 listenFileSelect();
 
 function createListing() {
-    alert ("CREATE LISTING is triggered");
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             var item_name = document.getElementById("item-name").value;
@@ -115,12 +114,8 @@ function uploadPic(listingID) {
                          // AFTER .update is done
                         .then(function () {
                             console.log('4. Added pic URL to Firestore.');
+                            window.location.href = `listing.html?docID=${listingID}`
                         })
-
-                    // TODO: ADD FOR LOOP TO LOOP THROUGH MULTIPLE IMAGES  
-                    // db.collection('items').doc(listingID).collection('images').add({
-                    //     url
-                    // })
                 })
         })
         .catch((error) => {

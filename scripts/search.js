@@ -36,17 +36,7 @@ function setup() {
         }
     })
 
-
-
-
-
-    
-    
     sessionStorage.clear();
-
-    console.log(advanced_queries)
-    console.log('type is ', type)
-
     query = db.collection("items").where('status', '==', 'active')
 
 
@@ -58,11 +48,9 @@ function setup() {
         for (let key in advanced_queries) {
             
             if (key === 'name') {
-                console.log('09380423')
                 query = query.where('name', 'in', advanced_queries[key].split(' '))
             } else if (key === 'price-range') {
                 if (advanced_queries[key] === '50') {
-                    console.log('here 50', parseInt(advanced_queries[key]), query)
                     query = query.where('price', '<=', parseInt(advanced_queries[key]))
                     query.get()
                     .then(
@@ -80,12 +68,12 @@ function setup() {
                         }
                     )
                 } else if (advanced_queries[key] === '100') {
-                    console.log('here 100')
+                    // console.log('here 100')
                     // display results that are within price range of [50, 100]
                     query = query.where('price', '<=', parseInt(advanced_queries[key]))
                     query = query.where('price', '>=', 50)
                 } else if (advanced_queries[key] === '500') {
-                    console.log('here 500')
+                    // console.log('here 500')
                 }
             } else {
                 query = query.where(key, '==', advanced_queries[key])
@@ -95,13 +83,12 @@ function setup() {
         query = query.where('type', '==', type);
     }
 
-    console.log(query)
+    // console.log(query)
 
     results_arr = []
     query.get()
         .then(
             results => {
-                console.log("results:", results)
                 results.forEach(result => {
                     var result_obj = {
                         name: result.data().name,
@@ -116,26 +103,31 @@ function setup() {
         )
         .then(() => {
             console.log(results_arr.length);
-            for (let i = 0; i < results_arr.length; i++) {
-                let redirect = document.createElement('a')
-                redirect.href = `listing.html?docID=${results_arr[i].id}`
-                let search = document.createElement('div')
-                search.className = 'search'
-                let image = document.createElement('img')
-                image.src = results_arr[i].image
-                let price = document.createElement('p')
-                price.className = 'price'
-                price.innerHTML = `$${results_arr[i].price}`
-                let location = document.createElement('p')
-                location.innerHTML = results_arr[i].location
-                location.className = 'location'
-
-                redirect.appendChild(image)
-                search.appendChild(redirect)
-                search.appendChild(price)
-                search.appendChild(location)
-                document.getElementById('results').appendChild(search)
+            if (results_arr.length == 0) {
+                document.getElementById('results').innerHTML += 'No listings found.'
+            } else {
+                for (let i = 0; i < results_arr.length; i++) {
+                    let redirect = document.createElement('a')
+                    redirect.href = `listing.html?docID=${results_arr[i].id}`
+                    let search = document.createElement('div')
+                    search.className = 'search'
+                    let image = document.createElement('img')
+                    image.src = results_arr[i].image
+                    let price = document.createElement('p')
+                    price.className = 'price'
+                    price.innerHTML = `$${results_arr[i].price}`
+                    let location = document.createElement('p')
+                    location.innerHTML = results_arr[i].location
+                    location.className = 'location'
+    
+                    redirect.appendChild(image)
+                    search.appendChild(redirect)
+                    search.appendChild(price)
+                    search.appendChild(location)
+                    document.getElementById('results').appendChild(search)
+                }
             }
+
         });
 }
 
