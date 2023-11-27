@@ -135,22 +135,34 @@ function setup() {
                 for (let i = 0; i < results_arr.length; i++) {
                     let redirect = document.createElement('a')
                     redirect.href = `listing.html?docID=${results_arr[i].id}`
+
+                    let panel = document.createElement('div')
+                    panel.className = 'panel col'
+
                     let search = document.createElement('div')
                     search.className = 'search'
                     let image = document.createElement('img')
                     image.src = results_arr[i].image
+                    image.className = 'img-thumbnail'
+
                     let price = document.createElement('p')
                     price.className = 'price'
                     price.innerHTML = `$${results_arr[i].price}`
                     let location = document.createElement('p')
                     location.innerHTML = results_arr[i].location
                     location.className = 'location'
+
+                    let name = document.createElement('p')
+                    name.innerHTML = results_arr[i].name
+                    name.className = 'name'
     
                     redirect.appendChild(image)
                     search.appendChild(redirect)
                     search.appendChild(price)
                     search.appendChild(location)
-                    document.getElementById('results').appendChild(search)
+                    panel.appendChild(search)
+                    panel.appendChild(name)
+                    document.getElementById('results').appendChild(panel)
                 }
             }
 
