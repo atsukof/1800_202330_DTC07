@@ -40,90 +40,7 @@
     <!-- Other libraries and styles of your own -->
     <!-------------------------------------------->
     <link rel="stylesheet" href="./styles/style.css">
-    <style>
-        .material-symbols-outlined {
-            font-size: 140px;
-            font-variation-settings:
-                'FILL' 0,
-                'wght' 400,
-                'GRAD' 0,
-                'opsz' 24;
-        }
-
-        .star {
-            font-size: 30px;
-            font-variation-settings:
-                'FILL' 1,
-                'wght' 400,
-                'GRAD' 0,
-                'opsz' 24
-        }
-
-
-        .img-row {
-            display: flex;
-            padding: 0px;
-            justify-content: space-around;
-        }
-
-        .search-img {
-            position: relative;
-            padding: 5px;
-            width: 30%;
-        }
-
-        .price {
-            position: absolute;
-            bottom: 8%;
-            left: 8%;
-            margin-bottom: 0px;
-            background: rgba(34, 34, 34, 0.763);
-            border-radius: 3px;
-            color: white;
-        }
-
-        .city {
-            position: absolute;
-            top: 8%;
-            right: 8%;
-            margin-bottom: 0px;
-            background: rgba(34, 34, 34, 0.763);
-            border-radius: 3px;
-            color: white;
-        }
-
-        #sold_item .star {
-            font-size: 12px;
-        }
-
-        #sold_item .stars_row {
-            position: absolute;
-            bottom: 30%;
-            left: 8%;
-            margin-bottom: 0px;
-            background: rgba(34, 34, 34, 0.763);
-            border-radius: 3px;
-            color: white;
-        }
-
-        #upload-pic {
-            display: none;
-            width: auto;
-        }
-
-        #profile-pic {
-            width: 100%;
-        }
-
-        .profile-info {
-            display: flex;
-        }
-
-        #profile-pic img {
-            border-radius: 50%;
-        }
-    </style>
-
+    <link rel="stylesheet" href="./styles/profile.css">
 </head>
 
 <body>
@@ -168,50 +85,8 @@
     <div id="active_listing" class="container">
         <div class="card my-3 py-2 bg-warning bg-opacity-10 border-2 border-warning">
             <h1 class="align-self-center">Active listing</h1>
-            <div class="img-row">
-                <div class="search-img">
-                    <img src="https://picsum.photos/200?random=1" class="img-thumbnail">
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-                <div class="search-img">
-                    <img src="https://picsum.photos/200?random=2" class="img-thumbnail">
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-                <div class="search-img">
-                    <img src="https://picsum.photos/200?random=3" class="img-thumbnail">
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-                <div class="search-img">
-                    <img src="https://picsum.photos/200?random=4" class="img-thumbnail">
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-            </div>
-
-            <div class="img-row">
-                <div class="search-img">
-                    <img src="https://picsum.photos/200?random=5" class="img-thumbnail">
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-                <div class="search-img">
-                    <img src="https://picsum.photos/200?random=6" class="img-thumbnail">
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-                <div class="search-img">
-                    <img src="https://picsum.photos/200?random=7" class="img-thumbnail">
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-                <div class="search-img">
-                    <img src="https://picsum.photos/200?random=8" class="img-thumbnail">
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
+            <div class="img-row" id="active">
+                
             </div>
         </div>
     </div>
@@ -219,55 +94,7 @@
     <div id="sold_item" class="container">
         <div class="card my-4 py-2 bg-warning bg-opacity-10 border-2 border-warning">
             <h1 class="align-self-center">Sold items</h1>
-            <div class="img-row">
-                <div class="search-img">
-                    <img src="https://picsum.photos/200?random=11" class="img-thumbnail">
-                    <div class="stars_row">
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star_half</span>
-                    </div>
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-                <div class="search-img">
-                    <img src="https://picsum.photos/200?random=12" class="img-thumbnail">
-                    <div class="stars_row">
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star_half</span>
-                    </div>
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-                <div class="search-img">
-                    <img src="https://picsum.photos/200?random=13" class="img-thumbnail">
-                    <div class="stars_row">
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star_half</span>
-                    </div>
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
-                <div class="search-img">
-                    <img src="https://picsum.photos/200?random=14" class="img-thumbnail">
-                    <div class="stars_row">
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star</span>
-                        <span class="material-symbols-outlined star">star_half</span>
-                    </div>
-                    <p class="price">$Price</p>
-                    <p class="city">City</p>
-                </div>
+            <div class="img-row" id="sold">
             </div>
         </div>
     </div>
