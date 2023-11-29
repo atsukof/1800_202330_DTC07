@@ -133,6 +133,7 @@ function setup() {
                 no_result = document.createElement('div')
                 no_result.innerHTML = 'No listings found.'
                 document.getElementById('results').appendChild(no_result)
+            }else{
                
                 for (let i = 0; i < results_arr.length; i++) {
                     let redirect = document.createElement('a')
