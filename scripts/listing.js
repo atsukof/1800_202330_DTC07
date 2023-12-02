@@ -81,13 +81,19 @@ async function itemInfo() {
                     })
 
             $("#price").text(`$${doc.data().price}`);
-            document.getElementById("location").innerHTML = doc.data().location;
-            document.getElementById("color").innerHTML = doc.data().color;
-            document.getElementById("material").innerHTML = doc.data().material;
-            document.getElementById("status").innerHTML = doc.data().status;
+            let details_location = doc.data().location === undefined ? " " : doc.data().location;
+            let details_color = doc.data().color === undefined ? " " : doc.data().color;
+            let details_material = doc.data().material === undefined ? " " : doc.data().material;
             let options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-            document.getElementById("posted").innerHTML = doc.data().date_created.toDate().toLocaleString('en-US', options);
-            document.getElementById("description").innerHTML = doc.data().description;
+            let details_posted = doc.data().date_created === undefined ? " " : doc.data().date_created.toDate().toLocaleString('en-US', options);
+            let description = doc.data().description === undefined ? " " : doc.data().description;
+
+            document.getElementById("location").innerHTML = details_location;
+            document.getElementById("color").innerHTML = details_color;
+            document.getElementById("material").innerHTML = details_material;
+            document.getElementById("posted").innerHTML = details_posted;
+            
+            document.getElementById("description").innerHTML = description;
         });
     return item_ID;
 }
@@ -151,7 +157,7 @@ function updateWatchlist(item_ID) {
 
 
 async function displayCommentsDynamically(item_ID) {
-    const all_comments = await db.collection("comments").where("item_ID", "==", item_ID).orderBy(`comment_date`,`desc`).get()
+    const all_comments = await db.collection("comments").where("item_ID", "==", item_ID).orderBy(`comment_date`, `desc`).get()
     const comments = all_comments.docs;
     // console.log(comments);
     comments.forEach(async (doc) => {
@@ -195,7 +201,7 @@ async function postComment() {
     console.log(commentDate)
 
     var user = firebase.auth().currentUser;
-    
+
     if (user) {
         db.collection("comments").add({
             comment_date: commentDate,
