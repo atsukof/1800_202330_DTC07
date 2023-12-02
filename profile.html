@@ -53,7 +53,7 @@
 
     <!-- the body of your page goes here -->
     <!-- stuff -->
-    <div class="d-flex flex-row justify-content-center">
+    <div id="profile_containter" class="d-flex flex-row justify-content-center">
         <div class="card border-0 mt-4" style="width: 80%;">
             <div class="profile-info">
                 <div>
@@ -83,16 +83,16 @@
     </div>
 
     <div id="active_listing" class="container">
-        <div class="card my-3 py-2 bg-warning bg-opacity-10 border-2 border-warning">
+        <div id="active_item_card" class="card my-3 py-2 bg-warning bg-opacity-10 border-2 border-warning">
             <h1 class="align-self-center">Active listing</h1>
             <div class="img-row" id="active">
-                
+   
             </div>
         </div>
     </div>
 
     <div id="sold_item" class="container">
-        <div class="card my-4 py-2 bg-warning bg-opacity-10 border-2 border-warning">
+        <div  id="sold_item_card" class="card my-4 py-2 bg-warning bg-opacity-10 border-2 border-warning">
             <h1 class="align-self-center">Sold items</h1>
             <div class="img-row" id="sold">
             </div>
@@ -110,6 +110,21 @@
     <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/profile.js"></script>
     <!-- <script src="./scripts/script.js"></script> -->
+    <script>
+        // 获取元素
+        var activeListing = document.getElementById('active_listing');
+        var search_card = document.querySelector(".search")
+        console.log(search_card);
+        // 修改元素高度
+        function increaseHeight() {
+            var currentHeight = activeListing.offsetHeight; // 获取当前高度
+            var newHeight = currentHeight + 50; // 增加50像素
+            activeListing.style.height = newHeight + 'px'; // 设置新高度
+        }
+
+        // 调用函数来增加高度
+        // increaseHeight();
+    </script>
 
 </body>
 
