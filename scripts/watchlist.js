@@ -13,13 +13,25 @@ function getUserID() {
 async function displayWatchlistsDynamically(user_ID) {
     const userDoc = await db.collection("users").doc(user_ID).get()
     const watchlist_items = userDoc.data().watchlists;
+    for (const item_ID of watchlist_items) {
+        let item_doc = await db.collection("items").doc(item_ID).get();
+        if (item_doc.data().status === "sold") {
+            elementToRemove = item_ID;
+            let indexToRemove = watchlist_items.indexOf(elementToRemove);
+            if (indexToRemove !== -1) {
+                watchlist_items.splice(indexToRemove, 1);
+            }
+        }
+    }
+    console.log(`watchlist length: ${watchlist_items.length}`)
+    await db.collection("users").doc(user_ID).update({ watchlists: watchlist_items });
 
     watchlist_items.forEach((item_ID) => {
-        console.log(item_ID)
+        console.log(`item_ID: ${item_ID}`)
         newCard(item_ID);
     });
-    }
-    
+}
+
 function newCard(itemID) {
     console.log("inside new card", itemID)
     doc = db.collection("items").doc(itemID).get().then((doc) => {
