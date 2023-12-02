@@ -92,20 +92,24 @@ async function itemInfo() {
             document.getElementById("color").innerHTML = details_color;
             document.getElementById("material").innerHTML = details_material;
             document.getElementById("posted").innerHTML = details_posted;
-            
+
             document.getElementById("description").innerHTML = description;
         });
     return item_ID;
 }
 
-function showEdit() {
-    firebase.auth().onAuthStateChanged(async function (user) {
-        if (user && seller_ID === user.uid) {
-            document.getElementById('edit-btn').style.display = 'block'
-        } else if (user && seller_ID != user.uid) {
-            document.getElementById('buy-btn').style.display = 'block'
-        }
-    })
+async function showEdit(item_ID) {
+    let doc = await db.collection("items").doc(item_ID).get();
+    is_sold = doc.data().status
+    if (is_sold != 'sold') {
+        firebase.auth().onAuthStateChanged(async function (user) {
+            if (user && seller_ID === user.uid) {
+                document.getElementById('edit-btn').style.display = 'block'
+            } else if (user && seller_ID != user.uid) {
+                document.getElementById('buy-btn').style.display = 'block'
+            }
+        })
+    }
 }
 
 function saveItemID() {
@@ -224,7 +228,7 @@ async function setup() {
 
     displayCommentsDynamically(item_ID);
     $("#comment").keyup(checkCommentFields);
-    showEdit();
+    showEdit(item_ID);
     console.log(currentUser)
 }
 
