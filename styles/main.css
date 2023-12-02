@@ -55,10 +55,16 @@ a {
 
 #filter {
     margin-right: 5%;
-    margin-top: 2%;
-    width: 20%;
+    margin-top: 0%;
+    white-space: nowrap;
 }
 
+.advanced {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
 
 .search {
     position: relative;
@@ -98,10 +104,7 @@ a {
     color: black;
 }
 
-.advanced {
-    display: flex;
-    justify-content: right;
-}
+
 
 @media (min-width: 768px) {
     .category-name {
@@ -117,7 +120,7 @@ a {
     }
 
 
-    .form-control, .mr-sm-2{
+    /* .form-control, .mr-sm-2{
         font-size: 30px;
-    }
+    } */
 }
