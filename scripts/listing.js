@@ -45,7 +45,10 @@ async function itemInfo() {
                     document.getElementById('save-' + item_ID).innerText = 'favorite';
                 }
             })
-
+            console.log(doc.data().status==="sold")
+            if (doc.data().status === "sold") {
+                document.querySelector('i').style.display = 'none';
+            }
             document.querySelector('i').onclick = () => updateWatchlist(item_ID);
 
             // get users collection -> user.name
@@ -220,7 +223,6 @@ async function postComment() {
         console.log("No user is signed in");
     }
 };
-
 async function setup() {
     await getUserID();
     item_ID = await itemInfo();
