@@ -48,13 +48,13 @@ main {
     margin: 1%;
 }
 
-
-.table {
-    display: flex;
+table {
+    width: 100%;
 }
 
 .table_content {
     font-style: italic;
+    width: 70%;
 }
 
 .display-table {

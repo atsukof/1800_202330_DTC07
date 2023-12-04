@@ -90,7 +90,20 @@ async function itemInfo() {
             let options = { year: 'numeric', month: '2-digit', day: '2-digit' };
             let details_posted = doc.data().date_created === undefined ? " " : doc.data().date_created.toDate().toLocaleString('en-US', options);
             let description = doc.data().description === undefined ? " " : doc.data().description;
-
+            
+            if (details_color === " ") {
+                document.getElementById("color-row").style.display = "none";
+                console.log("color is empty")
+            }
+            if (details_material === " ") {
+                document.getElementById("material-row").style.display = "none";
+            }
+            if (details_location === " ") {
+                document.getElementById("location-row").style.display = "none";
+            }
+            if (details_posted === " ") {
+                document.getElementById("date-row").style.display = "none";
+            }
             document.getElementById("location").innerHTML = details_location;
             document.getElementById("color").innerHTML = details_color;
             document.getElementById("material").innerHTML = details_material;
