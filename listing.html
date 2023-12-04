@@ -36,79 +36,9 @@
 
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="styles/listing.css">
 
     <style>
-        main {
-            padding: 2%;
-        }
-
-        .item-img {
-            width: 400px;
-        }
-
-        .title-section {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .title-left,
-        .title-right {
-            padding-top: 2%;
-            padding-bottom: 2%;
-        }
-
-        .item-name {
-            display: flex;
-        }
-
-        .item-name>h2 {
-            display: float;
-            margin-right: 8px;
-        }
-
-        .seller-name-link {
-            text-decoration: none;
-        }
-
-        .description,
-        #comments-go-here {
-            padding: 1%;
-        }
-
-        .each-comment {
-            background-color: lightyellow;
-            padding: 4px;
-            margin: 1%;
-        }
-
-        .table {
-            display: flex;
-        }
-
-        .table_content {
-            font-style: italic;
-        }
-
-        .display-table {
-            padding-bottom: 10px;
-        }
-
-        .colon {
-            width: 15px;
-        }
-
-        td {
-            vertical-align: top;
-        }
-
-        #edit-btn {
-            margin-bottom: 10px;
-        }
-
-        .img-div {
-            display: flex;
-            justify-content: center;
-        }
     </style>
 </head>
 
@@ -142,42 +72,39 @@
             </div>
         </div>
 
-
         <h3>Details</h3>
-        <div class="display-table">
-            <table>
-                <tr>
-                    <td>Location</td>
-                    <td>:</td>
-                    <td id="location" class="table_content"></td>
-                </tr>
-                <tr>
-                    <td>Color</td>
-                    <td>:</td>
-                    <td id="color" class="table_content"></td>
-                </tr>
-                <tr>
-                    <td>Material</td>
-                    <td>:</td>
-                    <td id="material" class="table_content"></td>
-                </tr>
-                <tr>
-                    <td>Status</td>
-                    <td>:</td>
-                    <td id="status" class="table_content"></td>
-                </tr>
-                <tr>
-                    <td>Posted on</td>
-                    <td>:</td>
-                    <td id="posted" class="table_content"></td>
-                </tr>
-                <tr>
-                    <td>Description</td>
-                    <td>:</td>
-                    <td id="description" class="table_content"></td>
-                </tr>
-            </table>
+        <div id="details-go-here">
+            <div id="details" class="display-table">
+                <table>
+                    <tr>
+                        <td>Location</td>
+                        <td>:</td>
+                        <td id="location" class="table_content"></td>
+                    </tr>
+                    <tr>
+                        <td>Color</td>
+                        <td>:</td>
+                        <td id="color" class="table_content"></td>
+                    </tr>
+                    <tr>
+                        <td>Material</td>
+                        <td>:</td>
+                        <td id="material" class="table_content"></td>
+                    </tr>
+                    <tr>
+                        <td>Posted on</td>
+                        <td>:</td>
+                        <td id="posted" class="table_content"></td>
+                    </tr>
+                </table>
+            </div>
         </div>
+
+        <h3>Description</h3>
+        <div id="description-go-here">
+            <div id="description"></div>
+        </div>
+
 
         <h3>Comment</h3>
         <div id="comments-go-here"></div>
@@ -189,7 +116,6 @@
             </div>
             <button type="button" class="btn btn-primary disabled" onclick="postComment()"
                 id="comment-btn">Comment</button>
-
         </div>
 
         <!-- Templates for general use, not displayed -->

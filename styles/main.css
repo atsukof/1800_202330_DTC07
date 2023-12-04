@@ -15,6 +15,7 @@ body {
 }
 
 .search-container {
+    display: flex;
     margin-top: 2%;
     margin-bottom: 2%;
 }
@@ -39,7 +40,7 @@ a {
 }
 
 .category-name {
-    font-size: 10px;
+    /* font-size: 10px; */
     margin-bottom: 0;
 }
 
@@ -55,10 +56,16 @@ a {
 
 #filter {
     margin-right: 5%;
-    margin-top: 2%;
-    width: 20%;
+    margin-top: 0%;
+    white-space: nowrap;
 }
 
+.advanced {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
 
 .search {
     position: relative;
@@ -98,7 +105,27 @@ a {
     color: black;
 }
 
-.advanced {
-    display: flex;
-    justify-content: right;
+
+
+@media (min-width: 768px) {
+    .category-name {
+        font-size: 30px;
+    }
+
+    .search,
+    .name {
+        font-size: 30px;
+    }
+
+    .btn-sm {
+        font-size: 30px;
+    }
+
+    .search-container .material-symbols-outlined {
+        font-size: 50px;
+    }
+
+    #search-input::placeholder {
+        font-size: 30px;
+    }
 }

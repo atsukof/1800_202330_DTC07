@@ -47,6 +47,7 @@ async function change_status() {
 
     item_status = { ["status"]: "sold" };
     await db.collection("items").doc(item_ID).update(item_status);
+    alert("Purchase successful!")
     window.location.href = "rating.html"
 }
 

@@ -44,7 +44,7 @@
     <!-- Other libraries and styles of your own -->
     <!-------------------------------------------->
 
-    <link rel="stylesheet" href="./styles/main_style.css">
+    <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/style.css">
     <style>
 
@@ -61,7 +61,7 @@
 
     <!-- the body of your page goes here -->
     <!-- search bar -->
-    <div class="container bg-warning bg-opacity-10" style="width: 90%; margin-top: 10%;">
+    <div class="container bg-warning bg-opacity-10" style="width: 95%; margin-top: 10%; padding-bottom: 2%;padding-top: 2%">
         <div id="icon_row">
             <div class="d-flex flex-row justify-content-between">
                 <a href="search.html" onclick="searchByType(event)" class="selected-type" id="type-furniture">
@@ -91,26 +91,23 @@
             </div>
         </div>
         <div class="search-container">
-            <div class="d-flex justify-content-center align-items-center">
-                <form class="form-inline" onSubmit="return false;">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search anything.."
-                        aria-label="Search" id="search-input">
-                </form>
-                <button class="btn btn-outline-secondary">
-                    <a href='search.html' onclick=searchQuery()>
-                        <div class="material-symbols-outlined">search</div>
-                    </a>
-                </button>
-            </div>
+            <input class="form-control mr-sm-2" type="search" placeholder="Search anything.." aria-label="Search"
+                id="search-input">
+            </form>
+            <button class="btn btn-outline-secondary">
+                <a href='search.html' onclick=searchQuery()>
+                    <div class="material-symbols-outlined search-icon" id="magnifying_glass">search</div>
+                </a>
+            </button>
         </div>
     </div>
 
-    <div class="advanced">
-        <button type="button" onclick="location.href = 'advanced_search.html'" class="btn btn-primary btn-sm advance-button"
-            id="filter">Advanced Search</button>
-    </div>
 
     <div class="container">
+        <div class="advanced">
+            <button type="button" onclick="location.href = 'advanced_search.html'" class="btn btn-primary btn-sm"
+                id="filter">Advanced Search</button>
+        </div>
         <div class="row row-cols-2" id="results">
         </div>
     </div>

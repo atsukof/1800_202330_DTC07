@@ -45,7 +45,10 @@ async function itemInfo() {
                     document.getElementById('save-' + item_ID).innerText = 'favorite';
                 }
             })
-
+            console.log(doc.data().status==="sold")
+            if (doc.data().status === "sold") {
+                document.querySelector('i').style.display = 'none';
+            }
             document.querySelector('i').onclick = () => updateWatchlist(item_ID);
 
             // get users collection -> user.name
@@ -81,24 +84,35 @@ async function itemInfo() {
                     })
 
             $("#price").text(`$${doc.data().price}`);
-            document.getElementById("location").innerHTML = doc.data().location;
-            document.getElementById("color").innerHTML = doc.data().color;
-            document.getElementById("material").innerHTML = doc.data().material;
-            document.getElementById("status").innerHTML = doc.data().status;
-            document.getElementById("posted").innerHTML = doc.data().date_created.toDate().toISOString().split('T')[0];;
-            document.getElementById("description").innerHTML = doc.data().description;
+            let details_location = doc.data().location === undefined ? " " : doc.data().location;
+            let details_color = doc.data().color === undefined ? " " : doc.data().color;
+            let details_material = doc.data().material === undefined ? " " : doc.data().material;
+            let options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+            let details_posted = doc.data().date_created === undefined ? " " : doc.data().date_created.toDate().toLocaleString('en-US', options);
+            let description = doc.data().description === undefined ? " " : doc.data().description;
+
+            document.getElementById("location").innerHTML = details_location;
+            document.getElementById("color").innerHTML = details_color;
+            document.getElementById("material").innerHTML = details_material;
+            document.getElementById("posted").innerHTML = details_posted;
+
+            document.getElementById("description").innerHTML = description;
         });
     return item_ID;
 }
 
-function showEdit() {
-    firebase.auth().onAuthStateChanged(async function (user) {
-        if (user && seller_ID === user.uid) {
-            document.getElementById('edit-btn').style.display = 'block'
-        } else if (user && seller_ID != user.uid) {
-            document.getElementById('buy-btn').style.display = 'block'
-        }
-    })
+async function showEdit(item_ID) {
+    let doc = await db.collection("items").doc(item_ID).get();
+    is_sold = doc.data().status
+    if (is_sold != 'sold') {
+        firebase.auth().onAuthStateChanged(async function (user) {
+            if (user && seller_ID === user.uid) {
+                document.getElementById('edit-btn').style.display = 'block'
+            } else if (user && seller_ID != user.uid) {
+                document.getElementById('buy-btn').style.display = 'block'
+            }
+        })
+    }
 }
 
 function saveItemID() {
@@ -150,7 +164,7 @@ function updateWatchlist(item_ID) {
 
 
 async function displayCommentsDynamically(item_ID) {
-    const all_comments = await db.collection("comments").where("item_ID", "==", item_ID).orderBy(`comment_date`,`desc`).get()
+    const all_comments = await db.collection("comments").where("item_ID", "==", item_ID).orderBy(`comment_date`, `desc`).get()
     const comments = all_comments.docs;
     // console.log(comments);
     comments.forEach(async (doc) => {
@@ -194,7 +208,7 @@ async function postComment() {
     console.log(commentDate)
 
     var user = firebase.auth().currentUser;
-    
+
     if (user) {
         db.collection("comments").add({
             comment_date: commentDate,
@@ -209,7 +223,6 @@ async function postComment() {
         console.log("No user is signed in");
     }
 };
-
 async function setup() {
     await getUserID();
     item_ID = await itemInfo();
@@ -217,7 +230,7 @@ async function setup() {
 
     displayCommentsDynamically(item_ID);
     $("#comment").keyup(checkCommentFields);
-    showEdit();
+    showEdit(item_ID);
     console.log(currentUser)
 }
 
