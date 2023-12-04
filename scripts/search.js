@@ -64,32 +64,6 @@ function setup() {
             
             if (key === 'name') {
                 query = query.where('name', 'in', advanced_queries[key].split(' '))
-            // } else if (key === 'price-range') {
-            //     if (advanced_queries[key] === '50') {
-            //         query = query.where('price', '<=', parseInt(advanced_queries[key]))
-            //         query.get()
-            //         .then(
-            //             results => {
-            //                 results.forEach(result => {
-            //                     var result_obj = {
-            //                         name: result.data().name,
-            //                         image: result.data().image,
-            //                         price: result.data().price,
-            //                         location: result.data().location,
-            //                         id: result.id
-            //                     };
-            //                     console.log("results_ind:", result_obj)
-            //                 })
-            //             }
-            //         )
-            //     } else if (advanced_queries[key] === '100') {
-            //         // console.log('here 100')
-            //         // display results that are within price range of [50, 100]
-            //         query = query.where('price', '<=', parseInt(advanced_queries[key]))
-            //         query = query.where('price', '>=', 50)
-            //     } else if (advanced_queries[key] === '500') {
-            //         // console.log('here 500')
-            //     }
             } else {
                 query = query.where(key, '==', advanced_queries[key])
             }
@@ -97,19 +71,6 @@ function setup() {
     } else if (type) {
         query = query.where('type', '==', type);
     }
-
-    // console.log(query)
-
-    // if (sessionStorage.getItem('sort')) {
-    //     var order = sessionStorage.getItem('sort')
-    //     if (order === 'Price: low to high') {
-    //         console.log(22222)
-    //         query = query.orderBy('price')
-    //     } else if (order === 'Newest') {
-    //         query = query.orderBy('date_created')
-    //     }
-    // }
-
 
     results_arr = []
     query.get()
@@ -133,7 +94,7 @@ function setup() {
                 no_result = document.createElement('div')
                 no_result.innerHTML = 'No listings found.'
                 document.getElementById('results').appendChild(no_result)
-               
+            } else {
                 for (let i = 0; i < results_arr.length; i++) {
                     let redirect = document.createElement('a')
                     redirect.href = `listing.html?docID=${results_arr[i].id}`
