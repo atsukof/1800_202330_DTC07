@@ -52,10 +52,19 @@
         .watchlist-img {
             position: relative;
             padding: 5px;
+            overflow: hidden;
+            width: 100%;
+            padding-bottom: 100%;
         }
 
         .watchlist-img img {
+            object-fit: cover;
+            object-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
+            height: 100%;
         }
 
         .price {
@@ -65,6 +74,7 @@
             margin-bottom: 0px;
             background: rgba(222, 222, 222, 0.5);
             border-radius: 3px;
+            color: black;
         }
 
         .location {
@@ -74,6 +84,7 @@
             margin-bottom: 0px;
             background: rgba(222, 222, 222, 0.5);
             border-radius: 3px;
+            color: black;
         }
     </style>
 </head>
@@ -96,12 +107,15 @@
 
                 <!-- Templates for general use, not displayed -->
                 <template id="watchlistTemplate">
-                    <div class="watchlist-img col">
-                        <a href="" class="listing-link">
-                            <img src="" class="img-thumbnail">
-                        </a>
-                        <p class="price">Price here</span></p>
-                        <p class="location">location here</p>
+                    <div class="panel col">
+                        <div class="watchlist-img">
+                            <a href="" class="listing-link">
+                                <img src="" class="img-thumbnail">
+                            </a>
+                            <p class="price">Price here</span></p>
+                            <p class="location">location here</p>
+                        </div>
+                        <p class="name"></p>
                     </div>
                 </template>
     </main>

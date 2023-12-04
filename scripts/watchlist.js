@@ -40,7 +40,8 @@ function newCard(itemID) {
             var itemLocation = doc.data().location
             var itemPrice = doc.data().price
             var itemImg = doc.data().image
-            console.log(itemName, itemLocation, itemPrice, itemImg, itemID)
+            var itemName = doc.data().name
+            console.log(itemName, itemLocation, itemPrice, itemImg, itemID, itemName)
 
             let newcard = watchlistTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
@@ -48,6 +49,7 @@ function newCard(itemID) {
             newcard.querySelector('.img-thumbnail').src = itemImg;
             newcard.querySelector('.price').innerHTML = `\$${itemPrice}`;
             newcard.querySelector('.location').innerHTML = itemLocation;
+            newcard.querySelector('.name').innerHTML = itemName;
             newcard.querySelector('.listing-link').href = `listing.html?docID=${itemID}`;
 
             document.getElementById("watchlists-go-here").appendChild(newcard);
