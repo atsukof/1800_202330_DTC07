@@ -1,19 +1,15 @@
 var profile_user_ID
 
-// get user ID which should be shown in the profile page from URL parameter
 function getProfileUserInfo() {
-    let params = new URL(window.location.href); //get URL of search bar
-    profile_user_ID = params.searchParams.get("userID"); //get value for key "id"
+    // Get the user ID from the URL
+    let params = new URL(window.location.href); 
+    profile_user_ID = params.searchParams.get("userID"); 
     return profile_user_ID;
 }
 
-// GET USER INFO FROM FIRESTORE
 function insertUserFromFirestore() {
-    // Check if the user is logged in:
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
-
-            //
             getProfileUserInfo();
             console.log(profile_user_ID, "will be shown");
 
@@ -60,14 +56,14 @@ function insertUserFromFirestore() {
             }
 
         } else {
-            console.log("No user is logged in."); // Log a message when no user is logged in
+            console.log("No user is logged in."); 
         }
     })
 }
 insertUserFromFirestore();
 
-//show form when change picture button is clicked
 function showForm() {
+    //show form when change picture button is clicked
     document.getElementById("change-pic").addEventListener('click', function () {
         console.log("clicked");
         document.getElementById("change-pic").style.display = "none";
@@ -79,39 +75,26 @@ function showForm() {
 var ImageFile;
 
 function chooseFileListener() {
-    const fileInput = document.getElementById("mypic-input");   // pointer #1
-
-    //attach listener to input file
-    //when this file changes, do something
+    // Listens for a file to be chosen
+    const fileInput = document.getElementById("profile-pic-upload");
     fileInput.addEventListener('change', function (e) {
-
-        //the change event returns a file "e.target.files[0]"
         ImageFile = e.target.files[0];
     })
 }
 chooseFileListener();
 
 function savePic() {
+    // Saves the profile picture to the database
     firebase.auth().onAuthStateChanged(function (user) {
         var storageRef = storage.ref("images/" + user.uid + ".jpg");
-
-        //Asynch call to put File Object (global variable ImageFile) onto Cloud
         storageRef.put(ImageFile)
             .then(async function () {
-                console.log('Uploaded to Cloud Storage.');
-
-                //Asynch call to get URL from Cloud
                 await storageRef.getDownloadURL()
-                    .then(async function (url) { // Get "url" of the uploaded file
-                        console.log("Got the download URL.");
-
-                        //Asynch call to save the form fields into Firestore.
+                    .then(async function (url) { 
                         await db.collection("users").doc(user.uid).update({
-                            profilePic: url // Save the URL into users collection
+                            profilePic: url 
                         })
                             .then(function () {
-                                console.log('Added Profile Pic URL to Firestore.');
-                                console.log('Saved use profile info');
                                 location.reload();
                             })
                     })
