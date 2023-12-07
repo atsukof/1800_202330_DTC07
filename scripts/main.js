@@ -60,7 +60,6 @@ function dynamicallyGenerateElement(queryResult) {
 
 function setup() {
     // Runs when the page is loaded
-    console.log("main.js is loaded")
     add_4_card()
 
     // search with enter key

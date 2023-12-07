@@ -10,7 +10,6 @@ async function get_collection() {
     // ------------------------------------------------------------
     // ------------------------------------------------------------
     docRef.forEach(doc => {
-        // console.log(doc.id);
         docID_array.push(doc.id)
     });
 }
@@ -28,10 +27,8 @@ async function get_collection_Jsonfile() {
 }
 
 async function update_all_doc_field(json_data, docID_array) {
-    console.log(docID_array);
-    console.log(json_data);
     for (let id of docID_array) {
-        console.log(id);
+
         // ------------------------------------------------------------
         // ------------------------------------------------------------
         // change "items" to target collection name
@@ -41,7 +38,6 @@ async function update_all_doc_field(json_data, docID_array) {
         for (let key in json_data) {
             is_exist = await docRef.data().hasOwnProperty(key)
             if (is_exist == false) {
-                console.log(`${key} is ${is_exist}`);
                 field_update = { [key]: '' }
                 // ------------------------------------------------------------
                 // change "items" to target collection name
@@ -86,7 +82,6 @@ async function delete_target_field(docID_array) {
 
 
 async function setup() {
-    console.log("js is active.");
     await get_collection();
     await get_collection_Jsonfile();
     update_all_doc_field(json_data, docID_array);

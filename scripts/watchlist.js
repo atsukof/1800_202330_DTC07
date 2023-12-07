@@ -13,6 +13,7 @@ function getUserID() {
 async function displayWatchlistsDynamically(user_ID) {
     const userDoc = await db.collection("users").doc(user_ID).get()
     const watchlist_items = userDoc.data().watchlists;
+    // Delete sold item from watchlist
     for (const item_ID of watchlist_items) {
         let item_doc = await db.collection("items").doc(item_ID).get();
         if (item_doc.data().status === "sold") {
@@ -23,17 +24,15 @@ async function displayWatchlistsDynamically(user_ID) {
             }
         }
     }
-    console.log(`watchlist length: ${watchlist_items.length}`)
     await db.collection("users").doc(user_ID).update({ watchlists: watchlist_items });
 
     watchlist_items.forEach((item_ID) => {
-        console.log(`item_ID: ${item_ID}`)
         newCard(item_ID);
     });
 }
 
 function newCard(itemID) {
-    console.log("inside new card", itemID)
+    console.log("inside item into watchlist", itemID)
     doc = db.collection("items").doc(itemID).get().then((doc) => {
         if (doc.exists) {
             var itemName = doc.data().name
@@ -41,7 +40,6 @@ function newCard(itemID) {
             var itemPrice = doc.data().price
             var itemImg = doc.data().image
             var itemName = doc.data().name
-            console.log(itemName, itemLocation, itemPrice, itemImg, itemID, itemName)
 
             let newcard = watchlistTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
