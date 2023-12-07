@@ -35,6 +35,7 @@ async function displayItemCard() {
 }
 
 async function change_status() {
+    // Change the item status from active to sold, and redirect to rating.html
     const item_docRef = await db.collection("items").doc(item_ID).get();
 
     item_status = { ["status"]: "sold" };
@@ -45,6 +46,7 @@ async function change_status() {
 
 
 async function setup() {
+    // when document is ready, display item card and 
     await displayItemCard();
     cancel = document.getElementById("cancel");
     cancel.href = `listing.html?docID=${item_ID}`;
