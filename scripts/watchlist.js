@@ -1,9 +1,8 @@
-
 function getUserID() {
+    // Get User ID if authenticated
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             var user_ID = user.uid
-            // currentUser = db.collection("users").doc(user_ID)
             displayWatchlistsDynamically(user_ID)
 
         }
@@ -11,9 +10,10 @@ function getUserID() {
 }
 
 async function displayWatchlistsDynamically(user_ID) {
+    // Get items from the user's watchlist
     const userDoc = await db.collection("users").doc(user_ID).get()
     const watchlist_items = userDoc.data().watchlists;
-    // Delete sold item from watchlist
+    // Delete sold items from watchlist
     for (const item_ID of watchlist_items) {
         let item_doc = await db.collection("items").doc(item_ID).get();
         if (item_doc.data().status === "sold") {
@@ -32,6 +32,7 @@ async function displayWatchlistsDynamically(user_ID) {
 }
 
 function newCard(itemID) {
+    // Generate a new card to display
     console.log("inside item into watchlist", itemID)
     doc = db.collection("items").doc(itemID).get().then((doc) => {
         if (doc.exists) {
@@ -41,9 +42,8 @@ function newCard(itemID) {
             var itemImg = doc.data().image
             var itemName = doc.data().name
 
-            let newcard = watchlistTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
+            let newcard = watchlistTemplate.content.cloneNode(true);
 
-            //update comment name, date, text
             newcard.querySelector('.img-thumbnail').src = itemImg;
             newcard.querySelector('.price').innerHTML = `\$${itemPrice}`;
             newcard.querySelector('.location').innerHTML = itemLocation;
@@ -51,12 +51,12 @@ function newCard(itemID) {
             newcard.querySelector('.listing-link').href = `listing.html?docID=${itemID}`;
 
             document.getElementById("watchlists-go-here").appendChild(newcard);
-
         }
     })
 }
 
 function setup() {
+    // Sets up the watchlist page
     getUserID();
 }
 
