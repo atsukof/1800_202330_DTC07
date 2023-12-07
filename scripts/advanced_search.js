@@ -13,14 +13,12 @@ function advancedSearchQuery() {
     get_value('condition')
     get_value('price-range')
     get_value('location')
-    console.log(advanced_queries)
     sessionStorage.setItem('advanced_queries', JSON.stringify(advanced_queries));
 }
 
 function get_value(selector) {
     // Gets the value of the selector if it is not null
     if ($(`#${selector}`).val() != null) {
-        console.log($(`#${selector}`).val())
         advanced_queries[`${selector}`] = $(`#${selector}`).val()
     }
 }
