@@ -33,7 +33,6 @@ async function displayWatchlistsDynamically(user_ID) {
 
 function newCard(itemID) {
     // Generate a new card to display
-    console.log("inside item into watchlist", itemID)
     doc = db.collection("items").doc(itemID).get().then((doc) => {
         if (doc.exists) {
             var itemName = doc.data().name
