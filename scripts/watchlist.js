@@ -13,6 +13,7 @@ function getUserID() {
 async function displayWatchlistsDynamically(user_ID) {
     const userDoc = await db.collection("users").doc(user_ID).get()
     const watchlist_items = userDoc.data().watchlists;
+    // Delete sold item from watchlist
     for (const item_ID of watchlist_items) {
         let item_doc = await db.collection("items").doc(item_ID).get();
         if (item_doc.data().status === "sold") {

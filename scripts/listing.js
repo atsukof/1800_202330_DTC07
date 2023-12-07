@@ -23,7 +23,6 @@ function logout() {
 
 async function itemInfo() {
     let params = new URL(window.location.href); //get URL of search bar
-    console.log(params)
     item_ID = params.searchParams.get("docID"); //get value for key "id"
     console.log(item_ID, "item_ID");
 
@@ -31,7 +30,6 @@ async function itemInfo() {
         .doc(item_ID)
         .get()
         .then(async (doc) => {
-            console.log("item is read")
             let imgEvent = document.querySelector(".item-img");
             imgEvent.src = `${doc.data().image}`;
             $(".item-name-text").append(doc.data().name);
@@ -45,7 +43,6 @@ async function itemInfo() {
                     document.getElementById('save-' + item_ID).innerText = 'favorite';
                 }
             })
-            console.log(doc.data().status==="sold")
             if (doc.data().status === "sold") {
                 document.querySelector('i').style.display = 'none';
             }
@@ -179,12 +176,10 @@ function updateWatchlist(item_ID) {
 async function displayCommentsDynamically(item_ID) {
     const all_comments = await db.collection("comments").where("item_ID", "==", item_ID).orderBy(`comment_date`, `desc`).get()
     const comments = all_comments.docs;
-    // console.log(comments);
     comments.forEach(async (doc) => {
         var commenter = await doc.data().comment_user_ID;
         var commenter_docRef = await db.collection("users").doc(commenter).get()
         var commenter_name = commenter_docRef.data().name;
-        // console.log(commenter_name);
         var commentDate = doc.data().comment_date;
         var commentText = doc.data().comment_text;
 
@@ -216,10 +211,6 @@ async function postComment() {
     var commentDate = firebase.firestore.Timestamp.fromDate(new Date())
     var commentText = document.getElementById("comment").value
 
-    console.log(commentText)
-    console.log(item_ID)
-    console.log(commentDate)
-
     var user = firebase.auth().currentUser;
 
     if (user) {
@@ -244,7 +235,6 @@ async function setup() {
     displayCommentsDynamically(item_ID);
     $("#comment").keyup(checkCommentFields);
     showEdit(item_ID);
-    console.log(currentUser)
 }
 
 $(document).ready(setup)

@@ -45,7 +45,6 @@ async function change_status() {
 
 
 async function setup() {
-    console.log("confirm_purchase.js is loaded.");
     await displayItemCard();
     cancel = document.getElementById("cancel");
     cancel.href = `listing.html?docID=${item_ID}`;
