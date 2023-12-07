@@ -4,27 +4,10 @@ var seller_ID
 var currentUser
 
 
-//------------------------------------------------
-// Call this function when the "logout" button is clicked
-//-------------------------------------------------
-function logout() {
-    firebase.auth().signOut().then(() => {
-        // Sign-out successful.
-        console.log("logging out user");
-    }).catch((error) => {
-        // An error happened.
-    });
-}
-
-//------------------------------------------------------------------------------
-// Input parameter is a string representing the collection we are reading from
-//------------------------------------------------------------------------------
-
-
 async function itemInfo() {
+    // Get the item info from the items collection
     let params = new URL(window.location.href); //get URL of search bar
     item_ID = params.searchParams.get("docID"); //get value for key "id"
-    console.log(item_ID, "item_ID");
 
     await db.collection("items")
         .doc(item_ID)
@@ -35,20 +18,19 @@ async function itemInfo() {
             $(".item-name-text").append(doc.data().name);
             document.querySelector("i").id = "save-" + item_ID
 
-            // check if the item is in the watchlist
+            // check if the item is in the watchlist and change the icon
             currentUser.get().then(userDoc => {
-                //get the user name
                 var watchlist_items = userDoc.data().watchlists;
                 if (watchlist_items.includes(item_ID)) {
                     document.getElementById('save-' + item_ID).innerText = 'favorite';
                 }
             })
+
+            // if the item is sold, hide the heart icon
             if (doc.data().status === "sold") {
                 document.querySelector('i').style.display = 'none';
             }
             document.querySelector('i').onclick = () => updateWatchlist(item_ID);
-
-            // get users collection -> user.name
 
             seller_ID = doc.data().seller_ID;
             localStorage.setItem("seller_ID", seller_ID);
@@ -87,7 +69,7 @@ async function itemInfo() {
             let options = { year: 'numeric', month: '2-digit', day: '2-digit' };
             let details_posted = doc.data().date_created === undefined ? " " : doc.data().date_created.toDate().toLocaleString('en-US', options);
             let description = doc.data().description === undefined ? " " : doc.data().description;
-            
+
             if (details_color === " ") {
                 document.getElementById("color-row").style.display = "none";
                 console.log("color is empty")
@@ -112,6 +94,7 @@ async function itemInfo() {
 }
 
 async function showEdit(item_ID) {
+    // Show the edit button if the user is the seller
     let doc = await db.collection("items").doc(item_ID).get();
     is_sold = doc.data().status
     if (is_sold != 'sold') {
@@ -126,13 +109,14 @@ async function showEdit(item_ID) {
 }
 
 function saveItemID() {
+    // Save the item ID to local storage
     let params = new URL(window.location.href) //get the url from the search bar
     let ID = params.searchParams.get("docID");
     localStorage.setItem('item_ID', ID);
-    // window.location.href = 'review.html';
 }
 
 async function getUserID() {
+    // Get the user ID from user authentication and save it to local storage
     firebase.auth().onAuthStateChanged(async function (user) {
         if (user) {
             localStorage.setItem('user_ID', user.uid)
@@ -145,37 +129,35 @@ async function getUserID() {
 }
 
 function updateWatchlist(item_ID) {
+    // Update the watchlist when the user clicks on the heart icon
     currentUser.get().then(userDoc => {
         let watchlist_items = userDoc.data().watchlists
         let iconID = 'save-' + item_ID;
         let isInWatchlist = watchlist_items.includes(item_ID);
 
+        // If the item is already in the watchlist, remove it. Otherwise, add it.
         if (isInWatchlist) {
             currentUser.update({
                 watchlists: firebase.firestore.FieldValue.arrayRemove(item_ID)
             }).then(() => {
-                console.log(`item ${item_ID} was removed.`)
                 document.getElementById(iconID).innerText = 'favorite_border';
             })
-
         } else {
             currentUser.update({
                 watchlists: firebase.firestore.FieldValue.arrayUnion(item_ID)
-            })
-                // Handle the front-end update to change the icon
-                .then(function () {
-                    console.log(`item ${item_ID} was added to your watchlist.`);
-                    document.getElementById(iconID).innerText = 'favorite';
-                });
+            }).then(function () {
+                document.getElementById(iconID).innerText = 'favorite';
+            });
         }
     })
-
 }
 
 
 async function displayCommentsDynamically(item_ID) {
+    // Display the comments dynamically
     const all_comments = await db.collection("comments").where("item_ID", "==", item_ID).orderBy(`comment_date`, `desc`).get()
     const comments = all_comments.docs;
+
     comments.forEach(async (doc) => {
         var commenter = await doc.data().comment_user_ID;
         var commenter_docRef = await db.collection("users").doc(commenter).get()
@@ -183,7 +165,7 @@ async function displayCommentsDynamically(item_ID) {
         var commentDate = doc.data().comment_date;
         var commentText = doc.data().comment_text;
 
-        let newcard = commentTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
+        let newcard = commentTemplate.content.cloneNode(true);
 
         //update comment name, date, text
         newcard.querySelector('.commenter-name').innerHTML = commenter_name;
@@ -196,6 +178,7 @@ async function displayCommentsDynamically(item_ID) {
 
 
 function checkCommentFields() {
+    // Check if the comment field is empty
     var comment = document.getElementById("comment").value;
 
     if (comment != '') {
@@ -207,10 +190,10 @@ function checkCommentFields() {
 }
 
 async function postComment() {
+    // Post the comment to the database
     user_ID = localStorage.getItem("user_ID")
     var commentDate = firebase.firestore.Timestamp.fromDate(new Date())
     var commentText = document.getElementById("comment").value
-
     var user = firebase.auth().currentUser;
 
     if (user) {
@@ -227,11 +210,13 @@ async function postComment() {
         console.log("No user is signed in");
     }
 };
+
+
 async function setup() {
+    // Sets up the listing page
     await getUserID();
     item_ID = await itemInfo();
     saveItemID();
-
     displayCommentsDynamically(item_ID);
     $("#comment").keyup(checkCommentFields);
     showEdit(item_ID);
