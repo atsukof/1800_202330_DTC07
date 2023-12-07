@@ -5,7 +5,8 @@ var currentUser
 
 
 async function itemInfo() {
-    // Get the item info from the items collection
+    // parse URL to get item ID, and then get item details
+    // append item details on the listing page
     let params = new URL(window.location.href); //get URL of search bar
     item_ID = params.searchParams.get("docID"); //get value for key "id"
 
@@ -61,7 +62,8 @@ async function itemInfo() {
                         ${rating_stars}
                         `)
                     })
-
+            
+            // show item details
             $("#price").text(`$${doc.data().price}`);
             let details_location = doc.data().location === undefined ? " " : doc.data().location;
             let details_color = doc.data().color === undefined ? " " : doc.data().color;
@@ -94,7 +96,7 @@ async function itemInfo() {
 }
 
 async function showEdit(item_ID) {
-    // Show the edit button if the user is the seller
+    // Show edit button for the active item
     let doc = await db.collection("items").doc(item_ID).get();
     is_sold = doc.data().status
     if (is_sold != 'sold') {
@@ -122,7 +124,6 @@ async function getUserID() {
             localStorage.setItem('user_ID', user.uid)
             var user_ID = user.uid;
             currentUser = await db.collection("users").doc(user_ID);
-            console.log(`currentUser: ${user_ID}`)
             return user_ID;
         }
     })
@@ -154,7 +155,7 @@ function updateWatchlist(item_ID) {
 
 
 async function displayCommentsDynamically(item_ID) {
-    // Display the comments dynamically
+    // Get comment from firestore and append on the listing page
     const all_comments = await db.collection("comments").where("item_ID", "==", item_ID).orderBy(`comment_date`, `desc`).get()
     const comments = all_comments.docs;
 
@@ -179,6 +180,7 @@ async function displayCommentsDynamically(item_ID) {
 
 function checkCommentFields() {
     // Check if the comment field is empty
+    // If it is not empty, enable the submit button
     var comment = document.getElementById("comment").value;
 
     if (comment != '') {
@@ -190,7 +192,8 @@ function checkCommentFields() {
 }
 
 async function postComment() {
-    // Post the comment to the database
+    // Get comment value from comment box
+    // Create a new comment to firestore database
     user_ID = localStorage.getItem("user_ID")
     var commentDate = firebase.firestore.Timestamp.fromDate(new Date())
     var commentText = document.getElementById("comment").value
@@ -214,6 +217,8 @@ async function postComment() {
 
 async function setup() {
     // Sets up the listing page
+    // When document is ready, get item details and comment
+    // append those on the listing page
     await getUserID();
     item_ID = await itemInfo();
     saveItemID();

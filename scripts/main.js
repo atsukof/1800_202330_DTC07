@@ -60,7 +60,7 @@ function dynamicallyGenerateElement(queryResult) {
 
 function setup() {
     // Runs when the page is loaded
-    add_4_card()
+    add_6_card()
 
     // search with enter key
     $("#search-input").keydown((e) => {
