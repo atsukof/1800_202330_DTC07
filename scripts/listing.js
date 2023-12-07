@@ -22,6 +22,8 @@ function logout() {
 
 
 async function itemInfo() {
+    // parse URL to get item ID, and then get item details
+    // append item details on the listing page
     let params = new URL(window.location.href); //get URL of search bar
     item_ID = params.searchParams.get("docID"); //get value for key "id"
     console.log(item_ID, "item_ID");
@@ -49,7 +51,6 @@ async function itemInfo() {
             document.querySelector('i').onclick = () => updateWatchlist(item_ID);
 
             // get users collection -> user.name
-
             seller_ID = doc.data().seller_ID;
             localStorage.setItem("seller_ID", seller_ID);
 
@@ -79,7 +80,8 @@ async function itemInfo() {
                         ${rating_stars}
                         `)
                     })
-
+            
+            // show item details
             $("#price").text(`$${doc.data().price}`);
             let details_location = doc.data().location === undefined ? " " : doc.data().location;
             let details_color = doc.data().color === undefined ? " " : doc.data().color;
@@ -112,6 +114,7 @@ async function itemInfo() {
 }
 
 async function showEdit(item_ID) {
+    // show edit button for the active item
     let doc = await db.collection("items").doc(item_ID).get();
     is_sold = doc.data().status
     if (is_sold != 'sold') {
@@ -126,13 +129,14 @@ async function showEdit(item_ID) {
 }
 
 function saveItemID() {
+    // save item id to local storage
     let params = new URL(window.location.href) //get the url from the search bar
     let ID = params.searchParams.get("docID");
     localStorage.setItem('item_ID', ID);
-    // window.location.href = 'review.html';
 }
 
 async function getUserID() {
+    // get the id of user who login
     firebase.auth().onAuthStateChanged(async function (user) {
         if (user) {
             localStorage.setItem('user_ID', user.uid)
@@ -145,6 +149,8 @@ async function getUserID() {
 }
 
 function updateWatchlist(item_ID) {
+    // click favorite icon to add this item to watchlist
+    // click favorite icon again to remove it from watchlist
     currentUser.get().then(userDoc => {
         let watchlist_items = userDoc.data().watchlists
         let iconID = 'save-' + item_ID;
@@ -174,6 +180,7 @@ function updateWatchlist(item_ID) {
 
 
 async function displayCommentsDynamically(item_ID) {
+    // Get comment from firestore and append on the listing page
     const all_comments = await db.collection("comments").where("item_ID", "==", item_ID).orderBy(`comment_date`, `desc`).get()
     const comments = all_comments.docs;
     comments.forEach(async (doc) => {
@@ -196,6 +203,8 @@ async function displayCommentsDynamically(item_ID) {
 
 
 function checkCommentFields() {
+    // check comment box is empty or not
+    // comment button only work when comment box is not empty
     var comment = document.getElementById("comment").value;
 
     if (comment != '') {
@@ -207,6 +216,8 @@ function checkCommentFields() {
 }
 
 async function postComment() {
+    // Get comment value from comment box
+    // Create a new comment to firestore
     user_ID = localStorage.getItem("user_ID")
     var commentDate = firebase.firestore.Timestamp.fromDate(new Date())
     var commentText = document.getElementById("comment").value
@@ -228,6 +239,8 @@ async function postComment() {
     }
 };
 async function setup() {
+    // when document is ready, get item details and comment
+    // append those on the listing page
     await getUserID();
     item_ID = await itemInfo();
     saveItemID();
