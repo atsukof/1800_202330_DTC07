@@ -1,6 +1,7 @@
 var advanced_queries = {}
 
 function advancedSearchQuery() {
+    // Gets the advanced search queries and stores them in session storage
     if ($("#search-input").val()) {
         advanced_queries.name = $("#search-input").val()
     } 
@@ -17,6 +18,7 @@ function advancedSearchQuery() {
 }
 
 function get_value(selector) {
+    // Gets the value of the selector if it is not null
     if ($(`#${selector}`).val() != null) {
         console.log($(`#${selector}`).val())
         advanced_queries[`${selector}`] = $(`#${selector}`).val()
