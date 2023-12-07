@@ -43,19 +43,23 @@
 </head>
 
 <body>
-
     <!-- navbar -->
     <nav id="navbar-here"></nav>
 
-
-    <!-- welcome and call_to_action -->
+    <!-- the body of your page goes here -->
     <main>
-        <a href="#" class="link-primary" onclick="goBack()"><span class="material-symbols-outlined">
+        <a href="#" class="link-primary" onclick="goBack()">
+            <span class="material-symbols-outlined">
                 arrow_back_ios
-            </span></a>
+            </span>
+        </a>
+
+        <!-- Item image-->
         <div class="img-div">
             <img class="item-img" src="" alt="">
         </div>
+
+        <!-- Item title -->
         <div class="title-section">
             <div class="title-left">
                 <div class="item-name">
@@ -72,6 +76,7 @@
             </div>
         </div>
 
+        <!-- Item details -->
         <h3>Details</h3>
         <div id="details-go-here">
             <div id="details" class="display-table">
@@ -101,7 +106,7 @@
             <div id="description"></div>
         </div>
 
-
+        <!-- Comment -->
         <h3>Comment</h3>
         <div id="comments-go-here"></div>
 
@@ -114,7 +119,7 @@
                 id="comment-btn">Comment</button>
         </div>
 
-        <!-- Templates for general use, not displayed -->
+        <!-- Templates for comment, not displayed -->
         <template id="commentTemplate">
             <div class="each-comment">
                 <div class="commenter-name text-warning">commenter name here</div>
