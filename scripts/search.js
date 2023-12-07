@@ -1,27 +1,11 @@
 function searchQuery() {
+    // Splits the search query into strings of keyword tokens and saves them in session storage
     keywords = $("#search-input").val().split(" ")
     sessionStorage.setItem('keywords', keywords);
 }
 
-// function saveSort(sort_array, index) {
-//     sessionStorage.setItem('sort', sort_array[index].innerHTML)
-// }
-
 function setup() {
-
-    // console.log('selected:', sessionStorage.getItem('type'))
-
-    sort = document.getElementsByTagName('li')
-    for (let i = 0; i < sort.length; i ++) {
-        html = sort[i].childNodes[0].innerHTML
-        console.log(html)
-        sort[i].childNodes[0].addEventListener("click", function () {
-            console.log(this.innerHTML)
-            sessionStorage.setItem('sort', this.innerHTML)
-        })
-        // sort[i].onclick = saveSort(sort, i)
-    }
-
+    // Sets up the search page
     if (sessionStorage.getItem('keywords')) {
         var keywords = sessionStorage.getItem('keywords').split(',');
     } else if (sessionStorage.getItem('advanced_queries')) {
@@ -52,27 +36,14 @@ function setup() {
     })
 
     sessionStorage.clear();
-    query = db.collection("items").where('status', '==', 'active')
-
-
-    if (keywords) {
-        query = query.where('name', 'in', keywords)
-    }
-
-    if (advanced_queries) {
-        for (let key in advanced_queries) {
-            
-            if (key === 'name') {
-                query = query.where('name', 'in', advanced_queries[key].split(' '))
-            } else {
-                query = query.where(key, '==', advanced_queries[key])
-            }
-        }
-    } else if (type) {
-        query = query.where('type', '==', type);
-    }
 
     results_arr = []
+    query = generateQuery(keywords, advanced_queries, type)
+    fetchQuery(query);
+}
+
+function fetchQuery(query) {
+    // Fetches the query results from the database
     query.get()
         .then(
             results => {
@@ -89,47 +60,74 @@ function setup() {
             }
         )
         .then(() => {
-            console.log(results_arr.length);
             if (results_arr.length == 0) {
                 no_result = document.createElement('div')
                 no_result.innerHTML = 'No listings found.'
                 document.getElementById('results').appendChild(no_result)
             } else {
                 for (let i = 0; i < results_arr.length; i++) {
-                    let redirect = document.createElement('a')
-                    redirect.href = `listing.html?docID=${results_arr[i].id}`
-
-                    let panel = document.createElement('div')
-                    panel.className = 'panel col'
-
-                    let search = document.createElement('div')
-                    search.className = 'search'
-                    let image = document.createElement('img')
-                    image.src = results_arr[i].image
-                    image.className = 'img-thumbnail'
-
-                    let price = document.createElement('p')
-                    price.className = 'price'
-                    price.innerHTML = `$${results_arr[i].price}`
-                    let location = document.createElement('p')
-                    location.innerHTML = results_arr[i].location
-                    location.className = 'location'
-
-                    let name = document.createElement('p')
-                    name.innerHTML = results_arr[i].name
-                    name.className = 'name'
-    
-                    redirect.appendChild(image)
-                    search.appendChild(redirect)
-                    search.appendChild(price)
-                    search.appendChild(location)
-                    panel.appendChild(search)
-                    panel.appendChild(name)
-                    document.getElementById('results').appendChild(panel)
+                    dynamicallyGenerateElement(results_arr[i])
                 }
-            }
-
+            };
         });
+}
+
+function generateQuery(keywords, advanced_queries, type) {
+    // Generates the query based on the search criteria
+    query = db.collection("items").where('status', '==', 'active')
+
+    if (keywords) {
+        query = query.where('name', 'in', keywords)
+    }
+
+    if (advanced_queries) {
+        for (let key in advanced_queries) {
+            if (key === 'name') {
+                query = query.where('name', 'in', advanced_queries[key].split(' '))
+            } else {
+                query = query.where(key, '==', advanced_queries[key])
+            }
+        }
+    } else if (type) {
+        query = query.where('type', '==', type);
+    }
+    return query
+}
+
+function dynamicallyGenerateElement(queryResult) {
+    // Dynamically generates HTML elements to display the search results
+    let redirect = document.createElement('a')
+    redirect.href = `listing.html?docID=${queryResult.id}`
+
+    let panel = document.createElement('div')
+    panel.className = 'panel col'
+
+    let search = document.createElement('div')
+    search.className = 'search'
+
+    let image = document.createElement('img')
+    image.src = queryResult.image
+    image.className = 'img-thumbnail'
+
+    let price = document.createElement('p')
+    price.className = 'price'
+    price.innerHTML = `$${queryResult.price}`
+
+    let location = document.createElement('p')
+    location.innerHTML = queryResult.location
+    location.className = 'location'
+
+    let name = document.createElement('p')
+    name.innerHTML = queryResult.name
+    name.className = 'name'
+
+    redirect.appendChild(image)
+    search.appendChild(redirect)
+    search.appendChild(price)
+    search.appendChild(location)
+    panel.appendChild(search)
+    panel.appendChild(name)
+    document.getElementById('results').appendChild(panel)
 }
 
 $(document).ready(setup);
