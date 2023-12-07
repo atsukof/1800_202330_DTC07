@@ -14,7 +14,6 @@ async function add_4_card() {
                         name: doc.data().name
                     };
 
-                    // console.log(item_obj)
                     results_arr.push(item_obj);
                     return results_arr
                 })
@@ -59,7 +58,6 @@ async function add_4_card() {
 
 // setup
 function setup() {
-    console.log("main.js is loaded")
     add_4_card()
 
     // search with enter key

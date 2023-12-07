@@ -31,9 +31,7 @@ function insertUserFromFirestore() {
                 }
 
                 document.getElementById("username-here").innerText = userName;
-                console.log(`userName: ${userName}`);
-                console.log(`userRating: ${userRating}`);
-
+               
                 // Initialize an empty string to store the star rating HTML
                 let starRating = "";
                 userRating = Math.round(userRating);
@@ -65,7 +63,6 @@ insertUserFromFirestore();
 function showForm() {
     //show form when change picture button is clicked
     document.getElementById("change-pic").addEventListener('click', function () {
-        console.log("clicked");
         document.getElementById("change-pic").style.display = "none";
         document.getElementById("upload-pic").style.display = "block";
         document.getElementById("username-rating").style.display = "none";
@@ -107,12 +104,10 @@ async function displayItemCardsDynamically() {
     let sold_block = document.querySelector('#sold');
 
     let userID = getProfileUserInfo();
-    console.log(`userID: ${userID}`);
 
 
     const all_activeDoc = await db.collection('items').where('status', '==', 'active').where('seller_ID', `==`, `${userID}`).orderBy(`date_created`, `desc`).get();
     all_activeDoc.forEach(function (doc) {
-        console.log(`active: ${doc.id}`);
 
         let search = document.createElement('div');
         search.className = 'search';
@@ -138,7 +133,6 @@ async function displayItemCardsDynamically() {
 
     const all_soldDoc = await db.collection('items').where('status', '==', 'sold').where('seller_ID', `==`, `${userID}`).orderBy(`date_created`, `desc`).get();
     all_soldDoc.forEach(doc => {
-        console.log(`sold: ${doc.id}`);
         let search = document.createElement('div');
         search.className = 'search';
         let redirect = document.createElement('a');

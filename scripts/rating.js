@@ -4,7 +4,6 @@ async function show_seller() {
     seller_ID = localStorage.getItem("seller_ID");
     const sellerDoc = await db.collection("users").doc(seller_ID).get();
     seller_name = document.querySelectorAll(".seller_name");
-    console.log(sellerDoc.data());
 
     seller_name.forEach(function (seller_name) {
         seller_name.textContent = "Rate "
@@ -27,7 +26,6 @@ async function show_seller() {
 function click_rating() {
     // Select all elements with the class name "star" and store them in the "stars" variable
     const stars = document.querySelectorAll('.star');
-    console.log(stars)
     stars.forEach((star, index) => {
         // Add a click event listener to the current star
         star.addEventListener('click', () => {
@@ -39,7 +37,6 @@ function click_rating() {
             for (let i = index + 1; i <= 4; i++) {
                 document.getElementById(`star${i + 1}`).textContent = 'star_outline';
             }
-            console.log(`rating star: ${index + 1}`);
         });
     });
 }
@@ -79,10 +76,8 @@ async function update_rating() {
 
 
 function setup() {
-    console.log("rating.js is read");
     show_seller();
     click_rating();
-    // update_rating();
 }
 
 $(document).ready(setup)

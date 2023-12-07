@@ -26,24 +26,16 @@ async function displayItemCard() {
     location.className = 'location';
 
     search.appendChild(image);
-    // search.appendChild(price)
-    // search.appendChild(location)
 
     document.getElementById('item_card').appendChild(search);
 
     document.getElementById('seller_name').textContent = seller_docRef.data().name;
     document.getElementById('location').textContent = item_docRef.data().location;
     document.getElementById('price').textContent = `$${item_docRef.data().price}`;
-
-
-
-    // document.getElementById("item_card").innerHTML = "abc";
 }
 
 async function change_status() {
-    // console.log(`item_ID: ${item_ID}`);
     const item_docRef = await db.collection("items").doc(item_ID).get();
-    // console.log(item_docRef.data().status);
 
     item_status = { ["status"]: "sold" };
     await db.collection("items").doc(item_ID).update(item_status);
