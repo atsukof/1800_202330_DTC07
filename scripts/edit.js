@@ -1,6 +1,7 @@
 var listing
 
 function setup() {
+    // Loads the listing data into the HTML elements
     item_ID = localStorage.getItem('item_ID')
     listing = db.collection("items").doc(item_ID)
     listing.get()
@@ -28,6 +29,7 @@ function setup() {
 }
 
 async function deleteListing() {
+    // Deletes the listing from the database
     if (confirm('Are you sure you want to delete this listing?')){
         await listing.delete();
         localStorage.clear();
@@ -36,6 +38,7 @@ async function deleteListing() {
 }
 
 async function saveListing() {
+    // Saves the listing to the database
     var item_name = document.getElementById("item-name").value;
     var item_description = document.getElementById("item-description").value;
     var item_price = parseFloat(document.getElementById("item-price").value);
@@ -72,13 +75,11 @@ async function saveListing() {
         price: item_price,
         location: item_location,
         date_created: firebase.firestore.FieldValue
-            .serverTimestamp(), //current system time
+            .serverTimestamp(), 
     }).then(
         console.log('saved')
     )
     window.location.href = `listing.html?docID=${localStorage.getItem('item_ID')}`
 }
-
-
 
 $(document).ready(setup)

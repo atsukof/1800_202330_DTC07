@@ -1,16 +1,18 @@
 var ImageFile;
 
 $(document).ready(function () {
+    // Listens for changes in field values and keypresses
     $("#item-name").keyup(checkFields);
     $("#item-description").keyup(checkFields);
     $("#item-price").keyup(checkFields);
     $("#item-type").change(checkFields);
     $("#item-condition").change(checkFields);
     $("#item-location").change(checkFields);
-    $("#mypic-input").change(checkFields);
+    $("#item-image").change(checkFields);
 });  
 
 function checkFields() {
+    // Checks if all required fields are filled in, if so, enables the create listing button
     var item_name = document.getElementById("item-name").value;
     var description = document.getElementById("item-description").value;
     var price = document.getElementById("item-price").value;
@@ -24,17 +26,17 @@ function checkFields() {
 }
 
 function listenFileSelect() {
-      // listen for file selection
-      var fileInput = document.getElementById("mypic-input"); // pointer #1
+    // Listens for file selection
+      var fileInput = document.getElementById("item-image"); 
 
-	  // When a change happens to the File Chooser Input
       fileInput.addEventListener('change', function (e) {
-          ImageFile = e.target.files[0];   //Global variable
+          ImageFile = e.target.files[0];   
       })
 }
 listenFileSelect();
 
 function createListing() {
+    // Creates a new listing in the database
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             var item_name = document.getElementById("item-name").value;
@@ -74,46 +76,31 @@ function createListing() {
                 price: item_price,
                 location: item_location,
                 date_created: firebase.firestore.FieldValue
-                    .serverTimestamp(), //current system time
+                    .serverTimestamp(), 
                 buyer_ID: null,
                 status: 'active'
             }).then(doc => {
                 console.log("Listing created!");
-                console.log(doc.id);
-                uploadPic(doc.id);
+                uploadImage(doc.id);
             })
         } else {
-            // No user is signed in.
-                          console.log("Error, no user signed in");
+            console.log("Error, no user signed in");
         }
     });
 }
 
-//upload picture
-function uploadPic(listingID) {
-    console.log("inside uploadPic " + listingID);
+function uploadImage(listingID) {
+    // Uploads the image to cloud storage
     var storageRef = storage.ref("images/" + listingID + ".jpg");
 
-    storageRef.put(ImageFile)   //global variable ImageFile
-       
-                   // AFTER .put() is done
+    storageRef.put(ImageFile)
         .then(function () {
-            console.log('2. Uploaded to Cloud Storage.');
             storageRef.getDownloadURL()
-
-                 // AFTER .getDownloadURL is done
-                .then(function (url) { // Get URL of the uploaded file
-                    console.log("3. Got the download URL.");
-
-                    // Now that the image is on Storage, we can go back to the
-                    // listing document, and update it with an "image" field
-                    // that contains the url of where the picture is stored.
+                .then(function (url) {
                     db.collection("items").doc(listingID).update({
-                            "image": url // Save the URL into users collection
+                            "image": url 
                         })
-                         // AFTER .update is done
                         .then(function () {
-                            console.log('4. Added pic URL to Firestore.');
                             window.location.href = `listing.html?docID=${listingID}`
                         })
                 })
