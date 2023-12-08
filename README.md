@@ -47,40 +47,78 @@ Content of the project folder:
 ├── scripts                 # JavaScript folder
 ├── templates               # Navbar and footer javascript folder
 ├── styles                  # CSS style folder
-├── index.html              # Landing HTML file, this is what users see when ├you come to url
-├── main.html               # Main page, all user can see this page
+├── .firebaserc             # Create automatically when deploy the website
+├── .gitignore              # ignore files for git
+├── 404.html                # Page not found, create automatically when deploy the website
 ├── add_listing.html        # Create listing page, user can create a new listing 
-├── search.html             # Search page, show search result from main page
 ├── advanced_search.html    # Advanced search page, can search items by specific conditions
-├── listing.html            # Listing page, show item details, user who login can see Buy button; seller can Edit instead. Any user can write comments in the comment box
-├── edit.html               # Edit listing page, Seller can edit their item details here
-├── profile.html            # User profile page, show user name, user rating, active listings, and sold listing
 ├── confirm_purchase.html   # Confirm purchase page, after clicking Buy button on listing page, user can see the summary of item, and Click confirm or Cancel button
-├── rating.html             # Rating page, after confirm purchase, user can rate their trading partner
-├── thanks.html             # Show thanks message page, click confirm to go back to main page.
-├── message.html            # Message log page, show all message of the user
-├── message_id.html         # Message page, user can send message to another user
-├── purchase_successful.html# Purchase successfully page, tell user what to do next
-├── template.html           # html template
-├── 404.html                # Create automatically when deploy the website
+├── edit.html               # Edit listing page, Seller can edit their item details here
 ├── firebase.json           # Create automatically when deploy the website
+├── firestore.indexes.json  # Create automatically when deploy the website
+├── firestore.indexex.json  # Create automatically when deploy the website
 ├── firestore.rules         # Create automatically when deploy the website
+├── index.html              # Landing HTML file, this is what users see when you come to url
+├── listing.html            # Listing page, show item details, user who login can see Buy button; seller can Edit instead. Any user can write comments in the comment box
+├── login.html              # Login page, Login if already having an account or sign up as a new user
+├── main.html               # Main page, all user can see this page
+├── message_id.html         # Message page, user can send message to another user
+├── message.html            # Message log page, show all message of the user
+├── profile.html            # User profile page, show user name, user rating, active listings, and sold listing
+├── purchase_successful.html# Purchase successfully page, tell user what to do next
+├── rating.html             # Rating page, after confirm purchase, user can rate their trading partner
+├── search.html             # Search page, show search result from main page
 ├── storage.rule            # Create automatically when deploy the website
 ├── storage.rules           # Create automatically when deploy the website
-
+├── thanks.html             # Show thanks message page, click confirm to go back to main page.
+├── template.html           # HTML template
+├── watchlist.html          # Watchlist page, show the items added in user's watchlist
 └── README.md
 
 It has the following subfolders and files:
-├── .git                     # Folder for git repo
-├── images                   # Folder for images
-    /blah.jpg                # Acknowledge source
-├── scripts                  # Folder for scripts
-    /blah.js                 # 
-├── styles                   # Folder for styles
-    /blah.css                # 
-
-
-
+├── .git                    # Folder for git repo
+├── .firebase               # Folder created when deploy the website
+    /hosting..cache         # File created when deploy the website
+├── images                  # Folder for images
+    /flowchart.png          # Flowchart of purchase process
+    /flowchart.svg          # Flowchart of purchase process, svg file
+    /landing_background.png # Background image on the landing page
+    /Second_Chance_logo.png # Big logo
+    /Second_Chance.png      # Small logo
+├── json                    # Folder for json file
+    /comments.json          # Fields in comments collection 
+    /items.json             # Fields in items collection
+    /rating.json            # Fields in rating collection (rating collection deleted)
+    /user.json              # Fields in user collection
+├── scripts                 # Folder for scripts
+    /add_listing.js         # Implement creating a new listing feature on add_listing.html
+    /advanced_search.js     # Implement advanced search feature on advanced_search.html
+    /authentication.js      # Handle authentication on firebase
+    /confirm_purchase.js    # Implement confirm purchase feature on confirm_purchase.html
+    /edit.js                # Implement editing listing feature on edit.html
+    /listing.js             # Implement showing listing details, reading/ writing comments, and purchasing item features on listing.html
+    /main.js                # Implement search and displaying newest listings features on main.html
+    /profile.js             # Implement showing user profile and active/ sold items features on profile.html
+    /rating.js              # Implement rating user features rating.html
+    /script.js              # Implement logout feature
+    /skeleton.js            # Implement different navbar and footer for logged-in user or unregistered user
+    /updateItemInfo.js      # Operate all documents in a specific feature
+    /watchlist.js           # Implement displaying items in watchlist feature on watchlist.html
+    /writedata.js           # Create test cases of comments and watchlist
+├── styles                  # Folder for styles
+    /confirm_purchase.css   # Implement CSS on confirm_purchase.html
+    /listing.css            # Implement CSS on listing.html
+    /main.css               # Implement CSS on main.html
+    /profile.css            # Implement CSS on profile.html
+    /purchase_successful.css# Implement CSS on purchase_successful.html
+    /rating.css             # Implement CSS on rating.html
+    /search.css             # Implement CSS on search.html
+    /style.css              # Implement CSS on navbar and footer
+├── templates               # Folder for templates
+    /footer-after.html      # footer for logged-in user
+    /footer-before.html     # footer for unregistered user
+    /navbar-after.html      # navbar for logged-in user
+    /navbar-before.html     # navbar for logged-in user
 ```
 
 
