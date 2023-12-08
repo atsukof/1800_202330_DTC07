@@ -1,4 +1,4 @@
-# Project Title
+# Second Chance
 
 ## 1. Project Description
 Our team DTC07 is developing a web application to help people who want to purchase/sell second-hand household items to enhance user experience by improving user interface and transaction security.
@@ -7,7 +7,7 @@ Our team DTC07 is developing a web application to help people who want to purcha
 List team members and/or short bio's here... 
 * Hi, I'm Alice! Excited to work with everyone!
 * I am Atsuko. I'm excited to join the team.
-* Chun-Wei Mo.
+* Hello, I am Mo. I am changing readme file to produce conflict, 3rd try.
 	
 ## 3. Technologies and Resources Used
 List technologies (with version numbers), API's, icons, fonts, images, media or data sources, and other resources that were used.
@@ -20,21 +20,17 @@ List technologies (with version numbers), API's, icons, fonts, images, media or 
 ## 4. Complete setup/installion/usage
 State what a user needs to do when they come to your project.  How do others start using your code or application?
 Here are the steps ...
-* ...
-* ...
-* ...
+* Have firebaseAPI.js for firebase configuration
+* Initialize firestore and firebase storage
 
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
 * goBack function cannot work on confirm purchase page, so redirect to previous listing page. It will cause a loop if click back button on the listing page.
-* ...
-* ...
 
 ## 6. Features for Future
 What we'd like to build in the future:
 * Message feature
 * Seller can rate buyer after complete the trade
-* ...
 	
 ## 7. Contents of Folder
 Content of the project folder:
