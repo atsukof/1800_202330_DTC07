@@ -5,15 +5,15 @@ var currentUser
 
 
 async function itemInfo() {
-    // parse URL to get item ID, and then get item details
-    // append item details on the listing page
-    let params = new URL(window.location.href); //get URL of search bar
-    item_ID = params.searchParams.get("docID"); //get value for key "id"
+    // Inject item info into listing page
+    let params = new URL(window.location.href); 
+    item_ID = params.searchParams.get("docID"); 
 
     await db.collection("items")
         .doc(item_ID)
         .get()
         .then(async (doc) => {
+            // Add image of listing
             let imgEvent = document.querySelector(".item-img");
             imgEvent.src = `${doc.data().image}`;
             $(".item-name-text").append(doc.data().name);
@@ -33,66 +33,68 @@ async function itemInfo() {
             }
             document.querySelector('i').onclick = () => updateWatchlist(item_ID);
 
+            // get seller info
             seller_ID = doc.data().seller_ID;
             localStorage.setItem("seller_ID", seller_ID);
-
             let seller_docRef = await db.collection("users").doc(seller_ID).get();
-            seller_rating = seller_docRef.data().rating;
-            seller_rating = Math.round(seller_rating);
-
+            seller_rating = Math.round(seller_docRef.data().rating);
 
             // convert rating to stars
-            stars = ""
-            let rating_stars = "";
-            for (let i = 0; i < seller_rating; i++) {
-                rating_stars += '<span class="material-icons" style="font-size:15px">star</span>';
-            }
+            stars = ratingStars(seller_rating);
 
-            for (let i = seller_rating; i < 5; i++) {
-                rating_stars += '<span class="material-icons" style="font-size:15px">star_outline</span>';
-            }
-
-
-            db.collection("users").doc(seller_ID).get()
-                .then(
-                    seller => {
-                        seller = seller.data()
-                        $(".seller-name").append(`
-                        <a href="profile.html?userID=${seller_ID}" class="seller-name-link">${seller.name}</a> 
-                        ${rating_stars}
-                        `)
-                    })
+            // inject seller info into listing page
+            $(".seller-name").append(`
+            <a href="profile.html?userID=${seller_ID}" class="seller-name-link">${seller_docRef.data().name}</a> 
+            ${stars}`)
             
             // show item details
-            $("#price").text(`$${doc.data().price}`);
-            let details_location = doc.data().location === undefined ? " " : doc.data().location;
-            let details_color = doc.data().color === undefined ? " " : doc.data().color;
-            let details_material = doc.data().material === undefined ? " " : doc.data().material;
-            let options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-            let details_posted = doc.data().date_created === undefined ? " " : doc.data().date_created.toDate().toLocaleString('en-US', options);
-            let description = doc.data().description === undefined ? " " : doc.data().description;
-
-            if (details_color === " ") {
-                document.getElementById("color-row").style.display = "none";
-                console.log("color is empty")
-            }
-            if (details_material === " ") {
-                document.getElementById("material-row").style.display = "none";
-            }
-            if (details_location === " ") {
-                document.getElementById("location-row").style.display = "none";
-            }
-            if (details_posted === " ") {
-                document.getElementById("date-row").style.display = "none";
-            }
-            document.getElementById("location").innerHTML = details_location;
-            document.getElementById("color").innerHTML = details_color;
-            document.getElementById("material").innerHTML = details_material;
-            document.getElementById("posted").innerHTML = details_posted;
-
-            document.getElementById("description").innerHTML = description;
+            generateItemTable(doc);
         });
     return item_ID;
+}
+
+function ratingStars(rating) {
+    // convert rating to stars
+    let rating_stars = "";
+    for (let i = 0; i < rating; i++) {
+        rating_stars += '<span class="material-icons" style="font-size:15px">star</span>';
+    }
+
+    for (let i = rating; i < 5; i++) {
+        rating_stars += '<span class="material-icons" style="font-size:15px">star_outline</span>';
+    }
+    return rating_stars
+}
+
+function generateItemTable(doc) {
+    // generate item details table
+    $("#price").text(`$${doc.data().price}`);
+    let details_location = doc.data().location === undefined ? " " : doc.data().location;
+    let details_color = doc.data().color === undefined ? " " : doc.data().color;
+    let details_material = doc.data().material === undefined ? " " : doc.data().material;
+    let options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    let details_posted = doc.data().date_created === undefined ? " " : doc.data().date_created.toDate().toLocaleString('en-US', options);
+    let description = doc.data().description === undefined ? " " : doc.data().description;
+
+    if (details_color === " ") {
+        document.getElementById("color-row").style.display = "none";
+        console.log("color is empty")
+    }
+    if (details_material === " ") {
+        document.getElementById("material-row").style.display = "none";
+    }
+    if (details_location === " ") {
+        document.getElementById("location-row").style.display = "none";
+    }
+    if (details_posted === " ") {
+        document.getElementById("date-row").style.display = "none";
+    }
+    document.getElementById("location").innerHTML = details_location;
+    document.getElementById("color").innerHTML = details_color;
+    document.getElementById("material").innerHTML = details_material;
+    document.getElementById("posted").innerHTML = details_posted;
+
+    document.getElementById("description").innerHTML = description;
 }
 
 async function showEdit(item_ID) {
@@ -217,8 +219,6 @@ async function postComment() {
 
 async function setup() {
     // Sets up the listing page
-    // When document is ready, get item details and comment
-    // append those on the listing page
     await getUserID();
     item_ID = await itemInfo();
     saveItemID();
