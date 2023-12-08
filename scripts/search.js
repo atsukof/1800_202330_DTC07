@@ -69,7 +69,9 @@ function fetchQuery(query) {
                     dynamicallyGenerateElement(results_arr[i])
                 }
             };
-        });
+        }).catch((error) => {
+            console.log("error fetching from database");
+       });
 }
 
 function generateQuery(keywords, advanced_queries, type) {

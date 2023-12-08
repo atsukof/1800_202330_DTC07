@@ -25,6 +25,8 @@ async function itemInfo() {
                 if (watchlist_items.includes(item_ID)) {
                     document.getElementById('save-' + item_ID).innerText = 'favorite';
                 }
+            }).catch((error) => {
+                console.log("error fetching user data from database");
             })
 
             // if the item is sold, hide the heart icon
@@ -49,6 +51,8 @@ async function itemInfo() {
             
             // show item details
             generateItemTable(doc);
+        }).catch((error) => {
+            console.log("error fetching listing data from database");
         });
     return item_ID;
 }
@@ -143,15 +147,21 @@ function updateWatchlist(item_ID) {
                 watchlists: firebase.firestore.FieldValue.arrayRemove(item_ID)
             }).then(() => {
                 document.getElementById(iconID).innerText = 'favorite_border';
-            })
+            }).catch((error) => {
+                console.log("error uploading to database");
+           })
         } else {
             currentUser.update({
                 watchlists: firebase.firestore.FieldValue.arrayUnion(item_ID)
             }).then(function () {
                 document.getElementById(iconID).innerText = 'favorite';
-            });
+            }).catch((error) => {
+                console.log("error uploading to database");
+           });
         }
-    })
+    }).catch((error) => {
+        console.log("error fetching watchlist from database");
+   })
 }
 
 
@@ -209,7 +219,9 @@ async function postComment() {
         }).then(() => {
             alert("Comment submitted.");
             window.location.href = `listing.html?docID=${item_ID}`; // Redirect to the listing page
-        });
+        }).catch((error) => {
+            console.log("error uploading comment to database");
+       });
     } else {
         console.log("No user is signed in");
     }

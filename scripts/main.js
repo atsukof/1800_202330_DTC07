@@ -19,7 +19,9 @@ async function add_6_card() {
                 for (let i = 0; i < 6; i++) {
                     dynamicallyGenerateElement(results_arr[i])
                 }
-            })
+        }).catch((error) => {
+            console.log("error fetching from database");
+        })
 }
 
 function dynamicallyGenerateElement(queryResult) {

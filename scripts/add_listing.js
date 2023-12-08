@@ -82,7 +82,9 @@ function createListing() {
             }).then(doc => {
                 console.log("Listing created!");
                 uploadImage(doc.id);
-            })
+            }).catch((error) => {
+                console.log("error uploading to firebase");
+           })
         } else {
             console.log("Error, no user signed in");
         }

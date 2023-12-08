@@ -51,7 +51,9 @@ function newCard(itemID) {
 
             document.getElementById("watchlists-go-here").appendChild(newcard);
         }
-    })
+    }).catch((error) => {
+        console.log("error fetching from database");
+    });
 }
 
 function setup() {

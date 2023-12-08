@@ -26,6 +26,9 @@ function setup() {
                 document.getElementById('item-material').value = item.data().material
             }
         })
+        .catch((error) => {
+            console.log("error loading from database");
+       })
 }
 
 async function deleteListing() {
@@ -78,7 +81,9 @@ async function saveListing() {
             .serverTimestamp(), 
     }).then(
         console.log('saved')
-    )
+    ).catch((error) => {
+        console.log("error uploading to database");
+   })
     window.location.href = `listing.html?docID=${localStorage.getItem('item_ID')}`
 }
 

@@ -36,6 +36,8 @@ function insertUserFromFirestore() {
                 // Inject user rating
                 userRating = Math.round(userRating);
                 document.querySelector(".stars_row").innerHTML = ratingStars(userRating);
+            }).catch((error) => {
+                console.log("error fetching user data from database");
             })
 
             if (profile_user_ID == user.uid) {
@@ -98,7 +100,9 @@ function savePic() {
                         })
                             .then(function () {
                                 location.reload();
-                            })
+                            }).catch((error) => {
+                                console.log("error uploading to database");
+                           })
                     })
             })
     })
