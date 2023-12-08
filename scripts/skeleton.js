@@ -7,9 +7,6 @@ function loadSkeleton() {
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {                   
-            //if the pointer to "user" object is not null, then someone is logged in
-            // User is signed in.
-
             var user_ID = user.uid
 
             $('#navbar-here').load('./templates/navbar-after.html', function () {
@@ -18,10 +15,9 @@ function loadSkeleton() {
 
             console.log($('#footer-here').load('./templates/footer-after.html'));
         } else {
-            // No user is signed in.
             console.log($('#navbar-here').load('./templates/navbar-before.html'));
             console.log($('#footer-here').load('./templates/footer-before.html'));
         }
     });
 }
-loadSkeleton(); //invoke the function
+loadSkeleton(); 

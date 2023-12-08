@@ -8,10 +8,10 @@ function getProfileUserInfo() {
 }
 
 function insertUserFromFirestore() {
+    // Insert the user information from the database into the HTML elements
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             getProfileUserInfo();
-            console.log(profile_user_ID, "will be shown");
 
             profileUser = db.collection("users").doc(profile_user_ID);
             profileUser.get().then(userDoc => {
@@ -20,6 +20,7 @@ function insertUserFromFirestore() {
                 let picUrl = userDoc.data().profilePic;
                 let userRating = userDoc.data().rating
 
+                // Inject user profile picture
                 if (picUrl != null) {
                     console.log(`picUrl: ${picUrl}`);
                     document.getElementById('profile-pic').innerHTML = ''
@@ -32,22 +33,13 @@ function insertUserFromFirestore() {
 
                 document.getElementById("username-here").innerText = userName;
                
-                // Initialize an empty string to store the star rating HTML
-                let starRating = "";
+                // Inject user rating
                 userRating = Math.round(userRating);
-
-                // This loop runs from i=0 to i<rating, where 'rating' is a variable holding the rating value.
-                for (let i = 0; i < userRating; i++) {
-                    starRating += '<span class="material-icons">star</span>';
-                }
-                // After the first loop, this second loop runs from i=rating to i<5.
-                for (let i = userRating; i < 5; i++) {
-                    starRating += '<span class="material-icons">star_outline</span>';
-                }
-                document.querySelector(".stars_row").innerHTML = starRating;
+                document.querySelector(".stars_row").innerHTML = ratingStars(userRating);
             })
 
             if (profile_user_ID == user.uid) {
+                // only allow user to change profile picture if it is their own profile
                 showForm();
             } else {
                 document.getElementById("change-pic").style.display = "none";
@@ -59,6 +51,19 @@ function insertUserFromFirestore() {
     })
 }
 insertUserFromFirestore();
+
+function ratingStars(rating) {
+    // convert rating to stars
+    let rating_stars = "";
+    for (let i = 0; i < rating; i++) {
+        rating_stars += '<span class="material-icons">star</span>';
+    }
+
+    for (let i = rating; i < 5; i++) {
+        rating_stars += '<span class="material-icons">star_outline</span>';
+    }
+    return rating_stars
+}
 
 function showForm() {
     //show form when change picture button is clicked
@@ -100,59 +105,45 @@ function savePic() {
 }
 
 async function displayItemCardsDynamically() {
+    // Fetches the query results from the database and generates the HTML elements to display the search results
     let active_block = document.querySelector('#active');
     let sold_block = document.querySelector('#sold');
-
     let userID = getProfileUserInfo();
-
 
     const all_activeDoc = await db.collection('items').where('status', '==', 'active').where('seller_ID', `==`, `${userID}`).orderBy(`date_created`, `desc`).get();
     all_activeDoc.forEach(function (doc) {
-
-        let search = document.createElement('div');
-        search.className = 'search';
-        let redirect = document.createElement('a')
-        redirect.href = `listing.html?docID=${doc.id}`
-        let image = document.createElement('img');
-        image.src = doc.data().image;
-        image.className = 'img-thumbnail';
-        let price = document.createElement('p');
-        price.className = 'price';
-        price.innerHTML = `$${doc.data().price}`;
-        let location = document.createElement('p');
-        location.innerHTML = doc.data().location;
-        location.className = 'location';
-
-        redirect.appendChild(image);
-        search.appendChild(redirect);
-        search.appendChild(price);
-        search.appendChild(location);
+        search = createElementToAppend(doc);
         active_block.appendChild(search);
     });
 
-
     const all_soldDoc = await db.collection('items').where('status', '==', 'sold').where('seller_ID', `==`, `${userID}`).orderBy(`date_created`, `desc`).get();
     all_soldDoc.forEach(doc => {
-        let search = document.createElement('div');
-        search.className = 'search';
-        let redirect = document.createElement('a');
-        redirect.href = `listing.html?docID=${doc.id}`;
-        let image = document.createElement('img');
-        image.src = doc.data().image;
-        image.className = 'img-thumbnail';
-        let price = document.createElement('p');
-        price.className = 'price';
-        price.innerHTML = `$${doc.data().price}`;
-        let location = document.createElement('p');
-        location.innerHTML = doc.data().location;
-        location.className = 'location';
-
-        redirect.appendChild(image);
-        search.appendChild(redirect);
-        search.appendChild(price);
-        search.appendChild(location);
+        search = createElementToAppend(doc);
         sold_block.appendChild(search);
     });
+}
+
+function createElementToAppend(doc) {
+    //  Dynamically generates HTML element for an item card from a document
+    let search = document.createElement('div');
+    search.className = 'search';
+    let redirect = document.createElement('a')
+    redirect.href = `listing.html?docID=${doc.id}`
+    let image = document.createElement('img');
+    image.src = doc.data().image;
+    image.className = 'img-thumbnail';
+    let price = document.createElement('p');
+    price.className = 'price';
+    price.innerHTML = `$${doc.data().price}`;
+    let location = document.createElement('p');
+    location.innerHTML = doc.data().location;
+    location.className = 'location';
+
+    redirect.appendChild(image);
+    search.appendChild(redirect);
+    search.appendChild(price);
+    search.appendChild(location);
+    return search;
 }
 
 displayItemCardsDynamically();

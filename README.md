@@ -22,6 +22,11 @@ State what a user needs to do when they come to your project.  How do others sta
 Here are the steps ...
 * Have firebaseAPI.js for firebase configuration
 * Initialize firestore and firebase storage
+* Create an account
+* Create a listing by clicking on create listing icon in the footer
+* Search for a listing they want to purchase through normal search or advanced search
+* Purchase the listing by clicking on the buy button
+* Rate the seller after buying the listing
 
 ## 5. Known Bugs and Limitations
 Here are some known bugs:
