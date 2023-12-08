@@ -78,7 +78,6 @@ function generateItemTable(doc) {
 
     if (details_color === " ") {
         document.getElementById("color-row").style.display = "none";
-        console.log("color is empty")
     }
     if (details_material === " ") {
         document.getElementById("material-row").style.display = "none";
