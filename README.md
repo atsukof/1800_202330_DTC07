@@ -122,4 +122,12 @@ It has the following subfolders and files:
     /navbar-before.html     # navbar for logged-in user
 ```
 
-
+## 8. References
+* Logo of Second Chance created from canva.com
+* Background images on index.html extracted from free stock photo library pexels.com:
+    * https://www.pexels.com/photo/simple-dining-table-1813502/
+    * https://www.pexels.com/photo/black-and-white-laptop-computer-on-brown-wooden-desk-356056/
+    * https://www.pexels.com/photo/modern-kitchen-interior-with-stove-and-utensil-5825352/
+* CSS styling from https://getbootstrap.com/
+* Icons from https://fonts.google.com/icons
+* Database hosted on https://firebase.google.com/
