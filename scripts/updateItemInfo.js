@@ -3,7 +3,7 @@ json_data = undefined;
 
 
 async function get_collection() {
-    // ------------------------------------------------------------
+    // get all doc.id of documents in this collection
     // ------------------------------------------------------------
     // change "items" to target collection named
     const docRef = await db.collection("items").get();
@@ -16,7 +16,7 @@ async function get_collection() {
 
 
 async function get_collection_Jsonfile() {
-    // ------------------------------------------------------------
+    // read collection template json
     // ------------------------------------------------------------
     // change to correspond json file
     const json_filepath = "../json/items.json";
@@ -27,8 +27,8 @@ async function get_collection_Jsonfile() {
 }
 
 async function update_all_doc_field(json_data, docID_array) {
+    // update a field for all documents
     for (let id of docID_array) {
-
         // ------------------------------------------------------------
         // ------------------------------------------------------------
         // change "items" to target collection name
@@ -47,13 +47,14 @@ async function update_all_doc_field(json_data, docID_array) {
                     () => {
                         console.log(`${key} is updated`)
                     }
-                )
+                    )
             }
         }
     }
 }
 
 async function delete_target_field(docID_array) {
+    // delete a field for all documents
     for (let id of docID_array) {
         // ------------------------------------------------------------
         // ------------------------------------------------------------
@@ -82,9 +83,10 @@ async function delete_target_field(docID_array) {
 
 
 async function setup() {
+    // when document is ready, operate a specific collection
     await get_collection();
     await get_collection_Jsonfile();
-    update_all_doc_field(json_data, docID_array);
+    // update_all_doc_field(json_data, docID_array);
     // delete_item_field(docID_array)
 }
 
