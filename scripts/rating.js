@@ -1,6 +1,7 @@
 let seller_ID = undefined;
 
 async function show_seller() {
+    // show seller username and user image
     seller_ID = localStorage.getItem("seller_ID");
     const sellerDoc = await db.collection("users").doc(seller_ID).get();
     seller_name = document.querySelectorAll(".seller_name");
@@ -22,10 +23,12 @@ async function show_seller() {
 }
 
 
-// Iterate through each star element
 function click_rating() {
+    // click star icon representing user rating
+
     // Select all elements with the class name "star" and store them in the "stars" variable
     const stars = document.querySelectorAll('.star');
+    // Iterate through each star element
     stars.forEach((star, index) => {
         // Add a click event listener to the current star
         star.addEventListener('click', () => {
@@ -42,6 +45,8 @@ function click_rating() {
 }
 
 async function update_rating() {
+    // convert stars rating to integer
+    // calculate average user rating and update to firestore
     let userDoc = await db.collection("users").doc(seller_ID).get();
     let rating_average = userDoc.data().rating;
     let rating_count = userDoc.data().rating_count;
@@ -76,6 +81,7 @@ async function update_rating() {
 
 
 function setup() {
+    // when the document is ready, show seller information and 5 star-outline
     show_seller();
     click_rating();
 }
